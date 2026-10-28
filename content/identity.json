@@ -20,7 +20,8 @@
       "education": {
         "degree": "Bacharelado em Ciência da Computação",
         "status": "Em andamento",
-        "university": "Universidade Federal do Tocantins (UFT)"
+        "university": "Universidade Federal do Tocantins (UFT)",
+        "semester": "8º semestre"
       },
       "location": "Palmas, Tocantins, Brasil"
     },
@@ -33,13 +34,14 @@
       "education": {
         "degree": "Bachelor's degree in Computer Science",
         "status": "In progress",
-        "university": "Federal University of Tocantins (UFT)"
+        "university": "Federal University of Tocantins (UFT)",
+        "semester": "8th semester"
       },
       "location": "Palmas, Tocantins, Brazil"
     }
   },
   "publicContact": {
-    "email": "",
-    "whatsapp": ""
+    "email": "vrascode@gmail.com",
+    "whatsapp": "+55 63 99225-4787"
   }
 }

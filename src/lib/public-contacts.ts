@@ -13,7 +13,7 @@ export function buildProfileContacts(values: { email?: string; whatsapp?: string
 
 export function getProfileContacts(): ProfileContacts {
   return buildProfileContacts({
-    email: process.env.PORTFOLIO_EMAIL ?? identity.publicContact.email,
-    whatsapp: process.env.PORTFOLIO_WHATSAPP ?? identity.publicContact.whatsapp
+    email: process.env.PORTFOLIO_EMAIL?.trim() || identity.publicContact.email,
+    whatsapp: process.env.PORTFOLIO_WHATSAPP?.trim() || identity.publicContact.whatsapp
   });
 }
