@@ -74,8 +74,8 @@
   },
   "Projects": {
     "label": "THE PROJECT COLLECTION",
-    "title": "Built to learn. Made to work.",
-    "description": "Personal and collaborative projects, with a clear look at the implementation, my contribution and what comes next.",
+    "title": "Projects that turn knowledge into real-world solutions.",
+    "description": "A collection of applications built to explore software engineering, full-stack development and systems architecture. Each project is an opportunity to apply technology, strengthen my skills and build purposeful solutions.",
     "all": "All projects",
     "mobile": "Mobile",
     "fullstack": "Full stack",

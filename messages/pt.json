@@ -74,8 +74,8 @@
   },
   "Projects": {
     "label": "COLEÇÃO DE PROJETOS",
-    "title": "Aprender construindo. Criar com propósito.",
-    "description": "Projetos pessoais e colaborativos, com uma visão clara da implementação, da minha participação e dos próximos passos.",
+    "title": "Projetos que transformam conhecimento em soluções reais.",
+    "description": "Uma coleção de aplicações desenvolvidas para explorar desafios de engenharia de software, desenvolvimento Full Stack e arquitetura de sistemas. Cada projeto representa uma oportunidade de aplicar tecnologias, aprimorar habilidades e construir soluções com propósito.",
     "all": "Todos os projetos",
     "mobile": "Mobile",
     "fullstack": "Full stack",
