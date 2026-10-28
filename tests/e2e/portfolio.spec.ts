@@ -163,6 +163,7 @@ for (const viewport of [{ width: 360, height: 800 }, { width: 390, height: 844 }
 test('reduced motion, back-to-top and copy interaction', async ({ page, context }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/en');
+  await expect(page.locator('html')).toHaveAttribute('data-scroll-engine', 'native');
   expect(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior)).toBe('auto');
   await page.locator('footer').scrollIntoViewIfNeeded();
   await page.getByRole('button', { name: 'Back to top' }).click();
@@ -172,6 +173,21 @@ test('reduced motion, back-to-top and copy interaction', async ({ page, context 
   await page.getByRole('button', { name: 'Copy GitHub profile link' }).click();
   await expect(page.getByRole('status')).toHaveText('Profile link copied');
   expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(identity.links.github);
+});
+
+test('Midnight Violet tokens, GSAP reveals, Lenis anchor scrolling and progress indicator', async ({ page }) => {
+  await page.addInitScript(() => Object.defineProperty(navigator, 'hardwareConcurrency', { configurable: true, value: 8 }));
+  await page.goto('/en');
+  await expect(page.locator('html')).toHaveAttribute('data-scroll-engine', 'lenis');
+  await expect(page.locator('.scroll-progress')).toBeAttached();
+  expect(await page.locator('.scroll-progress').evaluate(el => getComputedStyle(el).backgroundColor)).toBe('rgb(167, 139, 250)');
+  await page.locator('.hero-bottom a').click();
+  await expect(page).toHaveURL(/#selected-work$/);
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(50);
+  const progress = await page.locator('html').evaluate(el => getComputedStyle(el).getPropertyValue('--scroll-progress').trim());
+  expect(Number(progress)).toBeGreaterThan(0);
+  await page.locator('#technologies').scrollIntoViewIfNeeded();
+  await expect(page.locator('.stack-group').first()).toHaveCSS('visibility', 'visible');
 });
 
 test('404, robots, sitemap, favicon and localized Open Graph images', async ({ page, request }) => {
