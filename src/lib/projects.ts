@@ -120,7 +120,7 @@ export const projects: Project[] = [
       en: {
         category: 'PET ADOPTION · COLLABORATIVE PROJECT', status: 'Academic project',
         summary: 'A collaborative pet adoption and marketplace platform. A contribution to product descriptions and percentage discounts.',
-        overview: 'An academic team project for the UFT Systems Project course, 2025/2. Amigo Fiel connects pet catalogs, NGO and business profiles, a pet marketplace and messaging in a Django application.',
+        overview: 'An academic team project developed for UFT’s Systems Project course. The application brings together animal-related features, NGO and business profiles, a pet marketplace and communication between users, applying web development and systems organization concepts.',
         features: ['User, business and NGO profiles, with pet and product management.', 'Pet catalog with filters, adoption status and favorites.', 'Stores, product listings and a shopping cart.', 'Conversations and message polling.', 'An explicitly simulated checkout flow.'],
         architecture: 'Python and Django organize the AmigoFiel and chat apps. Views, URLs and server-rendered templates use Django ORM models and migrations with PostgreSQL persistence. The implementation is Django, despite an inconsistent PHP/MySQL description on the fork.',
         contribution: 'Matheus Sulino is a collaborator. Public commit e0228e5 adds short descriptions and percentage discounts to ProdutoEmpresa. The team also includes Eduardo Lopes, Eduardo Henrique, Henrique Wendler, Guilherme da Silva and Marcus Vinicius. This commit establishes a verified contribution, rather than authorship of the entire application.',
@@ -131,7 +131,7 @@ export const projects: Project[] = [
       pt: {
         category: 'ADOÇÃO PET · PROJETO COLABORATIVO', status: 'Projeto acadêmico',
         summary: 'Plataforma colaborativa de adoção e marketplace pet. Uma contribuição para descrições de produtos e descontos percentuais.',
-        overview: 'Projeto acadêmico em equipe da disciplina de Projeto de Sistemas da UFT, 2025/2. Amigo Fiel conecta catálogos de animais, perfis de ONGs e empresas, marketplace pet e mensagens em uma aplicação Django.',
+        overview: 'Projeto acadêmico desenvolvido na disciplina de Projeto de Sistemas da UFT. A aplicação reúne funcionalidades relacionadas a animais, perfis de ONGs e empresas, marketplace pet e comunicação entre usuários, explorando conceitos de desenvolvimento web e organização de sistemas.',
         features: ['Perfis de usuários, empresas e ONGs, com gerenciamento de pets e produtos.', 'Catálogo de animais com filtros, status de adoção e favoritos.', 'Lojas, listagem de produtos e carrinho.', 'Conversas e atualização de mensagens por polling.', 'Fluxo de checkout explicitamente simulado.'],
         architecture: 'Python e Django organizam os apps AmigoFiel e chat. Views, URLs e templates renderizados no servidor utilizam modelos e migrações do Django ORM, com persistência PostgreSQL. A implementação é Django, apesar da descrição inconsistente de PHP/MySQL no fork.',
         contribution: 'Matheus Sulino é colaborador. O commit público e0228e5 adiciona descrição curta e desconto percentual ao ProdutoEmpresa. A equipe também inclui Eduardo Lopes, Eduardo Henrique, Henrique Wendler, Guilherme da Silva e Marcus Vinicius. Esse commit comprova uma contribuição específica, sem atribuir a Matheus a autoria integral da aplicação.',
@@ -155,7 +155,7 @@ export const projects: Project[] = [
       en: {
         category: 'INVENTORY MANAGEMENT · COLLABORATIVE PROJECT', status: 'Academic project',
         summary: 'Products, stock movements and inventory reporting. A team project built with PHP, MySQL and MVC architecture.',
-        overview: 'An academic inventory system from Software Engineering at UFT, 2026.1. It organizes products, stock entries and exits, inventory counts and reporting through a server-rendered PHP interface.',
+        overview: 'A system developed for UFT’s Software Engineering course to organize and track inventory. It covers product management, incoming and outgoing stock movements, inventory and reports, using PHP and software architecture concepts.',
         features: ['Product creation and editing, categories, prices, units and minimum/maximum stock.', 'Stock entries and exits recorded with transactional quantity updates.', 'Inventory counts, discrepancies, approvals and adjustment audits.', 'Stock turnover, movement and valuation reports with relevant filters.', 'Session-based access, role permissions and CSRF protection in protected flows.'],
         architecture: 'Native PHP follows an MVC structure. Controllers coordinate views and models; PDO connects to MySQL. Relational tables cover users, products, movements, inventories and audit records. Transactions keep stock updates and movement history consistent.',
         contribution: 'Matheus contributed to user registration, stock limits, product filters, report refinements and interface improvements, with changes confirmed in Git history. The team includes João Pedro Rodrigues Bequiman, Giordano Bruno and Murillo Fernandes de Oliveira. Iagor Lourenço dos Santos is credited for earlier sprints.',
@@ -166,7 +166,7 @@ export const projects: Project[] = [
       pt: {
         category: 'GESTÃO DE ESTOQUE · PROJETO COLABORATIVO', status: 'Projeto acadêmico',
         summary: 'Produtos, movimentações e relatórios de estoque. Um projeto em equipe com PHP, MySQL e arquitetura MVC.',
-        overview: 'Sistema acadêmico de estoque da disciplina de Engenharia de Software da UFT, 2026.1. Organiza produtos, entradas e saídas, contagens de inventário e relatórios por uma interface PHP renderizada no servidor.',
+        overview: 'Sistema desenvolvido na disciplina de Engenharia de Software da UFT, voltado à organização e ao acompanhamento de estoques. O projeto contempla gerenciamento de produtos, movimentações de entrada e saída, inventário e relatórios, utilizando PHP e conceitos de arquitetura de software.',
         features: ['Cadastro e edição de produtos, categorias, preços, unidades e estoque mínimo/máximo.', 'Entradas e saídas registradas com atualização transacional de quantidades.', 'Contagens de inventário, divergências, aprovações e auditoria de ajustes.', 'Relatórios de giro, movimentação e valorização do estoque com filtros correspondentes.', 'Acesso por sessão, permissões de perfis e proteção CSRF em fluxos protegidos.'],
         architecture: 'PHP nativo segue a estrutura MVC. Controllers coordenam views e models; PDO conecta ao MySQL. Tabelas relacionais cobrem usuários, produtos, movimentações, inventários e auditorias. Transações mantêm a consistência entre atualização de estoque e histórico.',
         contribution: 'Matheus contribuiu com cadastro de usuários, limites de estoque, filtros de produtos, refinamento de relatórios e melhorias de interface, com alterações confirmadas no histórico Git. A equipe inclui João Pedro Rodrigues Bequiman, Giordano Bruno e Murillo Fernandes de Oliveira. Iagor Lourenço dos Santos é creditado por sprints anteriores.',
