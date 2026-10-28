@@ -23,7 +23,7 @@ Atualização: **27 de outubro de 2026**.
 | `npm.cmd run lint` | Aprovado, sem erros ou avisos na execução final. |
 | `npm.cmd test` | 8 testes aprovados. |
 | `npm.cmd run build` | Aprovado; vinte páginas de conteúdo pré-renderizadas. |
-| Playwright | 14 testes aprovados na execução completa inicial; falha do ícone Apple corrigida e o teste restante aprovado na repetição direcionada. |
+| Playwright | 15 cenários aprovados: no Windows, 14 na execução inicial e o restante após corrigir o ícone Apple; no GitHub Actions/Linux, suíte completa aprovada. |
 | Navegação | Vinte páginas, links internos, idioma, temas, menu mobile e erros 404 verificados. |
 | Acessibilidade | 28 análises axe-core: sete páginas × dois idiomas × dois temas, sem violações das regras WCAG 2 A/AA e 2.1 AA examinadas. Teclado, foco do menu, skip link e movimento reduzido também testados. |
 | Responsividade | 360, 390, 768 e 1440 pixels, em ambos os idiomas, sem overflow horizontal nas rotas examinadas. |
@@ -33,7 +33,7 @@ Atualização: **27 de outubro de 2026**.
 
 O problema do ícone Apple vinha do proxy de idiomas, que redirecionava `/apple-icon` para uma rota localizada inexistente. O ícone agora é excluído desse redirecionamento. A suíte também verifica as duas imagens Open Graph.
 
-Testes automatizados não equivalem a auditoria integral de acessibilidade, validação em dispositivos físicos ou teste em todos os navegadores. A execução local utilizou Microsoft Edge/Chromium no Windows; o workflow Linux está preparado, mas seu resultado remoto depende da execução no GitHub.
+Testes automatizados não equivalem a auditoria integral de acessibilidade, validação em dispositivos físicos ou teste em todos os navegadores. A execução local utilizou Microsoft Edge/Chromium no Windows. A [execução GitHub Actions no Linux](https://github.com/vrascode/vrascode.dev/actions/runs/40609600866), para o commit `134730195da3f9e3991c1682d7d7ee2b53569e66`, concluiu com **success**, incluindo instalação, TypeScript, lint, testes, build e Playwright.
 
 ## Projetos pesquisados
 
@@ -47,9 +47,9 @@ Um servidor existente do projeto foi observado na porta 3000 e preservado. `http
 
 ## Git e hospedagem
 
-Commits são criados por entregas reais, sem reescrever timestamps. O envio e a confirmação do GitHub serão registrados ao concluir a sincronização. O remote continua `https://github.com/vrascode/vrascode.dev.git`.
+Os dez commits iniciais foram enviados com sucesso para `origin/main`. A igualdade do commit local `134730195da3f9e3991c1682d7d7ee2b53569e66` com o remoto foi confirmada por `git ls-remote`; a branch está configurada para acompanhar `origin/main`. O registro posterior desta confirmação é um commit de documentação. O remote continua `https://github.com/vrascode/vrascode.dev.git`, e os timestamps não foram alterados.
 
-Nenhuma publicação na Vercel ou no domínio foi confirmada. Nenhum DNS foi alterado. [DEPLOYMENT.md](DEPLOYMENT.md) contém instruções de conexão com valores a obter na própria hospedagem.
+Nenhuma publicação na Vercel ou no domínio foi confirmada. Não foram encontrados token Vercel no ambiente, configuração local do projeto ou autenticação nas localizações usuais verificadas. Nenhum DNS foi alterado. [DEPLOYMENT.md](DEPLOYMENT.md) contém instruções de conexão com valores a obter na própria hospedagem.
 
 ## Pendências
 

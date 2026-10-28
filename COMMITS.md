@@ -13,8 +13,9 @@ Histórico criado por entregas verificáveis, no repositório existente `vrascod
 | `9a31fea` | `feat: implementar SEO e imagens sociais localizadas` — metadados sociais, robots e sitemap. |
 | `96a11e9` | `test: validar navegacao traducoes acessibilidade e fontes` — testes automatizados e workflow GitHub Actions. |
 | `f16fd96` | `chore: preparar publicacao Vercel e dominio Hostinger` — configuração e roteiro de publicação sem mudar DNS. |
+| `1347301` | `docs: documentar arquitetura fontes e validacao` — documentação completa; implementação aprovada no GitHub Actions/Linux. |
 
-Este documento e os demais relatórios são incluídos no commit `docs: documentar arquitetura fontes e validacao`. Commits posteriores de entrega, quando houver, registram somente mudanças reais de estado ou correções.
+O commit posterior `docs: registrar validacao remota e entrega` registra a confirmação do push e da [validação Linux](https://github.com/vrascode/vrascode.dev/actions/runs/40609600866). Os commits de entrega registram somente mudanças reais de estado ou correções.
 
 Para consultar os identificadores completos e o estado de sincronização:
 

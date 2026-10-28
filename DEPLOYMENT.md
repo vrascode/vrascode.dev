@@ -2,7 +2,7 @@
 
 ## Estado atual
 
-A aplicação está preparada para Vercel. Não existe vínculo local `.vercel/project.json`, não foi encontrada CLI Vercel disponível e nenhuma implantação foi confirmada. O domínio planejado é **https://vrascode.dev**. Os registros DNS não foram alterados.
+A aplicação está preparada para Vercel, e o código foi enviado ao GitHub com validação Linux aprovada. Não existe vínculo local `.vercel/project.json`, não foi encontrada CLI Vercel disponível, token no ambiente ou autenticação nas localizações usuais verificadas. Nenhuma implantação foi confirmada. O domínio planejado é **https://vrascode.dev**. Os registros DNS não foram alterados.
 
 O site local pode ser acompanhado em **http://localhost:3000**, executando `npm.cmd run dev` na pasta do projeto. A versão em português fica em `/pt`; a raiz direciona para `/en`.
 
