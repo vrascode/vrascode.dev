@@ -1,0 +1,40 @@
+{
+  "name": "Matheus Sulino",
+  "professionalName": "Matheus Sulino",
+  "brand": "VRAS CODE",
+  "pageTitle": "Matheus Sulino | Full-Stack Developer",
+  "domain": "vrascode.dev",
+  "links": {
+    "portfolio": "https://vrascode.dev",
+    "github": "https://github.com/vrascode",
+    "repository": "https://github.com/vrascode/vrascode.dev"
+  },
+  "locales": {
+    "pt-BR": {
+      "greeting": "Olá, eu sou Matheus Sulino.",
+      "headline": "Transformando desafios reais em soluções através da tecnologia.",
+      "description": "Sou estudante de Ciência da Computação na Universidade Federal do Tocantins e desenvolvedor Full Stack, com foco na criação de aplicações web, sistemas e soluções tecnológicas. Neste portfólio, apresento projetos que refletem minha experiência prática, minhas competências técnicas e minha evolução na engenharia de software.",
+      "field": "Desenvolvimento Full Stack",
+      "role": "Desenvolvedor Full Stack",
+      "education": {
+        "degree": "Bacharelado em Ciência da Computação",
+        "status": "Em andamento",
+        "university": "Universidade Federal do Tocantins (UFT)"
+      },
+      "location": "Palmas, Tocantins, Brasil"
+    },
+    "en": {
+      "greeting": "Hi, I'm Matheus Sulino.",
+      "headline": "Turning real-world challenges into technology-driven solutions.",
+      "description": "I'm a Computer Science student at the Federal University of Tocantins and a Full-Stack Developer focused on building web applications, software systems, and practical technology solutions. This portfolio showcases my projects, technical skills, and continuous growth in software engineering.",
+      "field": "Full-Stack Development",
+      "role": "Full-Stack Developer",
+      "education": {
+        "degree": "Bachelor's degree in Computer Science",
+        "status": "In progress",
+        "university": "Federal University of Tocantins (UFT)"
+      },
+      "location": "Palmas, Tocantins, Brazil"
+    }
+  }
+}
