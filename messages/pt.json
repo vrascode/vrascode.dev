@@ -132,10 +132,10 @@
     "journeyCurrent": "8º período · Graduação em andamento",
     "semester2025": "2025/2 · Projeto acadêmico em equipe",
     "semester2026": "2026/1 · Projeto acadêmico em equipe",
-    "degreePeriodLabel": "Período informado no LinkedIn",
-    "degreePeriod": "Janeiro de 2023 — dezembro de 2027 (previsão)",
+    "degreePeriod": "Janeiro de 2023 — Dezembro de 2027 (previsão)",
     "academicDescription": "Graduação em Ciência da Computação com estudos em programação, algoritmos, estruturas de dados, bancos de dados, engenharia de software e desenvolvimento de aplicações. Participação em projetos acadêmicos que permitem aplicar conhecimentos técnicos na resolução de problemas.",
     "universityLogoAlt": "Universidade Federal do Tocantins — UFT",
+    "amigoFielLogoAlt": "Logotipo do projeto Amigo Fiel",
     "projectLink": "Ver projeto",
     "academicSemester": "Período do projeto acadêmico",
     "softwareInterest": "Além do código",
@@ -160,7 +160,9 @@
     "task4": "Apoio à infraestrutura de TI",
     "location": "Palmas, Tocantins, Brasil",
     "modality": "Presencial",
-    "workLocation": "Local e modalidade"
+    "workLocation": "Local e modalidade",
+    "sefazLogoAlt": "Logotipo oficial da Secretaria da Fazenda do Tocantins",
+    "uftLogoAlt": "Universidade Federal do Tocantins — UFT"
   },
   "Contact": {
     "label": "VAMOS CONVERSAR",

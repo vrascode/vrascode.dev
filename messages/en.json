@@ -132,10 +132,10 @@
     "journeyCurrent": "8th term · Degree in progress",
     "semester2025": "2025/2 · Academic team project",
     "semester2026": "2026/1 · Academic team project",
-    "degreePeriodLabel": "Period listed on LinkedIn",
     "degreePeriod": "January 2023 — December 2027 (expected)",
     "academicDescription": "Computer Science studies in programming, algorithms, data structures, databases, software engineering and application development. Academic projects provide opportunities to apply technical knowledge to problem solving.",
     "universityLogoAlt": "Universidade Federal do Tocantins — UFT",
+    "amigoFielLogoAlt": "Amigo Fiel project logo",
     "projectLink": "View project",
     "academicSemester": "Academic project period",
     "softwareInterest": "Beyond the code",
@@ -160,7 +160,9 @@
     "task4": "IT infrastructure support",
     "location": "Palmas, Tocantins, Brazil",
     "modality": "On-site",
-    "workLocation": "Location and work arrangement"
+    "workLocation": "Location and work arrangement",
+    "sefazLogoAlt": "Official logo of the Tocantins Department of Finance",
+    "uftLogoAlt": "Universidade Federal do Tocantins — UFT"
   },
   "Contact": {
     "label": "LET'S CONNECT",
