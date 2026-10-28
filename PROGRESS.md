@@ -43,4 +43,4 @@ Os testes automatizados não substituem uma auditoria completa de acessibilidade
 
 Para acompanhar localmente, execute `npm.cmd run dev` quando a porta 3000 estiver livre. Não inicie uma segunda instância se já houver um servidor ativo.
 
-O remote continua `https://github.com/vrascode/vrascode.dev.git`. Os commits desta atualização aguardam push após a validação final. Nenhuma publicação na Vercel ou alteração DNS foi realizada nesta tarefa.
+O remote continua `https://github.com/vrascode/vrascode.dev.git`. Os sete commits funcionais e de documentação desta atualização foram enviados para `origin/main`; o SHA `01fa818` foi confirmado no remote. Nenhuma publicação na Vercel ou alteração DNS foi realizada nesta tarefa.
