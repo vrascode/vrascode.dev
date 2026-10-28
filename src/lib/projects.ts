@@ -184,6 +184,7 @@ export const projects: Project[] = [
     slug: 'vrascode', number: '04', name: 'VRAS CODE', category: 'web', verified: true,
     stack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'next-intl', 'GSAP', 'Lenis'],
     repository: 'https://github.com/vrascode/vrascode.dev',
+    image: '/icon.svg', imagePresentation: 'icon', imageDimensions: [64, 64],
     sources: [
       { label: 'package.json', url: 'https://github.com/vrascode/vrascode.dev/blob/main/package.json' },
       { label: 'localized app routes', url: 'https://github.com/vrascode/vrascode.dev/tree/main/src/app' }
@@ -198,7 +199,7 @@ export const projects: Project[] = [
         contribution: 'Personal project designed, developed and maintained by Matheus Sulino in the public vrascode/vrascode.dev repository.',
         verification: 'The source repository is public and includes the application code, dependency manifest and project documentation.',
         limitations: 'This project is the portfolio itself; it is presented as a website rather than a separate product application.',
-        imageCaption: 'VRAS CODE mark · project illustration, not an application screenshot'
+        imageCaption: 'VRAS CODE website icon.'
       },
       pt: {
         category: 'PORTFÓLIO PESSOAL · FULL STACK', status: 'Repositório público',
@@ -209,7 +210,7 @@ export const projects: Project[] = [
         contribution: 'Projeto pessoal planejado, desenvolvido e mantido por Matheus Sulino no repositório público vrascode/vrascode.dev.',
         verification: 'O repositório é público e contém o código da aplicação, o manifesto de dependências e a documentação do projeto.',
         limitations: 'Este projeto é o próprio portfólio e é apresentado como um site, não como uma aplicação de produto independente.',
-        imageCaption: 'Marca VRAS CODE · ilustração do projeto, não é uma captura da aplicação'
+        imageCaption: 'Ícone do site VRAS CODE.'
       }
     }
   }

@@ -233,6 +233,49 @@ for (const locale of ['en', 'pt'] as const) {
   });
 }
 
+for (const locale of ['en', 'pt'] as const) {
+  test(`${locale}: local project images load on cards and detail pages`, async ({ page }) => {
+    const expected = {
+      'clearledger': '/projects/clearledger.png',
+      'fintrack-pro': '/projects/fintrack-pro.png',
+      'controle-de-estoque': '/images/Controle-de-estoque.png',
+      'vras-watches': '/images/vras-watches.png',
+      'amigo-fiel': '/images/projects/amigo-fiel-logo.png',
+      'vrascode': '/icon.svg'
+    } as const;
+    for (const width of [390, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto(`/${locale}/projects`);
+      const visualHeights: number[] = [];
+      for (const [slug, path] of Object.entries(expected)) {
+        const card = page.locator(`.project-card[data-project="${slug}"]`);
+        const image = card.locator('.project-visual img');
+        await image.scrollIntoViewIfNeeded();
+        await expect.poll(() => image.evaluate(element => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+        const source = await image.evaluate(element => {
+          const url = new URL((element as HTMLImageElement).currentSrc);
+          return url.pathname === '/_next/image' ? url.searchParams.get('url') : url.pathname;
+        });
+        expect(source).toBe(path);
+        const box = await card.locator('.project-visual').boundingBox();
+        visualHeights.push(box!.height);
+        if (slug === 'clearledger' || slug === 'fintrack-pro') await expect(card.locator('.screenshot-frame')).toHaveCount(1);
+        else {
+          await expect(card.locator('.project-asset-preview')).toHaveCount(1);
+          await expect.poll(() => image.evaluate(element => getComputedStyle(element).objectFit)).toBe('contain');
+        }
+      }
+      expect(new Set(visualHeights).size).toBe(1);
+    }
+    for (const slug of Object.keys(expected)) {
+      await page.goto(`/${locale}/projects/${slug}`);
+      const image = page.locator('.project-visual img');
+      await expect(image).toBeVisible();
+      await expect.poll(() => image.evaluate(element => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+    }
+  });
+}
+
 test('project search, categories and recovery from empty results work', async ({ page }) => {
   await page.goto('/en/projects');
   await page.getByRole('searchbox').fill('FastAPI');
