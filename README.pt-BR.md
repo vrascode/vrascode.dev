@@ -22,7 +22,7 @@ Em Linux/macOS, use `npm`. Para visualizar a versão de produção, execute `npm
 
 ## Implementação
 
-- Vinte páginas localizadas: início, coleção de projetos, cinco detalhes de projetos, sobre, experiência e contato.
+- Vinte e duas páginas localizadas: início, coleção de projetos, seis detalhes, sobre, experiência e contato, em português e inglês.
 - Identidade original preservada, logotipo VRAS CODE, favicon SVG e ícone Apple próprios.
 - Temas claro/escuro, preferência persistida, troca de idioma preservando a página, menu mobile, navegação por teclado e movimento reduzido.
 - Busca e filtros de projetos, capturas reais e descrição clara do escopo e da participação de Matheus.
@@ -30,18 +30,20 @@ Em Linux/macOS, use `npm`. Para visualizar a versão de produção, execute `npm
 - Revelações com ScrollTrigger, uma instância Lenis sincronizada ao ticker GSAP, âncoras e indicador de rolagem. Dispositivos com movimento reduzido ou baixa capacidade usam rolagem nativa.
 - API pública do GitHub no servidor, cache de uma hora e estado de indisponibilidade.
 - Metadados, Open Graph localizado, canonical, alternativas de idioma, sitemap, robots e JSON-LD.
-- Estágio em TI na EGEFAZ desde junho de 2025, formação na UFT e tecnologias contextualizadas.
-- Linha do tempo academica mostra o 8o semestre confirmado, sem percentual de conclusao ou previsao de formatura. Disciplinas cursadas nao confirmadas nao sao listadas.
+- Estágio em TI na SEFAZ-TO desde junho de 2025, formação na UFT e tecnologias contextualizadas.
+- Formação: 8º período, com período informado no LinkedIn de janeiro de 2023 a dezembro de 2027; dezembro de 2027 aparece como previsão. Não há percentual de conclusão.
+- Logotipo oficial da UFT na seção acadêmica. A marca da SEFAZ-TO continua pendente de verificação e não é substituída por um brasão genérico do Estado.
 - Cards de LinkedIn, GitHub, email e WhatsApp com contatos autorizados por Matheus. A fotografia fornecida aparece no Inicio, em Sobre Mim e nas imagens sociais; o curriculo continua opcional.
 - Imagens Open Graph localizadas usam a fotografia fornecida; a identidade VRAS CODE permanece como composicao visual.
 
 ## Projetos e fontes
 
-1. **FinTrack Pro:** base Expo/React Native/NestJS; os fluxos financeiros ainda estão em desenvolvimento.
-2. **ClearLedger:** reconciliação FastAPI/SQLite, CSV, relatórios imutáveis e dashboard Next.js.
-3. **VRAS:** página reservada com pendência explícita de identificação da fonte original.
-4. **Amigo Fiel:** projeto colaborativo Django/PostgreSQL, com participação específica de Matheus creditada.
+1. **ClearLedger:** reconciliação FastAPI/SQLite, CSV, relatórios imutáveis e dashboard Next.js.
+2. **FinTrack Pro:** base Expo/React Native/NestJS; os fluxos financeiros ainda estão em desenvolvimento.
+3. **VRAS Watches:** loja Django descrita com base nas informações fornecidas; o repositório não está acessível publicamente, então o link e capturas não são exibidos.
+4. **VRAS CODE:** este portfólio, desenvolvido com Next.js e TypeScript.
 5. **Controle de Estoque:** projeto colaborativo PHP/MySQL/MVC, com produtos, movimentações, inventários e relatórios.
+6. **Amigo Fiel:** projeto colaborativo Django/PostgreSQL, com participação específica de Matheus creditada.
 
 Veja [CONTENT_SOURCES.md](CONTENT_SOURCES.md) e [a pesquisa detalhada](docs/project-research.md). As limitações e os testes de cada projeto são separados dos testes deste portfólio.
 

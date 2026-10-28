@@ -22,7 +22,7 @@ On macOS/Linux, use `npm` instead of `npm.cmd`. The dev server binds to loopback
 
 ## Features
 
-- Twenty localized pages: home, project collection, five project details, about, experience and contact, in English and Portuguese.
+- Twenty-two localized pages: home, project collection, six project details, about, experience and contact, in English and Portuguese.
 - Exact supplied identity and presentation, a custom typographic logo, SVG favicon and Apple icon.
 - Dark/light themes, persistent theme preference, route-preserving language switch, mobile dialog navigation, keyboard access and reduced-motion support.
 - Searchable project collection with category filters and honest implementation/contribution notes.
@@ -30,8 +30,9 @@ On macOS/Linux, use `npm` instead of `npm.cmd`. The dev server binds to loopback
 - GSAP ScrollTrigger reveals, one Lenis instance synchronized through the GSAP ticker, anchor support and a scroll progress indicator. Native scrolling remains active for reduced-motion and low-power devices.
 - GitHub public profile data fetched on the server, cached for one hour, with a graceful failure state.
 - Localized metadata and Open Graph images, canonical/alternate URLs, sitemap, robots and Person JSON-LD.
-- EGEFAZ IT internship since June 2025, UFT education and evidence-based technology descriptions.
-- Academic timeline shows the confirmed 8th semester. No completion percentage, graduation date or unconfirmed courses are shown.
+- SEFAZ-TO IT internship since June 2025, UFT education and evidence-based technology descriptions.
+- Academic timeline shows the confirmed 8th term and the LinkedIn-reported January 2023–December 2027 period, with December 2027 clearly labeled as expected. No completion percentage is shown.
+- Official UFT wordmark displayed in the education section. The SEFAZ-TO mark remains pending verification and is not replaced by a generic state logo.
 - LinkedIn and GitHub, plus the confirmed public e-mail and WhatsApp contact links. The supplied portrait is displayed on Home, About and social cards; a CV download remains optional.
 - Localized Open Graph cards include Matheus's supplied portrait; its existing JPEG file is used unchanged on Home and About.
 
@@ -39,11 +40,12 @@ On macOS/Linux, use `npm` instead of `npm.cmd`. The dev server binds to loopback
 
 | Order | Project | Verified scope |
 | --- | --- | --- |
-| 01 | FinTrack Pro | Expo/React Native/NestJS foundation; financial workflows remain in development. |
-| 02 | ClearLedger | FastAPI/SQLite reconciliation, CSV imports, immutable reports and a Next.js dashboard. |
-| 03 | VRAS | Reserved page with an explicit source-identification pending state. |
-| 04 | Amigo Fiel | Collaborative Django/PostgreSQL academic project; Matheus's specific product-model contribution is credited. |
+| 01 | ClearLedger | FastAPI/SQLite reconciliation, CSV imports, immutable reports and a Next.js dashboard. |
+| 02 | FinTrack Pro | Expo/React Native/NestJS foundation; financial workflows remain in development. |
+| 03 | VRAS Watches | Django store described from user-provided information; source repository was not publicly accessible, so no repository link or screenshot is shown. |
+| 04 | VRAS CODE | This portfolio, built with Next.js and TypeScript. |
 | 05 | Controle de Estoque | Collaborative PHP/MySQL MVC project; products, movements, inventory and reports. |
+| 06 | Amigo Fiel | Collaborative Django/PostgreSQL academic project; Matheus's specific product-model contribution is credited. |
 
 [CONTENT_SOURCES.md](CONTENT_SOURCES.md) and [the research record](docs/project-research.md) distinguish inspected code, executed tests, screenshots, team credits and unverified claims.
 

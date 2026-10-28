@@ -4,7 +4,7 @@
 
 This repository is the portfolio presentation layer. It does not run the financial, adoption or inventory systems it describes, access their databases, or embed their authentication. Project data is editorial content tied to inspected source evidence.
 
-Next.js App Router provides server-rendered and prerendered routes. The twenty content pages are statically generated for `en` and `pt`; the home page revalidates after one hour for GitHub data. Open Graph images are generated through Next.js ImageResponse. The application uses the standard Next.js runtime and is prepared for Vercel, not a static-only Hostinger upload.
+Next.js App Router provides server-rendered and prerendered routes. The twenty-two content pages are statically generated for `en` and `pt`; the home page revalidates after one hour for GitHub data. Open Graph images are generated through Next.js ImageResponse. The application uses the standard Next.js runtime and is prepared for Vercel, not a static-only Hostinger upload.
 
 ## Modules
 

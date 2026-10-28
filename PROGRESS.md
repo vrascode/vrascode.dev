@@ -1,72 +1,46 @@
 # Progresso · Matheus Sulino / VRAS CODE
 
-Atualizacao: **28 de outubro de 2026**.
+Atualização: **28 de outubro de 2026**.
 
 ## Implementado
 
-- Preservação de `content/identity.json`, `docs/identidade-profissional.md`, repositório e remote originais.
-- Next.js App Router, React, TypeScript, Tailwind, GSAP, ScrollTrigger, Lenis, Lucide, next-intl e next-themes.
-- Identidade VRAS CODE, nome Matheus Sulino, fontes locais, favicon e ícone Apple próprios.
-- `/en` padrão e `/pt`, com vinte páginas de conteúdo: início, projetos, cinco detalhes, sobre, experiência e contato em cada idioma.
-- Temas, idioma, navegação desktop/mobile, foco por teclado, movimento reduzido e retorno ao topo.
-- Busca e filtros, capturas reais de FinTrack/ClearLedger, créditos e limites dos projetos colaborativos.
-- Formação em Ciência da Computação na UFT e estágio em TI na EGEFAZ desde junho de 2025.
-- Integração GitHub com cache, timeout, validação de resposta e fallback; contato pelo perfil informado.
-- Apresentação, biografia e perfil profissional bilíngues de Matheus Sulino, com links para LinkedIn e GitHub e conhecimentos ancorados no README público do GitHub.
-- Minha Jornada Academica informa o 8o semestre confirmado. O percentual de conclusao e a previsao de formatura continuam sem estimativa.
-- Oito categorias de tecnologias, atividades da EGEFAZ restritas às informações confirmadas, e cards de contato responsivos.
-- E-mail e WhatsApp autorizados estao configurados e visiveis nas duas linguas. A foto fornecida em public/images/matheus-sulino.png.jpeg esta integrada sem alteracao. O curriculo continua opcional.
-- Pesquisa pública e anônima do LinkedIn registrada em `docs/profile-research.md`; o perfil não forneceu conteúdo legível, portanto nenhuma experiência, competência ou certificação foi atribuída a ele.
-- SEO, canonical, hreflang, JSON-LD, Open Graph, sitemap, robots e proteção contra indexação de previews.
-- Redesign Midnight Violet aplicado aos tokens dos temas, ícones e imagens sociais.
-- GSAP/ScrollTrigger para entrada do hero, revelações escalonadas e parallax decorativo sutil; Lenis compartilha o ticker GSAP e trata âncoras. Movimento reduzido e aparelhos de baixa capacidade permanecem em rolagem nativa.
-- Indicador de rolagem atualizado por eventos e `requestAnimationFrame`, sem renderizações React por quadro.
-- Configuração Vercel, workflow de validação GitHub Actions e documentação de DNS sem alteração da zona.
+- Preservados o projeto existente, `content/identity.json`, `docs/identidade-profissional.md`, histórico Git e remote original.
+- Aplicativo Next.js App Router, React, TypeScript, Tailwind CSS e next-intl com 22 páginas localizadas em `/en` e `/pt`.
+- Identidade VRAS CODE, nome Matheus Sulino, temas claro/escuro, navegação, filtros, animações existentes e layout responsivo preservados.
+- Apresentação de projetos atualizada nas duas línguas. Catálogo com ClearLedger, FinTrack Pro, VRAS Watches, VRAS CODE, Controle de Estoque e Amigo Fiel.
+- VRAS Watches usa apenas a descrição fornecida; seu repositório retornou 404 para acesso anônimo. Sem link público, screenshot ou alegações adicionais.
+- Páginas de experiência atualizadas com estágio de Tecnologia da Informação na Secretaria da Fazenda do Estado do Tocantins (SEFAZ-TO), desde junho de 2025, em Palmas e presencial, com as atividades informadas.
+- A versão oficial do logotipo da SEFAZ-TO não pôde ser verificada nos recursos oficiais acessíveis e permanece pendente; nenhum brasão genérico foi apresentado como marca da secretaria.
+- Formação na UFT atualizada para 8º período, com início informado em janeiro de 2023 e dezembro de 2027 apresentado como previsão. Sem percentual fictício de conclusão.
+- Descrição acadêmica e marcos 2025/2 (Amigo Fiel) e 2026/1 (Controle de Estoque) atualizados, com links internos preservados.
+- Logotipo oficial da UFT obtido no portal institucional e exibido junto à formação com proporção preservada e texto alternativo acessível.
+- Documentação de fontes e informações atualizada em `CONTENT_SOURCES.md`, `README.md`, `README.pt-BR.md` e `ARCHITECTURE.md`.
 
-## Validação executada localmente
+## Validação desta atualização
 
 | Verificação | Resultado |
 | --- | --- |
 | `npm.cmd run typecheck` | Aprovado. |
-| `npm.cmd run lint` | Aprovado, sem erros ou avisos na execução final. |
+| `npm.cmd run lint` | Aprovado. |
 | `npm.cmd test` | 11 testes aprovados. |
-| `npm.cmd run build` | Aprovado após a atualização; vinte páginas localizadas são geradas, com contato renderizado no servidor. |
-| Playwright | 21/21 cenarios aprovados em Chromium no Windows, incluindo acessibilidade, responsividade, contatos confirmados e fotografia fornecida. |
-| Navegação | Vinte páginas, links internos, idioma, temas, menu mobile e erros 404 verificados. |
-| Acessibilidade | 28 análises axe-core: sete páginas × dois idiomas × dois temas, sem violações das regras WCAG 2 A/AA e 2.1 AA examinadas. Teclado, foco do menu, skip link e movimento reduzido também testados. |
-| Responsividade | 360, 390, 768 e 1440 pixels, em ambos os idiomas, sem overflow horizontal nas rotas examinadas. |
-| Links externos | 20/20 links das fontes retornaram HTTP 200 após a atualização. |
-| Animações e rolagem | GSAP/ScrollTrigger e Lenis testados em produção: âncora, indicador, revela de tecnologias e fallback de movimento reduzido passaram. |
-| Regressão E2E | 22 testes Playwright aprovados no build de produção; inclui `/pt`, `/en`, navegação, acessibilidade, temas e larguras responsivas. |
-| Dependências de produção | `npm.cmd audit --omit=dev`: zero vulnerabilidades reportadas. |
-| Inspeção visual | Capturas reais do portfólio em desktop/celular revisadas; nenhuma exceção JavaScript detectada no preview. |
+| `npm.cmd run build` | Aprovado; 22 páginas localizadas geradas. |
+| `npm.cmd run test:e2e` | 24 cenários aprovados em Chromium, incluindo `/pt` e `/en`, projetos, experiência, formação, logotipo, temas, acessibilidade, responsividade e movimento reduzido. |
+| Acessibilidade automatizada | 32 análises axe-core (oito páginas × dois idiomas × dois temas), sem violações das regras WCAG 2 A/AA e 2.1 AA examinadas. |
+| `npm.cmd run check:links` | 22/22 links externos de fontes verificados com HTTP 200. O repositório VRAS Watches não é publicado como link, pois sua URL retorna 404 para acesso anônimo. |
+| Logotipo UFT | PNG institucional servido com `image/png`; carregamento e texto alternativo validados no navegador. |
+| `git diff --check` | Aprovado na revisão final. |
 
-O problema do ícone Apple vinha do proxy de idiomas, que redirecionava `/apple-icon` para uma rota localizada inexistente. O ícone agora é excluído desse redirecionamento. A suíte também verifica as duas imagens Open Graph.
+Os testes automatizados não substituem uma auditoria completa de acessibilidade, dispositivos físicos ou navegadores adicionais.
 
-Testes automatizados não equivalem a auditoria integral de acessibilidade, validação em dispositivos físicos ou teste em todos os navegadores. A execução local utilizou Microsoft Edge/Chromium no Windows. A [execução GitHub Actions no Linux](https://github.com/vrascode/vrascode.dev/actions/runs/40609600866), para o commit `134730195da3f9e3991c1682d7d7ee2b53569e66`, concluiu com **success**, incluindo instalação, TypeScript, lint, testes, build e Playwright.
+## Fontes e pendências
 
-## Projetos pesquisados
+- As informações da experiência, formação, períodos acadêmicos e descrição da VRAS Watches foram fornecidas por Matheus para esta atualização. O perfil LinkedIn não permite leitura anônima automatizada.
+- O arquivo UFT em `public/images/institutions/uft-logo.png` vem de recurso servido pela página institucional de identidade visual da UFT.
+- A marca oficial SEFAZ-TO segue pendente de arquivo oficial verificável; a página de secretarias do portal oficial não disponibilizou o asset em uma URL acessível durante a verificação.
+- Repositório e demonstração públicos da VRAS Watches seguem pendentes de acesso verificável.
 
-FinTrack Pro, ClearLedger, Amigo Fiel e Controle de Estoque foram localizados e analisados. Foram executados separadamente 27 testes do FinTrack, 64 de backend e 51 de frontend do ClearLedger. A pesquisa detalha o que foi apenas inspecionado nos demais projetos, sem afirmar testes não executados.
+## Ambiente e publicação
 
-VRAS mantém página própria na terceira posição, com fonte pendente. Não foi confundido com este portfólio nem com a loja USE-VRAS encontrada localmente.
+Para acompanhar localmente, execute `npm.cmd run dev` quando a porta 3000 estiver livre. Não inicie uma segunda instância se já houver um servidor ativo.
 
-## Ambiente local
-
-Para acompanhar em outro terminal, execute `npm.cmd run dev` quando a porta estiver livre; não inicie uma segunda instância se o projeto já estiver servindo ali. Os testes usam a porta 3100 e encerram apenas seu próprio servidor.
-
-## Git e hospedagem
-
-Os dez commits iniciais foram enviados com sucesso para `origin/main`. A igualdade do commit local `134730195da3f9e3991c1682d7d7ee2b53569e66` com o remoto foi confirmada por `git ls-remote`; a branch está configurada para acompanhar `origin/main`. O registro posterior desta confirmação é um commit de documentação. O remote continua `https://github.com/vrascode/vrascode.dev.git`, e os timestamps não foram alterados.
-
-Nenhuma publicação na Vercel ou no domínio foi confirmada. Não foram encontrados token Vercel no ambiente, configuração local do projeto ou autenticação nas localizações usuais verificadas. Nenhum DNS foi alterado. [DEPLOYMENT.md](DEPLOYMENT.md) contém instruções de conexão com valores a obter na própria hospedagem.
-
-## Pendências de perfil e publicação
-
-1. Curriculo profissional opcional: adicionar public/documents/matheus-sulino-cv.pdf.
-2. Resumo do LinkedIn, cursos/certificados, periodo de ingresso e disciplinas cursadas nao estao publicamente acessiveis; dados aprovados podem ser enviados para atualizar o conteudo.
-
-## Pendências de publicação
-
-1. Identificar URL/repositório do VRAS anterior para substituir o estado pendente por conteúdo verificado.
-2. Importar o repositório na conta Vercel, confirmar uma implantação e configurar o domínio com os registros fornecidos pelo projeto.
+O remote continua `https://github.com/vrascode/vrascode.dev.git`. Os commits desta atualização aguardam push após a validação final. Nenhuma publicação na Vercel ou alteração DNS foi realizada nesta tarefa.

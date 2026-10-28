@@ -4,7 +4,7 @@ Reviewed on **October 28, 2026**. This record links portfolio claims to user ins
 
 ## Professional identity
 
-The user supplied the name Matheus Sulino, VRAS CODE brand, official domain/repository, UFT Computer Science degree in progress (8th semester confirmed in the latest update), location, bilingual presentation and EGEFAZ IT internship starting June 2025. The internship details remain limited to technical support, computer maintenance, diagnosis and IT infrastructure. No completion percentage or graduation date was inferred.
+The user supplied the name Matheus Sulino, VRAS CODE brand, official domain/repository, UFT Computer Science degree in progress (8th term), LinkedIn-reported period from January 2023 to December 2027, location and bilingual presentation. The user identified December 2027 as an expected graduation date and supplied the SEFAZ-TO Information Technology internship beginning June 2025, its role, location, on-site arrangement and summary. No completion percentage is shown.
 
 The identity JSON and identity requirements remain in the repository; the identity JSON now contains the confirmed public e-mail, WhatsApp number and academic semester. Contact values were explicitly authorized in the latest update.
 
@@ -16,11 +16,17 @@ The LinkedIn link provided for this update is included as a professional link. I
 | --- | --- | --- |
 | FinTrack Pro | [`f5e71fd`](https://github.com/vrascode/fintrack-pro/tree/f5e71fd5f2aacc377ff551ab884fddc391df1595) | Read Expo navigation/preferences, NestJS health endpoint, shared money/security primitives, Prisma schema and tests. Financial workflows and database integration remain pending. |
 | ClearLedger | [`d5205e1`](https://github.com/vrascode/clearledger/tree/d5205e199e823edaf0607038549b489edbd9139c) | Read reconciliation, CSV ingestion, SQLite immutability, API, CLI, dashboard and tests. A single-host prototype with synthetic examples. |
-| VRAS | Unconfirmed | Public repositories and accessible local project folders were searched. The distinct USE-VRAS watch-store project does not establish the requested previous website. No technologies or authorship were invented. |
+| VRAS Watches | [Repository URL supplied by user](https://github.com/vrascode/vras-watches) | Anonymous GitHub API returned 404 on October 28, 2026. The listing uses only the user-supplied Django, catalog, shopping cart and responsive-interface description; the source link and screenshots are omitted. |
+| VRAS CODE | [Public repository](https://github.com/vrascode/vrascode.dev) | GitHub API confirmed the repository is public. The catalog describes the current Next.js/TypeScript portfolio, separately from VRAS Watches. |
 | Amigo Fiel | [`98696f0`](https://github.com/vrascode/Amigo-Fiel/tree/98696f0e3fa4bacf4d6e781ce0390427e82fd0be) | Read Django models, views, templates, settings, migrations and chat. The fork description's PHP/MySQL claim conflicts with the code. Matheus's [product-model contribution](https://github.com/Projeto-de-Sistemas-2025-2/Amigo-Fiel/commit/e0228e591d78a44593f0aeab17745d835b1d87bf) is explicitly attributed. Checkout is simulated. |
 | Controle de Estoque | [`ec18061`](https://github.com/vrascode/Eng.Software-Controle-de-Estoque/tree/ec1806143aef31b89ba09e0f97c020fcc2e39fb3) | Read PHP MVC models/controllers/views, MySQL schema, inventory/reporting and contribution history. Team credits and Matheus's specific changes are documented. |
 
 Source links in individual project pages point to the inspected revision where possible. The GitHub Pages page for Controle de Estoque is linked as a source presentation, not an interactive application demo. No public live demo is claimed for FinTrack Pro, ClearLedger or Amigo Fiel.
+
+## Institutional visual assets
+
+- **UFT:** `public/images/institutions/uft-logo.png` is the original PNG served by the official UFT document system for the vertical UFT mark. The official [UFT visual identity page](https://pitanga.uft.edu.br/index.php/es/sucom/servicos/assessoria-de-imprensa/cadastramento-de-profissionais-da-imprensa/156-orgaos-complementares/sucom/20109-identidade-visual) identifies this as an official university symbol and distinguishes the mark from the formal coat of arms. The original pixels, colors and proportions are preserved.
+- **SEFAZ-TO:** no file has been added. The official portal page [lists the department](https://portal.sefaz.to.gov.br/secretarias-e-orgaos-publicos) and its image path references `logo_to_sefaz.png`, but the `portal.sefaz.to.gov.br` host did not resolve for direct retrieval on October 28, 2026. The LinkedIn page also rejected anonymous access (`999`). The exact official mark shown there therefore remains pending verification; no generic state logo is presented as a SEFAZ logo.
 
 ## Source-project tests actually executed
 
