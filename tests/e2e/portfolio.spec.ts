@@ -100,7 +100,8 @@ for (const locale of ['en', 'pt'] as const) {
     const timeline = page.locator('#education');
     await expect(timeline.locator('.timeline-date').filter({ hasText: /2025\/2/ })).toBeVisible();
     await expect(timeline.locator('.timeline-date').filter({ hasText: /2026\/1/ })).toBeVisible();
-    await expect(timeline.getByText(locale === 'pt' ? 'Janeiro de 2023 — dezembro de 2027 (previsão)' : 'January 2023 — December 2027 (expected)')).toBeVisible();
+    await expect(timeline.getByText(locale === 'pt' ? 'Janeiro de 2023 — Dezembro de 2027 (previsão)' : 'January 2023 — December 2027 (expected)')).toBeVisible();
+    await expect(timeline).not.toContainText(/período informado no LinkedIn|period listed on LinkedIn/i);
     await expect(timeline.locator('.academic-data-pending')).toHaveText(locale === 'pt' ? '8º período · Graduação em andamento' : '8th term · Degree in progress');
     await expect(timeline.getByText(locale === 'pt' ? /Graduação em Ciência da Computação com estudos em programação/ : /Computer Science studies in programming/)).toBeVisible();
     const uftLogo = timeline.locator('.institution-logo');
@@ -109,6 +110,12 @@ for (const locale of ['en', 'pt'] as const) {
     const logoResponse = await page.request.get('/images/institutions/uft-logo.png');
     expect(logoResponse.ok()).toBe(true);
     expect(logoResponse.headers()['content-type']).toMatch(/image\/png/);
+    const amigoLogo = timeline.locator('.academic-project-logo');
+    await expect(amigoLogo).toHaveAttribute('alt', locale === 'pt' ? 'Logotipo do projeto Amigo Fiel' : 'Amigo Fiel project logo');
+    await expect.poll(() => amigoLogo.evaluate(image => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+    const amigoLogoResponse = await page.request.get('/images/projects/amigo-fiel-logo.png');
+    expect(amigoLogoResponse.ok()).toBe(true);
+    expect(amigoLogoResponse.headers()['content-type']).toMatch(/image\/png/);
     await expect(timeline).not.toContainText(/percentual de conclusão da graduação e a previsão de formatura não foram confirmados|degree completion percentage and expected graduation date have not been confirmed/i);
     await expect(timeline).not.toContainText(/\b\d+%\b/);
   });
@@ -134,6 +141,15 @@ for (const locale of ['en', 'pt'] as const) {
     await expect(experience).toContainText(locale === 'pt' ? 'Palmas, Tocantins, Brasil' : 'Palmas, Tocantins, Brazil');
     await expect(experience).toContainText(locale === 'pt' ? 'Presencial' : 'On-site');
     await expect(experience.locator('.timeline-body').last()).toContainText(locale === 'pt' ? 'Desenvolvedor de software, suporte técnico, manutenção de equipamentos e apoio à infraestrutura de TI' : 'software development, technical support, equipment maintenance and IT infrastructure support');
+    const sefazLogo = experience.locator('.experience-institution-logo');
+    await expect(sefazLogo).toHaveAttribute('alt', locale === 'pt' ? 'Logotipo oficial da Secretaria da Fazenda do Tocantins' : 'Official logo of the Tocantins Department of Finance');
+    await expect.poll(() => sefazLogo.evaluate(image => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+    const sefazResponse = await page.request.get('/images/institutions/sefaz-to-logo.png');
+    expect(sefazResponse.ok()).toBe(true);
+    expect(sefazResponse.headers()['content-type']).toMatch(/image\/png/);
+    const uftLogo = page.locator('.experience-academic-brand img');
+    await expect(uftLogo).toHaveAttribute('alt', 'Universidade Federal do Tocantins — UFT');
+    await expect.poll(() => uftLogo.evaluate(image => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
   });
 }
 
