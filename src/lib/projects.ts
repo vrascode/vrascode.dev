@@ -113,6 +113,7 @@ export const projects: Project[] = [
     slug: 'amigo-fiel', number: '06', name: 'Amigo Fiel', category: 'fullstack', verified: true,
     stack: ['Python', 'Django', 'PostgreSQL', 'HTML', 'CSS', 'JavaScript'],
     repository: 'https://github.com/vrascode/Amigo-Fiel',
+    image: '/images/projects/amigo-fiel-logo.png', imagePresentation: 'logo', imageDimensions: [1080, 1080],
     sources: [
       { label: 'Projeto-de-Sistemas-2025-2 / Amigo-Fiel', url: 'https://github.com/Projeto-de-Sistemas-2025-2/Amigo-Fiel' },
       { label: 'e0228e5 · Matheus Sulino', url: 'https://github.com/Projeto-de-Sistemas-2025-2/Amigo-Fiel/commit/e0228e591d78a44593f0aeab17745d835b1d87bf' },
@@ -128,7 +129,7 @@ export const projects: Project[] = [
         contribution: 'Matheus Sulino is a collaborator. Public commit e0228e5 adds short descriptions and percentage discounts to ProdutoEmpresa. The team also includes Eduardo Lopes, Eduardo Henrique, Henrique Wendler, Guilherme da Silva and Marcus Vinicius. This commit establishes a verified contribution, rather than authorship of the entire application.',
         verification: 'Models, views, routes, migrations and the contribution commit were reviewed. The two tests.py files contain only the default scaffold; no functional automated test suite was found or claimed.',
         limitations: 'Checkout is simulated; real payment processing is not established. No public demo is confirmed. Broader contributions will only be detailed when supported by evidence.',
-        imageCaption: 'Original portfolio illustration for the collaborative project.'
+        imageCaption: 'Original Amigo Fiel logo with a yellow animal symbol on a black background.'
       },
       pt: {
         category: 'ADOÇÃO PET · PROJETO COLABORATIVO', status: 'Projeto acadêmico',
@@ -139,7 +140,7 @@ export const projects: Project[] = [
         contribution: 'Matheus Sulino é colaborador. O commit público e0228e5 adiciona descrição curta e desconto percentual ao ProdutoEmpresa. A equipe também inclui Eduardo Lopes, Eduardo Henrique, Henrique Wendler, Guilherme da Silva e Marcus Vinicius. Esse commit comprova uma contribuição específica, sem atribuir a Matheus a autoria integral da aplicação.',
         verification: 'Foram analisados modelos, views, rotas, migrações e o commit de contribuição. Os dois arquivos tests.py contêm apenas o scaffold padrão; nenhuma suíte automatizada funcional foi encontrada ou alegada.',
         limitations: 'O checkout é simulado; processamento real de pagamentos não foi comprovado. Não há demonstração pública confirmada. Participações adicionais só serão detalhadas com evidências.',
-        imageCaption: 'Ilustração original do portfólio para o projeto colaborativo.'
+        imageCaption: 'Logotipo original do Amigo Fiel, com símbolo amarelo de animal sobre fundo preto.'
       }
     }
   },
