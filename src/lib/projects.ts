@@ -85,6 +85,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'vras-watches', number: '03', name: 'VRAS Watches', category: 'web', verified: false, stack: ['Django'], sources: [],
+    image: '/images/vras-watches.png', imagePresentation: 'cover', imageDimensions: [1672, 941],
     content: {
       en: {
         category: 'E-COMMERCE · DJANGO', status: 'Source not publicly accessible',
@@ -94,7 +95,7 @@ export const projects: Project[] = [
         contribution: 'Included using the project information supplied by Matheus. Further contribution details are not claimed without access to the source.',
         verification: 'The supplied GitHub URL returned HTTP 404 to anonymous access on October 28, 2026.',
         limitations: 'The repository and a live demo were not available for review. No additional features, screenshots or technical details are claimed.',
-        imageCaption: 'Illustration for the project · not an application screenshot'
+        imageCaption: 'VRAS Watches project cover image.'
       },
       pt: {
         category: 'E-COMMERCE · DJANGO', status: 'Fonte não acessível publicamente',
@@ -104,7 +105,7 @@ export const projects: Project[] = [
         contribution: 'Incluído com base nas informações do projeto fornecidas por Matheus. Não são atribuídos outros detalhes de participação sem acesso ao código-fonte.',
         verification: 'A URL do GitHub informada retornou HTTP 404 para acesso anônimo em 28 de outubro de 2026.',
         limitations: 'O repositório e uma demonstração não estavam disponíveis para análise. Não são alegadas funcionalidades adicionais, capturas ou detalhes técnicos.',
-        imageCaption: 'Ilustração do projeto · não é uma captura da aplicação'
+        imageCaption: 'Imagem de apresentação do projeto VRAS Watches.'
       }
     }
   },

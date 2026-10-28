@@ -49,11 +49,12 @@ test('the project collection preserves the required order and has complete local
   }
 });
 
-test('VRAS Watches remains listed without a public repository link or invented screenshot', () => {
+test('VRAS Watches uses its local project image without implying public repository access', () => {
   const watches = projects.find(p => p.slug === 'vras-watches')!;
   assert.equal(watches.verified, false);
   assert.equal(watches.repository, undefined);
-  assert.equal(watches.image, undefined);
+  assert.equal(watches.image, '/images/vras-watches.png');
+  assert.equal(watches.imagePresentation, 'cover');
   assert.deepEqual(watches.stack, ['Django']);
   assert.match(watches.content.pt.summary, /catálogo de produtos, carrinho de compras e interface responsiva/);
   const portfolio = projects.find(p => p.slug === 'vrascode')!;
