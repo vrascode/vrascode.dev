@@ -7,7 +7,7 @@ import type { Locale } from '@/i18n/routing';
 import type { Project } from '@/lib/projects';
 import { ProjectVisual } from './project-card';
 
-type Props = { project: Project; locale: Locale; detail?: boolean; labels: ShowcaseLabels };
+type Props = { project: Project; locale: Locale; detail?: boolean; editorial?: boolean; preload?: boolean; labels: ShowcaseLabels };
 export type ShowcaseLabels = {
   zoom: string; close: string; previous: string; next: string; sample: string;
   demoTitle: string; demoIntro: string; orders: string; payments: string; deposits: string;
@@ -35,7 +35,7 @@ const reconciliationSample = {
 } as const;
 type SampleTab = keyof typeof reconciliationSample | 'discrepancies' | 'results';
 
-export function ProjectInteractiveShowcase({ project, locale, detail = false, labels }: Props) {
+export function ProjectInteractiveShowcase({ project, locale, detail = false, editorial = false, preload = false, labels }: Props) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const [activeImage, setActiveImage] = useState(0);
@@ -44,8 +44,10 @@ export function ProjectInteractiveShowcase({ project, locale, detail = false, la
   const [isZoomed, setIsZoomed] = useState(false);
   const showcase = project.showcase;
   const gallery = showcase.mode === 'gallery' ? showcase.images : [];
-  const imagePath = gallery[activeImage]?.src ?? project.image;
-  const imageAlt = gallery[activeImage]?.alt[locale] ?? project.content[locale].imageCaption;
+  const imagePath = gallery[activeImage]?.src ?? project.showcaseImage?.src ?? project.image;
+  const imageAlt = gallery[activeImage]?.alt[locale] ?? project.showcaseImage?.alt[locale] ?? project.content[locale].imageCaption;
+  const imagePresentation = project.showcaseImage ? 'screenshot' : project.imagePresentation;
+  const showcaseProject = { ...project, image: imagePath, imagePresentation, imageDimensions: project.showcaseImage?.dimensions ?? project.imageDimensions };
   const runDemo = () => { setHasRun(true); setActiveTab('results'); };
 
   useEffect(() => {
@@ -60,7 +62,7 @@ export function ProjectInteractiveShowcase({ project, locale, detail = false, la
   return <div className={`interactive-showcase ${detail ? 'interactive-showcase-detail' : ''}`} data-showcase-mode={showcase.mode}>
     {showcase.mode === 'gallery' ? <div className="showcase-gallery">
       <div className="showcase-gallery-media">
-        <Image src={imagePath!} alt={imageAlt} fill sizes={detail ? '(max-width: 800px) 100vw, 1080px' : '(max-width: 800px) 100vw, 58vw'} className="showcase-gallery-image" priority={detail} />
+        <Image src={imagePath!} alt={imageAlt} fill sizes={detail ? '(max-width: 800px) 100vw, 1080px' : '(max-width: 1000px) 100vw, 65vw'} className="showcase-gallery-image" preload={detail || preload} />
         <button type="button" className="showcase-zoom" onClick={() => setIsZoomed(true)} aria-label={labels.zoom}><ZoomIn size={17} /></button>
       </div>
       <div className="showcase-controls">
@@ -73,10 +75,11 @@ export function ProjectInteractiveShowcase({ project, locale, detail = false, la
     </div> : showcase.mode === 'comparison' ? <div className="showcase-comparison">
       {[showcase.before, showcase.after].map((item, index) => <figure key={item.src}><Image src={item.src} alt={item.alt[locale]} width={1200} height={675} sizes="(max-width: 700px) 100vw, 50vw" /><figcaption>{index === 0 ? labels.previous : labels.next}</figcaption></figure>)}
     </div> : <>
-        <div className="showcase-image-wrap">
-        <ProjectVisual project={{ ...project, image: imagePath }} locale={locale} detail={detail} />
-          {imagePath && project.imagePresentation !== 'icon' && <button type="button" className="showcase-zoom" onClick={() => setIsZoomed(true)} aria-label={labels.zoom}><ZoomIn size={17} /></button>}
+        <div className={`showcase-image-wrap ${project.showcaseImage ? 'showcase-image-with-brand' : ''}`}>
+          <ProjectVisual project={showcaseProject} locale={locale} detail={detail} editorial={editorial || detail} preload={preload} alt={imageAlt} />
+          {imagePath && imagePresentation !== 'icon' && <button type="button" className="showcase-zoom" onClick={() => setIsZoomed(true)} aria-label={labels.zoom}><ZoomIn size={17} /></button>}
       </div>
+        {project.showcaseImage && <div className="project-brand-complement" aria-label="VRAS CODE"><Image src="/icon.svg" width={28} height={28} alt="" /><span>VRAS CODE</span></div>}
       {showcase.mode === 'demo' && showcase.demoId === 'clearledger' && <section className="reconciliation-demo" aria-label={labels.demoTitle}>
         <div className="reconciliation-demo-heading"><div><span className="eyebrow">{labels.sample}</span><h3>{labels.demoTitle}</h3><p>{labels.demoIntro}</p></div><span className="demo-state"><span aria-hidden="true" />{hasRun ? labels.results : labels.pending}</span></div>
         <div className="demo-notice">{labels.demoNotice}</div>
@@ -90,7 +93,7 @@ export function ProjectInteractiveShowcase({ project, locale, detail = false, la
       </section>}
     </>}
 
-    {isZoomed && imagePath && project.imagePresentation !== 'icon' && <dialog ref={dialogRef} className="showcase-lightbox" aria-label={imageAlt} onClose={() => setIsZoomed(false)} onClick={event => { if (event.target === event.currentTarget) setIsZoomed(false); }}>
+    {isZoomed && imagePath && imagePresentation !== 'icon' && <dialog ref={dialogRef} className="showcase-lightbox" aria-label={imageAlt} onClose={() => setIsZoomed(false)} onClick={event => { if (event.target === event.currentTarget) setIsZoomed(false); }}>
       <button ref={closeButtonRef} type="button" className="showcase-lightbox-close" aria-label={labels.close} onClick={() => setIsZoomed(false)}><X size={20} /></button>
       <div className="showcase-lightbox-image"><Image src={imagePath} alt={imageAlt} fill sizes="100vw" /></div>
     </dialog>}

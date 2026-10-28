@@ -43,7 +43,7 @@ export function ProjectExplorer() {
             <div className="project-story-stack" aria-label={t('stack')}>{project.stack.slice(0, 6).map(tech => <span key={tech}>{tech}</span>)}</div>
             <div className="project-story-actions"><Link href={`/projects/${project.slug}`} className="text-link">{t('openCase')}<ArrowUpRight size={15} /></Link>{project.repository && <a className="text-link" href={project.repository} target="_blank" rel="noopener noreferrer">{t('repository')}<ExternalLink size={14} /></a>}{project.liveDemo && <a className="text-link" href={project.liveDemo} target="_blank" rel="noopener noreferrer">{t('openWebsite')}<ExternalLink size={14} /></a>}</div>
           </div>
-          <div className="project-story-media"><ProjectInteractiveShowcase project={project} locale={locale} labels={labels} /><p className="image-caption">{copy.imageCaption}</p></div>
+          <div className="project-story-media"><ProjectInteractiveShowcase project={project} locale={locale} editorial preload={index === 0} labels={labels} /><p className="image-caption">{copy.imageCaption}</p></div>
         </div>
       </article>;
     })}</Reveal>

@@ -250,12 +250,11 @@ for (const locale of ['en', 'pt'] as const) {
       'controle-de-estoque': '/images/Controle-de-estoque.png',
       'vras-watches': '/images/vras-watches.png',
       'amigo-fiel': '/images/projects/amigo-fiel-logo.png',
-      'vrascode': '/icon.svg'
+      'vrascode': '/projects/vrascode-portfolio.png'
     } as const;
-    for (const width of [390, 1440]) {
+    for (const width of [390, 768, 1024, 1440]) {
       await page.setViewportSize({ width, height: 900 });
       await page.goto(`/${locale}/projects`);
-      const visualHeights: number[] = [];
       for (const [slug, path] of Object.entries(expected)) {
         const card = page.locator(`.project-story[data-project="${slug}"]`);
         const image = card.locator('.project-visual img');
@@ -266,15 +265,20 @@ for (const locale of ['en', 'pt'] as const) {
           return url.pathname === '/_next/image' ? url.searchParams.get('url') : url.pathname;
         });
         expect(source).toBe(path);
-        const box = await card.locator('.project-visual').boundingBox();
-        visualHeights.push(box!.height);
-        if (slug === 'clearledger' || slug === 'fintrack-pro') await expect(card.locator('.screenshot-frame')).toHaveCount(1);
-        else {
-          await expect(card.locator('.project-asset-preview')).toHaveCount(1);
-          await expect.poll(() => image.evaluate(element => getComputedStyle(element).objectFit)).toBe('contain');
+        const media = card.locator('.project-visual');
+        await expect(media).toHaveClass(/project-visual-editorial/);
+        const mediaBox = await media.boundingBox();
+        const imageBox = await image.boundingBox();
+        const dimensions = await image.evaluate(element => ({ width: (element as HTMLImageElement).naturalWidth, height: (element as HTMLImageElement).naturalHeight }));
+        expect(imageBox!.width / mediaBox!.width).toBeGreaterThan(0.98);
+        expect(Math.abs(imageBox!.width / imageBox!.height - dimensions.width / dimensions.height)).toBeLessThan(0.03);
+        await expect.poll(() => image.evaluate(element => getComputedStyle(element).objectFit)).toBe('contain');
+        if (slug === 'amigo-fiel') {
+          await expect(media).toHaveCSS('background-color', 'rgb(5, 5, 5)');
+          await expect(image).toHaveCSS('transform', 'matrix(1.5, 0, 0, 1.5, 0, 0)');
         }
+        if (slug === 'vrascode') await expect(card.locator('.project-brand-complement')).toContainText('VRAS CODE');
       }
-      expect(new Set(visualHeights).size).toBe(1);
     }
     for (const slug of Object.keys(expected)) {
       await page.goto(`/${locale}/projects/${slug}`);
