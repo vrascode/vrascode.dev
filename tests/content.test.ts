@@ -7,7 +7,7 @@ import identity from '../content/identity.json';
 import { filterProjects, projects } from '../src/lib/projects';
 import { pageMetadata, publicPaths } from '../src/lib/metadata';
 import { parseGitHubProfile, readGitHubProfile } from '../src/lib/github';
-import { buildProfileContacts } from '../src/lib/public-contacts';
+import { buildProfileContacts, getProfileContacts } from '../src/lib/public-contacts';
 
 function keys(value: Record<string, unknown>, prefix = ''): string[] {
   return Object.entries(value).flatMap(([key, item]) => typeof item === 'string' ? [`${prefix}${key}`] : keys(item as Record<string, unknown>, `${prefix}${key}.`)).sort();
@@ -87,8 +87,9 @@ test('GitHub HTTP failures, malformed JSON and network timeouts safely fall back
   assert.deepEqual(await readGitHubProfile(async () => Response.json({ login: 'vrascode', public_repos: 6, followers: 6 })), { login: 'vrascode', publicRepos: 6, followers: 6 });
 });
 
-test('email and WhatsApp stay unpublished until valid public-contact details are configured', () => {
-  assert.deepEqual(identity.publicContact, { email: '', whatsapp: '' });
+test('authorized email and WhatsApp details are normalized and available by default', () => {
+  assert.deepEqual(identity.publicContact, { email: 'vrascode@gmail.com', whatsapp: '+55 63 99225-4787' });
+  assert.deepEqual(getProfileContacts(), { email: 'vrascode@gmail.com', whatsapp: '5563992254787' });
   assert.deepEqual(buildProfileContacts({}), { email: null, whatsapp: null });
   assert.deepEqual(buildProfileContacts({ email: 'not-an-email', whatsapp: '123-abc' }), { email: null, whatsapp: null });
   assert.deepEqual(buildProfileContacts({ email: 'matheus@example.com', whatsapp: '+55 (63) 99999-1234' }), { email: 'matheus@example.com', whatsapp: '5563999991234' });
@@ -100,6 +101,9 @@ test('professional identity includes the LinkedIn profile supplied by Matheus', 
 
 test('optional photograph and resume use the requested drop-in filenames', async () => {
   const assets = await import('../src/lib/profile-assets');
-  assert.equal(assets.profilePhotoPath, '/images/matheus-sulino.png');
+  assert.equal(assets.profilePhotoPath, '/images/matheus-sulino.png.jpeg');
+  assert.equal(assets.hasProfilePhoto(), true);
   assert.equal(assets.resumePath, '/documents/matheus-sulino-cv.pdf');
+  assert.equal(identity.locales['pt-BR'].education.semester, '8' + String.fromCharCode(186) + ' semestre');
+  assert.equal(identity.locales.en.education.semester, '8th semester');
 });

@@ -68,14 +68,15 @@ for (const locale of ['en', 'pt'] as const) {
 
   test(`${locale}: profile image loads only when Matheus's supplied photograph exists`, async ({ page }) => {
     await page.goto(`/${locale}`);
-    const providedPhotoExists = existsSync('public/images/matheus-sulino.png');
+    const providedPhotoExists = existsSync('public/images/matheus-sulino.png.jpeg');
     await expect(page.locator('.hero-art img')).toHaveCount(providedPhotoExists ? 1 : 0);
     if (providedPhotoExists) {
       await expect(page.locator('.hero-art img')).toHaveAttribute('alt', locale === 'pt' ? 'Foto profissional de Matheus Sulino' : 'Professional photo of Matheus Sulino');
-      const response = await page.request.get('/images/matheus-sulino.png');
+      const response = await page.request.get('/images/matheus-sulino.png.jpeg');
       expect(response.ok()).toBe(true);
       await response.body();
       await expect(page.locator('.hero-art')).toBeVisible();
+      await page.goto(`/${locale}/about`);
       await expect(page.locator('.bio-mark img')).toHaveAttribute('alt', locale === 'pt' ? 'Foto profissional de Matheus Sulino' : 'Professional photo of Matheus Sulino');
     } else {
       await expect(page.locator('.hero-art .monogram')).toBeVisible();
@@ -89,19 +90,23 @@ for (const locale of ['en', 'pt'] as const) {
     const timeline = page.locator('#education');
     await expect(timeline.locator('.timeline-date').filter({ hasText: /2025\/2/ })).toBeVisible();
     await expect(timeline.locator('.timeline-date').filter({ hasText: /2026\.1/ })).toBeVisible();
-    await expect(timeline.getByText(locale === 'pt' ? new RegExp(String.fromCharCode(110, 227, 111) + ' foram confirmados') : /have not been confirmed/)).toBeVisible();
+    await expect(timeline.getByText(locale === 'pt' ? new RegExp('percentual de conclus' + String.fromCharCode(227) + 'o da gradua' + String.fromCharCode(231, 227) + 'o e a previs' + String.fromCharCode(227) + 'o de formatura n' + String.fromCharCode(227) + 'o foram confirmados') : /degree completion percentage and expected graduation date have not been confirmed/)).toBeVisible();
+    await expect(timeline.locator('.education-status')).toHaveText(locale === 'pt' ? '8' + String.fromCharCode(186) + ' semestre' : '8th semester');
     await expect(timeline).not.toContainText(/\b\d+%\b/);
   });
 }
 
-test('unconfirmed e-mail and WhatsApp details never create contact actions', async ({ page }) => {
-  if (process.env.PORTFOLIO_EMAIL || process.env.PORTFOLIO_WHATSAPP) test.skip();
-  await page.goto('/en/contact');
-  await expect(page.locator('a[href^="mailto:"]')).toHaveCount(0);
-  await expect(page.locator('a[href^="https://wa.me/"]')).toHaveCount(0);
-  await expect(page.getByRole('link', { name: 'View LinkedIn profile' })).toHaveAttribute('href', identity.links.linkedin);
-  await expect(page.getByRole('link', { name: 'View GitHub profile' })).toHaveAttribute('href', identity.links.github);
-});
+for (const locale of ['en', 'pt'] as const) {
+  test(`${locale}: confirmed e-mail and WhatsApp contacts render working public links`, async ({ page }) => {
+    await page.goto(`/${locale}/contact`);
+    await expect(page.locator('a[href^="mailto:"]')).toHaveAttribute('href', 'mailto:vrascode@gmail.com');
+    await expect(page.locator('a[href^="https://wa.me/"]')).toHaveAttribute('href', /5563992254787/);
+    await expect(page.getByRole('link', { name: locale === 'pt' ? 'Enviar e-mail' : 'Send an email' })).toHaveAttribute('href', 'mailto:vrascode@gmail.com');
+    await expect(page.getByRole('link', { name: locale === 'pt' ? 'Conversar pelo WhatsApp' : 'Chat on WhatsApp' })).toHaveAttribute('href', /5563992254787/);
+    await expect(page.getByRole('link', { name: locale === 'pt' ? 'Ver perfil no LinkedIn' : 'View LinkedIn profile' })).toHaveAttribute('href', identity.links.linkedin);
+    await expect(page.getByRole('link', { name: locale === 'pt' ? 'Ver perfil no GitHub' : 'View GitHub profile' })).toHaveAttribute('href', identity.links.github);
+  });
+}
 
 test('project search, categories and recovery from empty results work', async ({ page }) => {
   await page.goto('/en/projects');
@@ -182,5 +187,10 @@ test('404, robots, sitemap, favicon and localized Open Graph images', async ({ p
     const image = await request.get(route);
     expect(image.status(), route).toBe(200);
     expect(image.headers()['content-type']).toMatch(/image\//);
+    if (route.includes('opengraph-image')) {
+      const png = Buffer.from(await image.body());
+      expect([...png.subarray(0, 8)]).toEqual([137, 80, 78, 71, 13, 10, 26, 10]);
+      expect(png.byteLength).toBeGreaterThan(20_000);
+    }
   }
 });
