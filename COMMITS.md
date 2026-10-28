@@ -27,3 +27,14 @@ git ls-remote origin refs/heads/main
 ```
 
 O hash completo de `git rev-parse HEAD` deve coincidir com o retornado para `refs/heads/main` após o envio final. O resultado de publicação em Vercel é independente do resultado do push.
+
+
+## Atualiza??o do perfil de Matheus Sulino
+
+| Commit | Entrega |
+| --- | --- |
+| `6e443ea` | `feat: atualizar apresentacao e jornada profissional` ? biografia, in?cio, experi?ncia, educa??o, oito categorias de tecnologia, metadados e tradu??es. |
+| `57705fc` | `feat: adicionar contatos e midias pessoais opcionais` ? cards LinkedIn/GitHub, e-mail e WhatsApp configur?veis, fotografia, curr?culo opcional e Open Graph com fotografia opcional. |
+| `087553b` | `test: validar perfil e jornada academica` ? testes de tradu??o, dados pessoais, contatos, fotografia, linha do tempo, responsividade e acessibilidade. |
+
+A confirma??o do envio desta atualiza??o consta no hist?rico remoto ap?s o push. A fotografia, o PDF, o e-mail e o WhatsApp n?o foram inclu?dos, pois n?o foram fornecidos/autorizados.

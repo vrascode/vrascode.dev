@@ -8,6 +8,8 @@ The user supplied the name Matheus Sulino, VRAS CODE brand, official domain/repo
 
 The original [identity JSON](content/identity.json) and [identity requirements](docs/identidade-profissional.md) are preserved. Contact uses only the supplied public GitHub link; no email has been inferred from Git author metadata.
 
+The LinkedIn link provided for this update is included as a professional link. Its anonymous public page could not be read during the October 27, 2026 review (web reader returned `999 Unknown Status Code`); no profile text was guessed. [docs/profile-research.md](docs/profile-research.md) records the lookup, GitHub knowledge source and remaining personal data needed for richer content.
+
 ## Project evidence
 
 | Project | Source revision | Evidence and scope |
@@ -39,6 +41,8 @@ These results concern the showcased source projects. The portfolio's own tests a
 - `public/projects/fintrack-pro.png`: an existing real screenshot from the user's FinTrack Pro workspace. The interface displays its genuine empty state.
 - `public/projects/clearledger.png`: an existing real screenshot from the user's ClearLedger workspace. Its sample-data banner and the portfolio captions identify synthetic financial records.
 - No third-party pet, product, staff or avatar images were copied from the collaborative projects.
+- Matheus's portrait file `public/images/matheus-sulino.png` was not present during review. The optional portrait and photo-assisted social card render only when he supplies that file. No face was generated or altered.
+- No professional CV PDF, confirmed publication email or approved WhatsApp number was found. Contact controls appear only after their values are explicitly configured. The empty opt-in configuration is in `content/identity.json` and `.env.example`.
 - Geist and JetBrains Mono are packaged via Fontsource; Lucide supplies interface icons. Package distributions include their respective license information.
 
 ## Maintenance rules

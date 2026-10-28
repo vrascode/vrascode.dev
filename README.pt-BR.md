@@ -30,7 +30,9 @@ Em Linux/macOS, use `npm`. Para visualizar a versão de produção, execute `npm
 - API pública do GitHub no servidor, cache de uma hora e estado de indisponibilidade.
 - Metadados, Open Graph localizado, canonical, alternativas de idioma, sitemap, robots e JSON-LD.
 - Estágio em TI na EGEFAZ desde junho de 2025, formação na UFT e tecnologias contextualizadas.
-- Contato pelo perfil informado do GitHub, com cópia do link. Nenhum e-mail ou envio de formulário fictício.
+- Linha do tempo acadêmica somente com períodos confirmados; progresso, disciplinas e previsão de conclusão desconhecidos não são inventados.
+- Cards de contato para LinkedIn e GitHub. E-mail, WhatsApp, fotografia e currículo só aparecem quando os dados ou arquivos reais forem fornecidos.
+- Imagens Open Graph localizadas com a fotografia opcional; enquanto ela não estiver disponível, aparece a identidade VRAS CODE.
 
 ## Projetos e fontes
 
@@ -62,7 +64,7 @@ npm.cmd audit --omit=dev
 
 Os testes de navegador abrem um servidor de produção próprio na porta **3100**, sem encerrar o servidor de desenvolvimento na 3000. No Windows, usam Microsoft Edge instalado, quando disponível. Caso contrário, execute `npx.cmd playwright install chromium`. Capturas responsivas são gravadas em `.artifacts/screenshots/`, fora do Git. `PLAYWRIGHT_CHANNEL` permite selecionar outro canal instalado.
 
-Nenhuma variável de ambiente é obrigatória. O `GITHUB_TOKEN` opcional fica apenas no servidor. Veja `.env.example` e [SECURITY.md](SECURITY.md).
+Nenhuma variável de ambiente é obrigatória. O `GITHUB_TOKEN` opcional fica apenas no servidor. A fotografia deve ser adicionada em `public/images/matheus-sulino.png` e o currículo, quando disponível, em `public/documents/matheus-sulino-cv.pdf`. `PORTFOLIO_EMAIL` e `PORTFOLIO_WHATSAPP` só devem ser configurados com autorização para publicação; o WhatsApp requer número internacional. Veja `.env.example`, [pesquisa do perfil](docs/profile-research.md) e [SECURITY.md](SECURITY.md).
 
 Para atualizar o conteúdo, edite a identidade, os dois arquivos de tradução e os dados verificados em `src/lib/projects.ts`, mantendo fontes e idiomas consistentes.
 

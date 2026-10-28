@@ -12,6 +12,11 @@ Atualização: **27 de outubro de 2026**.
 - Busca e filtros, capturas reais de FinTrack/ClearLedger, créditos e limites dos projetos colaborativos.
 - Formação em Ciência da Computação na UFT e estágio em TI na EGEFAZ desde junho de 2025.
 - Integração GitHub com cache, timeout, validação de resposta e fallback; contato pelo perfil informado.
+- Apresentação, biografia e perfil profissional bilíngues de Matheus Sulino, com links para LinkedIn e GitHub e conhecimentos ancorados no README público do GitHub.
+- Seção “Minha Jornada Acadêmica” com UFT, campus Palmas, curso em andamento e apenas os períodos confirmados dos projetos acadêmicos; ingresso, semestre atual, disciplinas, percentual e conclusão não são inventados.
+- Oito categorias de tecnologias, atividades da EGEFAZ restritas às informações confirmadas, e cards de contato responsivos.
+- Fotografia, currículo, e-mail e WhatsApp são opcionais e permanecem ausentes enquanto Matheus não fornecer e autorizar a publicação dos respectivos dados/arquivos. Sem links quebrados.
+- Pesquisa pública e anônima do LinkedIn registrada em `docs/profile-research.md`; o perfil não forneceu conteúdo legível, portanto nenhuma experiência, competência ou certificação foi atribuída a ele.
 - SEO, canonical, hreflang, JSON-LD, Open Graph, sitemap, robots e proteção contra indexação de previews.
 - Configuração Vercel, workflow de validação GitHub Actions e documentação de DNS sem alteração da zona.
 
@@ -21,13 +26,13 @@ Atualização: **27 de outubro de 2026**.
 | --- | --- |
 | `npm.cmd run typecheck` | Aprovado. |
 | `npm.cmd run lint` | Aprovado, sem erros ou avisos na execução final. |
-| `npm.cmd test` | 8 testes aprovados. |
-| `npm.cmd run build` | Aprovado; vinte páginas de conteúdo pré-renderizadas. |
-| Playwright | 15 cenários aprovados: no Windows, 14 na execução inicial e o restante após corrigir o ícone Apple; no GitHub Actions/Linux, suíte completa aprovada. |
+| `npm.cmd test` | 11 testes aprovados. |
+| `npm.cmd run build` | Aprovado após a atualização; vinte páginas localizadas são geradas, com contato renderizado no servidor. |
+| Playwright | 20/20 cenários aprovados em Chromium no Windows, incluindo as duas localidades, troca de idioma, apresentação e linha do tempo acadêmica. |
 | Navegação | Vinte páginas, links internos, idioma, temas, menu mobile e erros 404 verificados. |
 | Acessibilidade | 28 análises axe-core: sete páginas × dois idiomas × dois temas, sem violações das regras WCAG 2 A/AA e 2.1 AA examinadas. Teclado, foco do menu, skip link e movimento reduzido também testados. |
 | Responsividade | 360, 390, 768 e 1440 pixels, em ambos os idiomas, sem overflow horizontal nas rotas examinadas. |
-| Links externos | 20/20 links das fontes retornaram HTTP 200. |
+| Links externos | 20/20 links das fontes retornaram HTTP 200 após a atualização. |
 | Dependências de produção | `npm.cmd audit --omit=dev`: zero vulnerabilidades reportadas. |
 | Inspeção visual | Capturas reais do portfólio em desktop/celular revisadas; nenhuma exceção JavaScript detectada no preview. |
 
@@ -51,8 +56,13 @@ Os dez commits iniciais foram enviados com sucesso para `origin/main`. A igualda
 
 Nenhuma publicação na Vercel ou no domínio foi confirmada. Não foram encontrados token Vercel no ambiente, configuração local do projeto ou autenticação nas localizações usuais verificadas. Nenhum DNS foi alterado. [DEPLOYMENT.md](DEPLOYMENT.md) contém instruções de conexão com valores a obter na própria hospedagem.
 
-## Pendências
+## Pendências de perfil e publicação
+
+1. Fornecer a fotografia original em `public/images/matheus-sulino.png` e o currículo, caso queira, em `public/documents/matheus-sulino-cv.pdf`.
+2. Confirmar endereço profissional de e-mail e, se desejar publicação, autorizar e fornecer o número internacional do WhatsApp.
+3. Como o LinkedIn não forneceu dados legíveis, encaminhar o resumo aprovado, períodos/cargos, cursos e certificados que devam aparecer. Também faltam data de ingresso, situação acadêmica detalhada e disciplinas efetivamente cursadas.
+
+## Pendências de publicação
 
 1. Identificar URL/repositório do VRAS anterior para substituir o estado pendente por conteúdo verificado.
 2. Importar o repositório na conta Vercel, confirmar uma implantação e configurar o domínio com os registros fornecidos pelo projeto.
-3. Opcional: informar um canal de contato adicional, caso o proprietário deseje exibir e-mail ou LinkedIn. O contato atual pelo GitHub funciona sem essa informação.

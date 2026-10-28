@@ -17,6 +17,8 @@ Next.js App Router provides server-rendered and prerendered routes. The twenty c
 | `src/lib/projects.ts` | Ordered project catalog, localized scope, architecture, contributions, limitations and source links. Search handles accents. |
 | `src/lib/identity.ts` | Read-only adapter for the original identity file. |
 | `src/lib/metadata.ts` | Production canonical URLs, language alternatives, localized social metadata. |
+| `src/lib/profile-assets.ts` | Detects optional, user-supplied portrait and CV files so absent assets never yield broken links. |
+| `src/lib/public-contacts.ts` | Validates opt-in e-mail and international WhatsApp values before they become public links. |
 | `src/lib/github.server.ts` | Fixed GitHub API endpoint, optional server token, four-second timeout and hourly caching. |
 | `src/lib/github.ts` | Strict public-profile response parsing and safe failure handling. Only login and public counts are returned. |
 | `src/components/` | Shared page sections, cards, navigation and small interaction components. |
@@ -32,13 +34,13 @@ Server-rendered text remains visible without animation or JavaScript. Motion hon
 
 CSS variables implement the requested dark palette and an independently checked light palette. Tailwind supplies utilities and reset; shared CSS describes the visual system. Geist and JetBrains Mono ship through local npm font assets, without a runtime Google Fonts request. Lucide supplies interface icons; the VRAS mark and project illustrations are original code-native artwork.
 
-Two authorized local screenshots illustrate the user's FinTrack Pro and ClearLedger projects. `next/image` supplies responsive sizes and lazy loading on collection pages. Detail-page images are preloaded. ClearLedger captions disclose synthetic records. Illustrations for the other projects are explicitly identified as illustrations.
+Two authorized local screenshots illustrate the user's FinTrack Pro and ClearLedger projects. `next/image` supplies responsive sizes and lazy loading on collection pages. Detail-page images are preloaded. ClearLedger captions disclose synthetic records. Illustrations for the other projects are explicitly identified as illustrations. A portrait at `public/images/matheus-sulino.png` is optional and is rendered with `next/image` only when present; the localized Open Graph ImageResponse uses it when present and otherwise creates a typographic VRAS CODE card. A CV at `public/documents/matheus-sulino-cv.pdf` is optional.
 
 ## Content and integration constraints
 
 Project order is fixed. Only the verified curated collection is rendered; GitHub integration does not import arbitrary repositories into the portfolio. VRAS remains an honest pending entry. Team attribution and simulated payment behavior are visible in project details. No CV, email address, proficiency percentage or production claim is invented.
 
-No database, contact API, analytics, authentication or secret-bearing client integration is needed. Vercel preview environments receive noindex metadata and disallow crawling. The production domain remains `https://vrascode.dev` in metadata, regardless of local preview host.
+No database, contact API, analytics, authentication or secret-bearing client integration is needed. The optional contact variables are rendered into public profile links, so they must only contain information Matheus has approved for publication. They are validated and never appear in client-side environment configuration. Vercel preview environments receive noindex metadata and disallow crawling. The production domain remains `https://vrascode.dev` in metadata, regardless of local preview host.
 
 ## Verification
 
