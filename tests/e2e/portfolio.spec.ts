@@ -190,14 +190,45 @@ for (const locale of ['en', 'pt'] as const) {
     await expect(experience).toContainText(locale === 'pt' ? 'Presencial' : 'On-site');
     await expect(experience.locator('.timeline-body').last()).toContainText(locale === 'pt' ? 'Desenvolvedor de software, suporte técnico, manutenção de equipamentos e apoio à infraestrutura de TI' : 'software development, technical support, equipment maintenance and IT infrastructure support');
     const sefazLogo = experience.locator('.experience-institution-logo');
+    await expect(experience.locator('.experience-entry-logo img')).toHaveCount(1);
+    await expect(experience.locator('.experience-institution img')).toHaveCount(0);
     await expect(sefazLogo).toHaveAttribute('alt', locale === 'pt' ? 'Logotipo oficial da Secretaria da Fazenda do Tocantins' : 'Official logo of the Tocantins Department of Finance');
     await expect.poll(() => sefazLogo.evaluate(image => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+    await expect.poll(() => sefazLogo.evaluate(image => getComputedStyle(image).objectFit)).toBe('contain');
     const sefazResponse = await page.request.get('/images/institutions/sefaz-to-logo.png');
     expect(sefazResponse.ok()).toBe(true);
     expect(sefazResponse.headers()['content-type']).toMatch(/image\/png/);
-    const uftLogo = page.locator('.experience-academic-brand img');
+    const academicExperience = page.locator('.timeline-entry').nth(1);
+    const uftLogo = academicExperience.locator('.experience-entry-logo img');
     await expect(uftLogo).toHaveAttribute('alt', 'Universidade Federal do Tocantins — UFT');
     await expect.poll(() => uftLogo.evaluate(image => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+    await expect(academicExperience.locator('.experience-academic-brand img')).toHaveCount(0);
+    await expect.poll(() => uftLogo.evaluate(image => getComputedStyle(image).objectFit)).toBe('contain');
+    const sefazBox = await experience.locator('.experience-entry-logo').boundingBox();
+    const sefazTitleBox = await experience.locator('h2').boundingBox();
+    const uftBox = await academicExperience.locator('.experience-entry-logo').boundingBox();
+    const uftTitleBox = await academicExperience.locator('h2').boundingBox();
+    expect(sefazBox!.x).toBeLessThan(sefazTitleBox!.x);
+    expect(uftBox!.x).toBeLessThan(uftTitleBox!.x);
+  });
+
+  test(`${locale}: experience institution logos stack correctly on mobile`, async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(`/${locale}/experience`);
+    for (const index of [0, 1] as const) {
+      const entry = page.locator('.timeline-entry').nth(index);
+      const date = entry.locator('.experience-entry-meta .timeline-date');
+      const frame = entry.locator('.experience-entry-logo');
+      const title = entry.locator('h2');
+      await frame.scrollIntoViewIfNeeded();
+      await expect.poll(() => frame.locator('img').evaluate(image => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+      const dateBox = await date.boundingBox();
+      const imageBox = await frame.boundingBox();
+      const titleBox = await title.boundingBox();
+      expect(imageBox!.y).toBeGreaterThan(dateBox!.y);
+      expect(titleBox!.y).toBeGreaterThan(imageBox!.y + imageBox!.height);
+      expect(await entry.evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true);
+    }
   });
 }
 
