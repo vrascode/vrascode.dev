@@ -7,6 +7,7 @@ import identity from '../content/identity.json';
 import { filterProjects, projects } from '../src/lib/projects';
 import { pageMetadata, publicPaths } from '../src/lib/metadata';
 import { parseGitHubProfile, readGitHubProfile } from '../src/lib/github';
+import { buildProfileContacts } from '../src/lib/public-contacts';
 
 function keys(value: Record<string, unknown>, prefix = ''): string[] {
   return Object.entries(value).flatMap(([key, item]) => typeof item === 'string' ? [`${prefix}${key}`] : keys(item as Record<string, unknown>, `${prefix}${key}.`)).sort();
@@ -23,9 +24,13 @@ test('every message has an English and Portuguese equivalent and formats without
 test('identity retains the exact requested presentation and official links', () => {
   assert.equal(identity.name, 'Matheus Sulino');
   assert.equal(identity.brand, 'VRAS CODE');
-  assert.equal(identity.pageTitle, 'Matheus Sulino | Full-Stack Developer');
+  assert.equal(identity.pageTitle, 'Matheus Sulino | Full-Stack Developer — VRAS CODE');
   assert.equal(identity.locales.en.greeting, "Hi, I'm Matheus Sulino.");
   assert.equal(identity.locales['pt-BR'].greeting, 'Olá, eu sou Matheus Sulino.');
+  assert.equal(identity.locales['pt-BR'].headline, 'Desenvolvendo soluções para desafios reais.');
+  assert.equal(identity.locales['pt-BR'].description, 'Sou desenvolvedor Full Stack e estudante de Ciência da Computação na Universidade Federal do Tocantins. Tenho interesse em engenharia de software, desenvolvimento de sistemas e na criação de soluções tecnológicas que unem funcionalidade, qualidade e boas práticas de desenvolvimento.');
+  assert.equal(identity.locales.en.headline, 'Building software solutions for real-world challenges.');
+  assert.equal(identity.locales.en.description, "I'm a Full-Stack Developer and Computer Science student at the Federal University of Tocantins, focused on software engineering, application development, and building practical solutions through thoughtful engineering.");
   assert.equal(identity.links.portfolio, 'https://vrascode.dev');
   assert.equal(identity.links.repository, 'https://github.com/vrascode/vrascode.dev');
 });
@@ -80,4 +85,21 @@ test('GitHub HTTP failures, malformed JSON and network timeouts safely fall back
   assert.equal(await readGitHubProfile(async () => new Response('Invalid JSON')), null);
   assert.equal(await readGitHubProfile(async () => { throw new DOMException('Timed out', 'TimeoutError'); }), null);
   assert.deepEqual(await readGitHubProfile(async () => Response.json({ login: 'vrascode', public_repos: 6, followers: 6 })), { login: 'vrascode', publicRepos: 6, followers: 6 });
+});
+
+test('email and WhatsApp stay unpublished until valid public-contact details are configured', () => {
+  assert.deepEqual(identity.publicContact, { email: '', whatsapp: '' });
+  assert.deepEqual(buildProfileContacts({}), { email: null, whatsapp: null });
+  assert.deepEqual(buildProfileContacts({ email: 'not-an-email', whatsapp: '123-abc' }), { email: null, whatsapp: null });
+  assert.deepEqual(buildProfileContacts({ email: 'matheus@example.com', whatsapp: '+55 (63) 99999-1234' }), { email: 'matheus@example.com', whatsapp: '5563999991234' });
+});
+
+test('professional identity includes the LinkedIn profile supplied by Matheus', () => {
+  assert.equal(identity.links.linkedin, 'https://www.linkedin.com/in/matheus-sulino-2227a9257/');
+});
+
+test('optional photograph and resume use the requested drop-in filenames', async () => {
+  const assets = await import('../src/lib/profile-assets');
+  assert.equal(assets.profilePhotoPath, '/images/matheus-sulino.png');
+  assert.equal(assets.resumePath, '/documents/matheus-sulino-cv.pdf');
 });

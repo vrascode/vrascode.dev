@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { existsSync } from 'node:fs';
 import { mkdir } from 'node:fs/promises';
 import identity from '../../content/identity.json';
 import { projects } from '../../src/lib/projects';
@@ -40,6 +41,12 @@ for (const locale of ['en', 'pt'] as const) {
     await expect(page.locator('.hero-greeting')).toHaveText(copy.greeting);
     await expect(page.locator('h1')).toHaveText(copy.headline);
     await expect(page.locator('.hero-description')).toHaveText(copy.description);
+    const linkedIn = page.getByRole('link', { name: locale === 'pt' ? 'Meu LinkedIn' : 'My LinkedIn' });
+    await expect(linkedIn).toHaveAttribute('href', identity.links.linkedin);
+    await expect(linkedIn).toHaveAttribute('rel', /noopener/);
+    const github = page.getByRole('link', { name: 'GitHub' }).first();
+    await expect(github).toHaveAttribute('href', identity.links.github);
+    await expect(page.getByRole('link', { name: locale === 'pt' ? 'Entre em contato' : 'Get in touch' })).toHaveAttribute('href', `/${locale}/contact`);
     await page.keyboard.press('Tab');
     await expect(page.locator('.skip-link')).toBeFocused();
     await page.keyboard.press('Enter');
@@ -58,7 +65,43 @@ for (const locale of ['en', 'pt'] as const) {
       }
     }
   });
+
+  test(`${locale}: profile image loads only when Matheus's supplied photograph exists`, async ({ page }) => {
+    await page.goto(`/${locale}`);
+    const providedPhotoExists = existsSync('public/images/matheus-sulino.png');
+    await expect(page.locator('.hero-art img')).toHaveCount(providedPhotoExists ? 1 : 0);
+    if (providedPhotoExists) {
+      await expect(page.locator('.hero-art img')).toHaveAttribute('alt', locale === 'pt' ? 'Foto profissional de Matheus Sulino' : 'Professional photo of Matheus Sulino');
+      const response = await page.request.get('/images/matheus-sulino.png');
+      expect(response.ok()).toBe(true);
+      await response.body();
+      await expect(page.locator('.hero-art')).toBeVisible();
+      await expect(page.locator('.bio-mark img')).toHaveAttribute('alt', locale === 'pt' ? 'Foto profissional de Matheus Sulino' : 'Professional photo of Matheus Sulino');
+    } else {
+      await expect(page.locator('.hero-art .monogram')).toBeVisible();
+      await page.goto(`/${locale}/about`);
+      await expect(page.locator('.bio-mark .monogram')).toBeVisible();
+    }
+  });
+
+  test(`${locale}: academic timeline displays evidence without inventing graduation progress`, async ({ page }) => {
+    await page.goto(`/${locale}/about#education`);
+    const timeline = page.locator('#education');
+    await expect(timeline.locator('.timeline-date').filter({ hasText: /2025\/2/ })).toBeVisible();
+    await expect(timeline.locator('.timeline-date').filter({ hasText: /2026\.1/ })).toBeVisible();
+    await expect(timeline.getByText(locale === 'pt' ? new RegExp(String.fromCharCode(110, 227, 111) + ' foram confirmados') : /have not been confirmed/)).toBeVisible();
+    await expect(timeline).not.toContainText(/\b\d+%\b/);
+  });
 }
+
+test('unconfirmed e-mail and WhatsApp details never create contact actions', async ({ page }) => {
+  if (process.env.PORTFOLIO_EMAIL || process.env.PORTFOLIO_WHATSAPP) test.skip();
+  await page.goto('/en/contact');
+  await expect(page.locator('a[href^="mailto:"]')).toHaveCount(0);
+  await expect(page.locator('a[href^="https://wa.me/"]')).toHaveCount(0);
+  await expect(page.getByRole('link', { name: 'View LinkedIn profile' })).toHaveAttribute('href', identity.links.linkedin);
+  await expect(page.getByRole('link', { name: 'View GitHub profile' })).toHaveAttribute('href', identity.links.github);
+});
 
 test('project search, categories and recovery from empty results work', async ({ page }) => {
   await page.goto('/en/projects');
