@@ -308,10 +308,10 @@ img { max-width: 100%; height: auto; }
 .academic-data-pending { color: var(--muted); border: 1px solid var(--border); border-radius: 4px; padding: 7px 10px; font: 10px var(--font-mono); white-space: nowrap; }
 .academic-description { max-width: 790px; margin: -10px 0 34px; color: var(--muted); font-size: 14px; line-height: 1.8; }
 .academic-timeline .timeline-entry { grid-template-columns: minmax(155px, .35fr) 1fr; padding-block: 28px; }
+.academic-project-meta { min-width: 0; }
+.academic-project-preview { display: flex; width: 100%; aspect-ratio: 16 / 9; margin-top: 17px; align-items: center; justify-content: center; overflow: hidden; border: 1px solid var(--border); border-radius: 8px; background: #070708; }
+.academic-project-preview-image { display: block; width: 100%; height: 100%; object-fit: contain; }
 .academic-project-title { font-size: 21px; font-weight: 500; }
-.academic-project-heading { display: flex; align-items: center; gap: 13px; min-height: 48px; }
-.academic-project-logo-frame { display: flex; flex: 0 0 48px; width: 48px; aspect-ratio: 1; align-items: center; justify-content: center; overflow: hidden; border: 1px solid var(--border); border-radius: 6px; background: #070708; }
-.academic-project-logo { display: block; width: 100%; height: 100%; object-fit: contain; }
 .academic-timeline .timeline-body { margin-top: 9px; font-size: 13px; }
 .academic-timeline .text-link { margin-top: 13px; font-size: 11px; }
 .academic-interests { border-top: 1px solid var(--border); margin-top: 16px; padding-top: 25px; }
@@ -462,8 +462,7 @@ img { max-width: 100%; height: auto; }
   .institution-logo-frame { flex-basis: 112px; width: 112px; }
   .academic-snapshot .academic-brand { align-items: flex-start; gap: 15px; }
   .academic-timeline .timeline-entry { grid-template-columns: 1fr; gap: 13px; }
-  .academic-project-heading { gap: 11px; }
-  .academic-project-logo-frame { flex-basis: 40px; width: 40px; }
+  .academic-project-preview { margin-top: 13px; }
   .profile-photo-about { min-height: 240px; }
   .error-page h1 { font-size: 38px; }
 }
