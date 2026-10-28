@@ -32,7 +32,8 @@ On macOS/Linux, use `npm` instead of `npm.cmd`. The dev server binds to loopback
 - Localized metadata and Open Graph images, canonical/alternate URLs, sitemap, robots and Person JSON-LD.
 - SEFAZ-TO IT internship since June 2025, UFT education and evidence-based technology descriptions.
 - Academic timeline shows the confirmed 8th term and the LinkedIn-reported January 2023–December 2027 period, with December 2027 clearly labeled as expected. No completion percentage is shown.
-- Official UFT wordmark displayed in the education section. The SEFAZ-TO mark remains pending verification and is not replaced by a generic state logo.
+- Official UFT wordmark displayed in About and Experience. SEFAZ-TO uses the institutional signature from an official Government of Tocantins publication.
+- Original Amigo Fiel project mark displayed in the academic timeline. A real Controle de Estoque application screenshot remains pending; no illustrative dashboard is presented as a real capture.
 - LinkedIn and GitHub, plus the confirmed public e-mail and WhatsApp contact links. The supplied portrait is displayed on Home, About and social cards; a CV download remains optional.
 - Localized Open Graph cards include Matheus's supplied portrait; its existing JPEG file is used unchanged on Home and About.
 

@@ -32,7 +32,8 @@ Em Linux/macOS, use `npm`. Para visualizar a versão de produção, execute `npm
 - Metadados, Open Graph localizado, canonical, alternativas de idioma, sitemap, robots e JSON-LD.
 - Estágio em TI na SEFAZ-TO desde junho de 2025, formação na UFT e tecnologias contextualizadas.
 - Formação: 8º período, com período informado no LinkedIn de janeiro de 2023 a dezembro de 2027; dezembro de 2027 aparece como previsão. Não há percentual de conclusão.
-- Logotipo oficial da UFT na seção acadêmica. A marca da SEFAZ-TO continua pendente de verificação e não é substituída por um brasão genérico do Estado.
+- Logotipo oficial da UFT nas seções Sobre e Experiência. A SEFAZ-TO usa a assinatura institucional publicada em uma notícia oficial do Governo do Tocantins.
+- Símbolo original do projeto Amigo Fiel na jornada acadêmica. Uma captura real do Controle de Estoque continua pendente; nenhum dashboard ilustrativo é apresentado como captura do sistema.
 - Cards de LinkedIn, GitHub, email e WhatsApp com contatos autorizados por Matheus. A fotografia fornecida aparece no Inicio, em Sobre Mim e nas imagens sociais; o curriculo continua opcional.
 - Imagens Open Graph localizadas usam a fotografia fornecida; a identidade VRAS CODE permanece como composicao visual.
 

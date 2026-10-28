@@ -10,8 +10,11 @@ Atualização: **28 de outubro de 2026**.
 - Apresentação de projetos atualizada nas duas línguas. Catálogo com ClearLedger, FinTrack Pro, VRAS Watches, VRAS CODE, Controle de Estoque e Amigo Fiel.
 - VRAS Watches usa apenas a descrição fornecida; seu repositório retornou 404 para acesso anônimo. Sem link público, screenshot ou alegações adicionais.
 - Páginas de experiência atualizadas com estágio de Tecnologia da Informação na Secretaria da Fazenda do Estado do Tocantins (SEFAZ-TO), desde junho de 2025, em Palmas e presencial, com as atividades informadas.
-- A versão oficial do logotipo da SEFAZ-TO não pôde ser verificada nos recursos oficiais acessíveis e permanece pendente; nenhum brasão genérico foi apresentado como marca da secretaria.
+- A assinatura visual da SEFAZ-TO foi obtida de uma imagem de notícia publicada no portal oficial do Governo do Tocantins, preservando pixels, cores e proporções ao recortar a área da marca. Aparece junto à experiência com texto alternativo localizado.
+- O PNG original amarelo do Amigo Fiel foi encontrado no repositório público do projeto e incluído no título do projeto acadêmico.
+- Nenhuma captura real do sistema Controle de Estoque foi encontrada. A página GitHub Pages usa um dashboard CSS ilustrativo com números não verificados, e o vídeo vinculado requer login; ambos foram excluídos. A imagem permanece pendente de fonte verificável.
 - Formação na UFT atualizada para 8º período, com início informado em janeiro de 2023 e dezembro de 2027 apresentado como previsão. Sem percentual fictício de conclusão.
+- Rótulo “Período informado no LinkedIn” removido; a página Sobre mostra somente o intervalo e a previsão de dezembro de 2027.
 - Descrição acadêmica e marcos 2025/2 (Amigo Fiel) e 2026/1 (Controle de Estoque) atualizados, com links internos preservados.
 - Logotipo oficial da UFT obtido no portal institucional e exibido junto à formação com proporção preservada e texto alternativo acessível.
 - Documentação de fontes e informações atualizada em `CONTENT_SOURCES.md`, `README.md`, `README.pt-BR.md` e `ARCHITECTURE.md`.
@@ -28,6 +31,8 @@ Atualização: **28 de outubro de 2026**.
 | Acessibilidade automatizada | 32 análises axe-core (oito páginas × dois idiomas × dois temas), sem violações das regras WCAG 2 A/AA e 2.1 AA examinadas. |
 | `npm.cmd run check:links` | 22/22 links externos de fontes verificados com HTTP 200. O repositório VRAS Watches não é publicado como link, pois sua URL retorna 404 para acesso anônimo. |
 | Logotipo UFT | PNG institucional servido com `image/png`; carregamento e texto alternativo validados no navegador. |
+| Marca SEFAZ-TO | PNG derivado da publicação oficial, servido localmente e verificado no Chromium nos dois idiomas. |
+| Logotipo Amigo Fiel | PNG original de 1080×1080, servido localmente e verificado no Chromium nos dois idiomas. |
 | `git diff --check` | Aprovado na revisão final. |
 
 Os testes automatizados não substituem uma auditoria completa de acessibilidade, dispositivos físicos ou navegadores adicionais.
