@@ -14,6 +14,7 @@ import { TechnologySection } from '@/components/technology-section';
 import { GitHubSection } from '@/components/github-section';
 import { ContactBanner } from '@/components/contact-banner';
 import { ProfilePhoto } from '@/components/profile-photo';
+import { HeroEntrance } from '@/components/reveal';
 
 export const revalidate = 3600;
 
@@ -37,16 +38,17 @@ export default async function Home({ params }: PageProps) {
   };
   return <div className="container">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
-    <section className={`hero${portraitAvailable ? ' hero-has-photo' : ''}`} aria-labelledby="hero-heading">
+    <HeroEntrance className={`hero${portraitAvailable ? ' hero-has-photo' : ''}`} aria-labelledby="hero-heading">
       <div className="hero-top"><p className="eyebrow"><span className="status-dot" />{t('eyebrow')}</p><p className="eyebrow">{t('location')}</p></div>
       <p className="hero-greeting">{person.greeting}</p>
       <h1 className="hero-heading" id="hero-heading">{person.headline}</h1>
       <p className="hero-description">{person.description}</p>
-      <div className="hero-actions"><Link href="/projects" className="button button-primary">{t('projectsCta')}<ArrowUpRight size={17} /></Link><a href={identity.links.linkedin} className="button button-secondary" target="_blank" rel="noopener noreferrer"><span>{t('linkedinCta')}</span><ArrowUpRight size={16} /></a><a href={identity.links.github} className="button button-secondary" target="_blank" rel="noopener noreferrer"><GithubMark size={16} /><span>{t('githubCta')}</span><ArrowUpRight size={16} /></a><Link href="/contact" className="button button-secondary"><span>{t('contactCta')}</span><ArrowUpRight size={16} /></Link></div>
+      <div className="hero-actions"><Link href="/projects" className="button button-primary">{t('projectsCta')}<ArrowUpRight size={17} /></Link><Link href="/contact" className="button button-secondary"><span>{t('contactCta')}</span><ArrowUpRight size={16} /></Link></div>
+      <nav className="hero-socials" aria-label={t('socialLinks')}><a href={identity.links.github} target="_blank" rel="noopener noreferrer"><GithubMark size={15} />GitHub<ArrowUpRight size={13} /></a><a href={identity.links.linkedin} aria-label={t('linkedinCta')} target="_blank" rel="noopener noreferrer">LinkedIn<ArrowUpRight size={13} /></a></nav>
       <div className="hero-art">{portraitAvailable ? <ProfilePhoto alt={t('photoAvailable')} className="profile-photo-home" preload /> : <Monogram />}</div>
       <div className="hero-bottom"><a href="#selected-work" className="mono"><ArrowDown size={13} />{t('scroll')}</a><p className="mono">{t('note')}</p></div>
-    </section>
-    <section className="section" id="selected-work"><Reveal><SectionHeading label={t('workLabel')} title={t('workTitle')} description={t('workDescription')}><Link href="/projects" className="text-link">{t('allProjects')}<ArrowUpRight size={16} /></Link></SectionHeading><div className="projects-grid">{projects.slice(0, 2).map(project => <ProjectCard key={project.slug} project={project} locale={locale} viewLabel={p('view')} />)}</div></Reveal></section>
+    </HeroEntrance>
+    <section className="section" id="selected-work"><Reveal><SectionHeading label={t('workLabel')} title={t('workTitle')} description={t('workDescription')}><Link href="/projects" className="text-link">{t('allProjects')}<ArrowUpRight size={16} /></Link></SectionHeading></Reveal><Reveal stagger><div className="projects-grid">{projects.slice(0, 2).map(project => <ProjectCard key={project.slug} project={project} locale={locale} viewLabel={p('view')} />)}</div></Reveal></section>
     <section className="section" id="about"><Reveal className="about-grid"><div><p className="eyebrow">{t('aboutLabel')}</p><h2 className="section-title">{t('aboutTitle')}</h2><div className="about-facts"><div className="fact-row"><GraduationCap size={22} strokeWidth={1.4} /><div><h3>{t('education')}</h3><p>{t('educationNote')}</p></div></div><div className="fact-row"><BriefcaseBusiness size={21} strokeWidth={1.4} /><div><h3>{t('experience')}</h3><p>{t('experienceNote')}</p></div></div></div></div><div className="about-copy"><p>{t('aboutDescription')}</p><p>{t('aboutSecond')}</p><Link href="/about" className="text-link">{t('moreAbout')}<ArrowDownRight size={17} /></Link></div></Reveal></section>
     <TechnologySection /><GitHubSection /><ContactBanner />
   </div>;
