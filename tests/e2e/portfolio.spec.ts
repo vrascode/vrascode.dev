@@ -110,7 +110,8 @@ for (const locale of ['en', 'pt'] as const) {
     const logoResponse = await page.request.get('/images/institutions/uft-logo.png');
     expect(logoResponse.ok()).toBe(true);
     expect(logoResponse.headers()['content-type']).toMatch(/image\/png/);
-    const amigoLogo = timeline.locator('.academic-project-preview-image');
+    const amigoFielEntry = timeline.locator('.timeline-entry').filter({ hasText: 'Amigo Fiel' });
+    const amigoLogo = amigoFielEntry.locator('.academic-project-preview-image');
     await expect(amigoLogo).toHaveAttribute('alt', locale === 'pt' ? 'Logotipo do projeto Amigo Fiel' : 'Amigo Fiel project logo');
     await expect.poll(() => amigoLogo.evaluate(image => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
     await expect(timeline.locator('.academic-project-heading .academic-project-logo')).toHaveCount(0);
@@ -118,11 +119,17 @@ for (const locale of ['en', 'pt'] as const) {
     const amigoLogoResponse = await page.request.get('/images/projects/amigo-fiel-preview.png');
     expect(amigoLogoResponse.ok()).toBe(true);
     expect(amigoLogoResponse.headers()['content-type']).toMatch(/image\/png/);
-    const amigoFielEntry = timeline.locator('.timeline-entry').filter({ hasText: 'Amigo Fiel' });
     await expect(amigoFielEntry.locator('.academic-project-meta .timeline-date')).toBeVisible();
     await expect(amigoFielEntry.locator('.academic-project-meta .academic-project-preview')).toBeVisible();
     const inventoryEntry = timeline.locator('.timeline-entry').filter({ hasText: 'Controle de Estoque' });
-    await expect(inventoryEntry.locator('.academic-project-preview')).toHaveCount(0);
+    await expect(inventoryEntry.locator('.academic-project-meta .timeline-date')).toBeVisible();
+    const inventoryPreview = inventoryEntry.locator('.academic-project-preview-image');
+    await expect(inventoryEntry.locator('.academic-project-preview')).toHaveCount(1);
+    await expect.poll(() => inventoryPreview.evaluate(image => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+    await expect.poll(() => inventoryPreview.evaluate(image => getComputedStyle(image).objectFit)).toBe('contain');
+    const inventoryResponse = await page.request.get('/images/Controle-de-estoque.png');
+    expect(inventoryResponse.ok()).toBe(true);
+    expect(inventoryResponse.headers()['content-type']).toMatch(/image\/png/);
     await expect(timeline).not.toContainText(/percentual de conclusão da graduação e a previsão de formatura não foram confirmados|degree completion percentage and expected graduation date have not been confirmed/i);
     await expect(timeline).not.toContainText(/\b\d+%\b/);
   });
@@ -132,39 +139,41 @@ for (const locale of ['en', 'pt'] as const) {
       await page.setViewportSize({ width, height: 900 });
       await page.goto(`/${locale}/about#education`);
       const timeline = page.locator('#education');
-      const entry = timeline.locator('.timeline-entry').filter({ hasText: 'Amigo Fiel' });
-      const meta = entry.locator('.academic-project-meta');
-      const frame = meta.locator('.academic-project-preview');
-      const image = frame.locator('img');
-      const content = entry.locator('> div').nth(1);
-      await frame.scrollIntoViewIfNeeded();
-      await expect.poll(() => image.evaluate(element => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
-      const periodBox = await meta.locator('.timeline-date').boundingBox();
-      const imageBox = await frame.boundingBox();
-      const titleBox = await content.locator('h3').boundingBox();
-      expect(periodBox).not.toBeNull();
-      expect(imageBox).not.toBeNull();
-      expect(titleBox).not.toBeNull();
-      const natural = await image.evaluate(element => ({ width: (element as HTMLImageElement).naturalWidth, height: (element as HTMLImageElement).naturalHeight, fit: getComputedStyle(element).objectFit }));
-      expect(natural.width).toBeGreaterThan(0);
-      expect(natural.height).toBeGreaterThan(0);
-      expect(natural.fit).toBe('contain');
-      expect(Math.abs(imageBox!.width / imageBox!.height - 16 / 9)).toBeLessThan(0.02);
-      const metaBox = await meta.boundingBox();
-      expect(metaBox).not.toBeNull();
-      expect(imageBox!.x).toBeGreaterThanOrEqual(metaBox!.x);
-      expect(imageBox!.x + imageBox!.width).toBeLessThanOrEqual(metaBox!.x + metaBox!.width + 1);
-      if (width <= 620) {
-        expect(imageBox!.y).toBeGreaterThan(periodBox!.y);
-        expect(titleBox!.y).toBeGreaterThan(imageBox!.y + imageBox!.height);
-      } else {
-        expect(imageBox!.x).toBeLessThan(titleBox!.x);
+      const frameBoxes: { width: number; height: number }[] = [];
+      for (const { slug, title } of [{ slug: 'amigo-fiel', title: 'Amigo Fiel' }, { slug: 'controle-de-estoque', title: 'Controle de Estoque' }]) {
+        const entry = timeline.locator('.timeline-entry').filter({ hasText: title });
+        const meta = entry.locator('.academic-project-meta');
+        const frame = meta.locator('.academic-project-preview');
+        const image = frame.locator('img');
+        const content = entry.locator('> div').nth(1);
+        await frame.scrollIntoViewIfNeeded();
+        await expect.poll(() => image.evaluate(element => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+        const periodBox = await meta.locator('.timeline-date').boundingBox();
+        const imageBox = await frame.boundingBox();
+        const titleBox = await content.locator('h3').boundingBox();
+        expect(periodBox).not.toBeNull();
+        expect(imageBox).not.toBeNull();
+        expect(titleBox).not.toBeNull();
+        const natural = await image.evaluate(element => ({ width: (element as HTMLImageElement).naturalWidth, height: (element as HTMLImageElement).naturalHeight, fit: getComputedStyle(element).objectFit }));
+        expect(natural.width).toBeGreaterThan(0);
+        expect(natural.height).toBeGreaterThan(0);
+        expect(natural.fit).toBe('contain');
+        expect(Math.abs(imageBox!.width / imageBox!.height - 16 / 9)).toBeLessThan(0.02);
+        const metaBox = await meta.boundingBox();
+        expect(metaBox).not.toBeNull();
+        expect(imageBox!.x).toBeGreaterThanOrEqual(metaBox!.x);
+        expect(imageBox!.x + imageBox!.width).toBeLessThanOrEqual(metaBox!.x + metaBox!.width + 1);
+        if (width <= 620) {
+          expect(imageBox!.y).toBeGreaterThan(periodBox!.y);
+          expect(titleBox!.y).toBeGreaterThan(imageBox!.y + imageBox!.height);
+        } else {
+          expect(imageBox!.x).toBeLessThan(titleBox!.x);
+        }
+        await expect(entry.locator(`a[href$="/projects/${slug}"]`)).toHaveCount(1);
+        frameBoxes.push({ width: imageBox!.width, height: imageBox!.height });
       }
-      await expect(entry.locator('a[href$="/projects/amigo-fiel"]')).toHaveCount(1);
-      const stock = timeline.locator('.timeline-entry').filter({ hasText: 'Controle de Estoque' });
-      await expect(stock.locator('.timeline-date')).toBeVisible();
-      await expect(stock.locator('a[href$="/projects/controle-de-estoque"]')).toHaveCount(1);
-      await expect(stock.locator('.academic-project-preview')).toHaveCount(0);
+      expect(frameBoxes[0]!.width).toBe(frameBoxes[1]!.width);
+      expect(frameBoxes[0]!.height).toBe(frameBoxes[1]!.height);
     }
   });
 }
