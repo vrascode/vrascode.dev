@@ -184,8 +184,9 @@ for (const locale of ['en', 'pt'] as const) {
     await page.goto(`/${locale}/experience`);
     const experience = page.locator('.timeline-entry').first();
     await expect(experience.locator('h2')).toHaveText(locale === 'pt' ? 'Estagiário de Tecnologia da Informação' : 'Information Technology Intern');
-    await expect(experience.locator('.timeline-company')).toHaveText('SEFAZ-TO');
-    await expect(experience).toContainText(locale === 'pt' ? 'Junho de 2025 — Atual' : 'June 2025 — Present');
+    await expect(experience.locator('.experience-entry-meta .timeline-date')).toHaveText('SEFAZ-TO');
+    await expect(experience.locator('.timeline-company')).toHaveCount(0);
+    await expect(experience).not.toContainText(locale === 'pt' ? 'Junho de 2025 — Atual' : 'June 2025 — Present');
     await expect(experience).toContainText(locale === 'pt' ? 'Palmas, Tocantins, Brasil' : 'Palmas, Tocantins, Brazil');
     await expect(experience).toContainText(locale === 'pt' ? 'Presencial' : 'On-site');
     await expect(experience.locator('.timeline-body').last()).toContainText(locale === 'pt' ? 'Desenvolvedor de software, suporte técnico, manutenção de equipamentos e apoio à infraestrutura de TI' : 'software development, technical support, equipment maintenance and IT infrastructure support');
