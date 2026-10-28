@@ -8,7 +8,7 @@ The portfolio presents public information. It does not accept financial records,
 
 - No secrets are required. An optional `GITHUB_TOKEN` is read exclusively in `src/lib/github.server.ts`, guarded with `server-only`.
 - Never prefix a credential with `NEXT_PUBLIC_`, put it in the identity/project files or commit `.env` files. `.env.example` contains no credential.
-- `PORTFOLIO_EMAIL` and `PORTFOLIO_WHATSAPP` are opt-in public contact values, not secrets. Do not set them until Matheus confirms they may be published. The WhatsApp value is normalized and validated as an international number; contact controls are omitted if either value is invalid. Keep deployment environment configuration private even though the resulting contact details are intentionally public.
+- PORTFOLIO_EMAIL and PORTFOLIO_WHATSAPP contain contact details that Matheus has explicitly authorized for public display. They are validated and rendered as public links; do not treat them as secrets or put them in client-side environment configuration.
 - The server fetches one fixed public GitHub endpoint. It uses a four-second timeout and hourly cache, validates the response and exposes only public counts and the expected login. HTTP, rate-limit, malformed-data and network failures have a safe fallback.
 - No arbitrary user-supplied URLs are fetched by the application. External source links are a reviewed allowlist in the project data.
 - External links opened in a new tab use `noopener noreferrer`.

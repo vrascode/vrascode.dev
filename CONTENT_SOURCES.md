@@ -1,12 +1,12 @@
 # Content sources
 
-Reviewed on **October 27, 2026**. This record links portfolio claims to user instructions and inspected implementation. Detailed evidence, local source paths, authorship checks and executed source-project tests are in [docs/project-research.md](docs/project-research.md).
+Reviewed on **October 28, 2026**. This record links portfolio claims to user instructions and inspected implementation. Detailed evidence, local source paths, authorship checks and executed source-project tests are in [docs/project-research.md](docs/project-research.md).
 
 ## Professional identity
 
-The user supplied the name Matheus Sulino, VRAS CODE brand, official domain/repository, UFT Computer Science degree in progress, location, exact bilingual home presentation and EGEFAZ IT internship starting in June 2025. The internship description is limited to technical support, computer maintenance and IT infrastructure. No graduation date, seniority, client outcomes or extra responsibilities were inferred.
+The user supplied the name Matheus Sulino, VRAS CODE brand, official domain/repository, UFT Computer Science degree in progress (8th semester confirmed in the latest update), location, bilingual presentation and EGEFAZ IT internship starting June 2025. The internship details remain limited to technical support, computer maintenance, diagnosis and IT infrastructure. No completion percentage or graduation date was inferred.
 
-The original [identity JSON](content/identity.json) and [identity requirements](docs/identidade-profissional.md) are preserved. Contact uses only the supplied public GitHub link; no email has been inferred from Git author metadata.
+The identity JSON and identity requirements remain in the repository; the identity JSON now contains the confirmed public e-mail, WhatsApp number and academic semester. Contact values were explicitly authorized in the latest update.
 
 The LinkedIn link provided for this update is included as a professional link. Its anonymous public page could not be read during the October 27, 2026 review (web reader returned `999 Unknown Status Code`); no profile text was guessed. [docs/profile-research.md](docs/profile-research.md) records the lookup, GitHub knowledge source and remaining personal data needed for richer content.
 
@@ -41,8 +41,8 @@ These results concern the showcased source projects. The portfolio's own tests a
 - `public/projects/fintrack-pro.png`: an existing real screenshot from the user's FinTrack Pro workspace. The interface displays its genuine empty state.
 - `public/projects/clearledger.png`: an existing real screenshot from the user's ClearLedger workspace. Its sample-data banner and the portfolio captions identify synthetic financial records.
 - No third-party pet, product, staff or avatar images were copied from the collaborative projects.
-- Matheus's portrait file `public/images/matheus-sulino.png` was not present during review. The optional portrait and photo-assisted social card render only when he supplies that file. No face was generated or altered.
-- No professional CV PDF, confirmed publication email or approved WhatsApp number was found. Contact controls appear only after their values are explicitly configured. The empty opt-in configuration is in `content/identity.json` and `.env.example`.
+- The supplied portrait was found as public/images/matheus-sulino.png.jpeg (JPEG bytes, despite the double suffix) and is used unchanged in the home page, About page and localized Open Graph image. The exact .png pathname does not exist.
+- A public professional email and WhatsApp number were explicitly authorized by Matheus on this update; both appear in the localized contact cards. The LinkedIn profile content itself remains inaccessible anonymously, so no details are attributed to that page.
 - Geist and JetBrains Mono are packaged via Fontsource; Lucide supplies interface icons. Package distributions include their respective license information.
 
 ## Maintenance rules

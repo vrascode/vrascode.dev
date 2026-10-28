@@ -30,9 +30,9 @@ On macOS/Linux, use `npm` instead of `npm.cmd`. The dev server binds to loopback
 - GitHub public profile data fetched on the server, cached for one hour, with a graceful failure state.
 - Localized metadata and Open Graph images, canonical/alternate URLs, sitemap, robots and Person JSON-LD.
 - EGEFAZ IT internship since June 2025, UFT education and evidence-based technology descriptions.
-- Academic project timeline with confirmed terms only; unknown degree progress, courses and graduation date stay unspecified.
-- LinkedIn and GitHub contact cards. E-mail, WhatsApp, portrait and CV appear only after their real assets/details are supplied; no contact channel is fabricated.
-- Localized Open Graph cards with the optional supplied portrait; a VRAS CODE fallback is used while the portrait is absent.
+- Academic timeline shows the confirmed 8th semester. No completion percentage, graduation date or unconfirmed courses are shown.
+- LinkedIn and GitHub, plus the confirmed public e-mail and WhatsApp contact links. The supplied portrait is displayed on Home, About and social cards; a CV download remains optional.
+- Localized Open Graph cards include Matheus's supplied portrait; its existing JPEG file is used unchanged on Home and About.
 
 ## Projects
 
@@ -83,7 +83,7 @@ Playwright starts its own production server on port **3100**, leaving your dev s
 
 No environment variables are required. Optional `GITHUB_TOKEN` increases GitHub API rate limits and stays server-only; consult `.env.example` and [SECURITY.md](SECURITY.md).
 
-Optional portrait: add Matheus's original image at `public/images/matheus-sulino.png`. Optional CV: add `public/documents/matheus-sulino-cv.pdf`. Contact cards may be enabled with the server-only `PORTFOLIO_EMAIL` or `PORTFOLIO_WHATSAPP` variables only after Matheus authorizes publication; WhatsApp requires an international number. See `.env.example`, [profile research](docs/profile-research.md) and [SECURITY.md](SECURITY.md).
+Matheus supplied photo is integrated from public/images/matheus-sulino.png.jpeg without alteration. The optional CV belongs at public/documents/matheus-sulino-cv.pdf.
 
 Edit identity in `content/identity.json`, UI copy in both message files, and verified project details in `src/lib/projects.ts`. Update both locales and source evidence together. Never infer project features from a package dependency or a marketing description alone.
 

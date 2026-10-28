@@ -1,6 +1,6 @@
 # Progresso · Matheus Sulino / VRAS CODE
 
-Atualização: **27 de outubro de 2026**.
+Atualizacao: **28 de outubro de 2026**.
 
 ## Implementado
 
@@ -13,9 +13,9 @@ Atualização: **27 de outubro de 2026**.
 - Formação em Ciência da Computação na UFT e estágio em TI na EGEFAZ desde junho de 2025.
 - Integração GitHub com cache, timeout, validação de resposta e fallback; contato pelo perfil informado.
 - Apresentação, biografia e perfil profissional bilíngues de Matheus Sulino, com links para LinkedIn e GitHub e conhecimentos ancorados no README público do GitHub.
-- Seção “Minha Jornada Acadêmica” com UFT, campus Palmas, curso em andamento e apenas os períodos confirmados dos projetos acadêmicos; ingresso, semestre atual, disciplinas, percentual e conclusão não são inventados.
+- Minha Jornada Academica informa o 8o semestre confirmado. O percentual de conclusao e a previsao de formatura continuam sem estimativa.
 - Oito categorias de tecnologias, atividades da EGEFAZ restritas às informações confirmadas, e cards de contato responsivos.
-- Fotografia, currículo, e-mail e WhatsApp são opcionais e permanecem ausentes enquanto Matheus não fornecer e autorizar a publicação dos respectivos dados/arquivos. Sem links quebrados.
+- E-mail e WhatsApp autorizados estao configurados e visiveis nas duas linguas. A foto fornecida em public/images/matheus-sulino.png.jpeg esta integrada sem alteracao. O curriculo continua opcional.
 - Pesquisa pública e anônima do LinkedIn registrada em `docs/profile-research.md`; o perfil não forneceu conteúdo legível, portanto nenhuma experiência, competência ou certificação foi atribuída a ele.
 - SEO, canonical, hreflang, JSON-LD, Open Graph, sitemap, robots e proteção contra indexação de previews.
 - Configuração Vercel, workflow de validação GitHub Actions e documentação de DNS sem alteração da zona.
@@ -28,7 +28,7 @@ Atualização: **27 de outubro de 2026**.
 | `npm.cmd run lint` | Aprovado, sem erros ou avisos na execução final. |
 | `npm.cmd test` | 11 testes aprovados. |
 | `npm.cmd run build` | Aprovado após a atualização; vinte páginas localizadas são geradas, com contato renderizado no servidor. |
-| Playwright | 20/20 cenários aprovados em Chromium no Windows, incluindo as duas localidades, troca de idioma, apresentação e linha do tempo acadêmica. |
+| Playwright | 21/21 cenarios aprovados em Chromium no Windows, incluindo acessibilidade, responsividade, contatos confirmados e fotografia fornecida. |
 | Navegação | Vinte páginas, links internos, idioma, temas, menu mobile e erros 404 verificados. |
 | Acessibilidade | 28 análises axe-core: sete páginas × dois idiomas × dois temas, sem violações das regras WCAG 2 A/AA e 2.1 AA examinadas. Teclado, foco do menu, skip link e movimento reduzido também testados. |
 | Responsividade | 360, 390, 768 e 1440 pixels, em ambos os idiomas, sem overflow horizontal nas rotas examinadas. |
@@ -58,9 +58,8 @@ Nenhuma publicação na Vercel ou no domínio foi confirmada. Não foram encontr
 
 ## Pendências de perfil e publicação
 
-1. Fornecer a fotografia original em `public/images/matheus-sulino.png` e o currículo, caso queira, em `public/documents/matheus-sulino-cv.pdf`.
-2. Confirmar endereço profissional de e-mail e, se desejar publicação, autorizar e fornecer o número internacional do WhatsApp.
-3. Como o LinkedIn não forneceu dados legíveis, encaminhar o resumo aprovado, períodos/cargos, cursos e certificados que devam aparecer. Também faltam data de ingresso, situação acadêmica detalhada e disciplinas efetivamente cursadas.
+1. Curriculo profissional opcional: adicionar public/documents/matheus-sulino-cv.pdf.
+2. Resumo do LinkedIn, cursos/certificados, periodo de ingresso e disciplinas cursadas nao estao publicamente acessiveis; dados aprovados podem ser enviados para atualizar o conteudo.
 
 ## Pendências de publicação
 

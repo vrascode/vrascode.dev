@@ -30,9 +30,9 @@ Em Linux/macOS, use `npm`. Para visualizar a versão de produção, execute `npm
 - API pública do GitHub no servidor, cache de uma hora e estado de indisponibilidade.
 - Metadados, Open Graph localizado, canonical, alternativas de idioma, sitemap, robots e JSON-LD.
 - Estágio em TI na EGEFAZ desde junho de 2025, formação na UFT e tecnologias contextualizadas.
-- Linha do tempo acadêmica somente com períodos confirmados; progresso, disciplinas e previsão de conclusão desconhecidos não são inventados.
-- Cards de contato para LinkedIn e GitHub. E-mail, WhatsApp, fotografia e currículo só aparecem quando os dados ou arquivos reais forem fornecidos.
-- Imagens Open Graph localizadas com a fotografia opcional; enquanto ela não estiver disponível, aparece a identidade VRAS CODE.
+- Linha do tempo academica mostra o 8o semestre confirmado, sem percentual de conclusao ou previsao de formatura. Disciplinas cursadas nao confirmadas nao sao listadas.
+- Cards de LinkedIn, GitHub, email e WhatsApp com contatos autorizados por Matheus. A fotografia fornecida aparece no Inicio, em Sobre Mim e nas imagens sociais; o curriculo continua opcional.
+- Imagens Open Graph localizadas usam a fotografia fornecida; a identidade VRAS CODE permanece como composicao visual.
 
 ## Projetos e fontes
 
@@ -64,7 +64,7 @@ npm.cmd audit --omit=dev
 
 Os testes de navegador abrem um servidor de produção próprio na porta **3100**, sem encerrar o servidor de desenvolvimento na 3000. No Windows, usam Microsoft Edge instalado, quando disponível. Caso contrário, execute `npx.cmd playwright install chromium`. Capturas responsivas são gravadas em `.artifacts/screenshots/`, fora do Git. `PLAYWRIGHT_CHANNEL` permite selecionar outro canal instalado.
 
-Nenhuma variável de ambiente é obrigatória. O `GITHUB_TOKEN` opcional fica apenas no servidor. A fotografia deve ser adicionada em `public/images/matheus-sulino.png` e o currículo, quando disponível, em `public/documents/matheus-sulino-cv.pdf`. `PORTFOLIO_EMAIL` e `PORTFOLIO_WHATSAPP` só devem ser configurados com autorização para publicação; o WhatsApp requer número internacional. Veja `.env.example`, [pesquisa do perfil](docs/profile-research.md) e [SECURITY.md](SECURITY.md).
+O email e WhatsApp autorizados ja estao configurados no conteudo publico. A foto esta integrada de public/images/matheus-sulino.png.jpeg; o curriculo pode ser salvo em public/documents/matheus-sulino-cv.pdf. Consulte .env.example, docs/profile-research.md e SECURITY.md.
 
 Para atualizar o conteúdo, edite a identidade, os dois arquivos de tradução e os dados verificados em `src/lib/projects.ts`, mantendo fontes e idiomas consistentes.
 

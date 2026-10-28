@@ -16,22 +16,22 @@ Portanto, esta revisão não confirma a partir do LinkedIn o título exato, o re
 - **Conhecimentos declarados no GitHub:** o [README do perfil público `vrascode`](https://github.com/vrascode) lista Python, Java, JavaScript, PHP e C, além de desenvolvimento web e APIs. O README também declara interesse em Full Stack, sistemas, bancos de dados, engenharia de software e aprendizado contínuo. Esses são interesses declarados, não uma escala independente de proficiência.
 - **Tecnologias dos projetos:** as tecnologias exibidas nas páginas de projetos vieram da inspeção de código, descrita em [project research](project-research.md). O portfólio não atribui essas tecnologias a um projeto que não as utilize.
 
-## Não confirmado para publicação
+## Status atual: contatos e arquivos
 
 | Informação | Situação desta revisão |
 | --- | --- |
-| Foto `public/images/matheus-sulino.png` | Arquivo não encontrado. O site verificará a existência e mostrará a foto quando Matheus adicionar seu arquivo original nesse caminho. Até lá, não exibe rosto gerado nem uma imagem quebrada. |
+| Fotografia | Arquivo fornecido em public/images/matheus-sulino.png.jpeg; JPEG verificado e integrado sem alteracao. O caminho com sufixo simples .png nao existe. |
 | Currículo PDF | Nenhum PDF profissional encontrado em `public/documents/matheus-sulino-cv.pdf`. O botão de download só aparece depois que o arquivo for fornecido. |
-| E-mail profissional | Nenhum endereço foi confirmado para divulgação. E-mail de autoria Git não foi tratado como canal profissional público. O campo `PORTFOLIO_EMAIL` e o valor configurável vazio permitem ativá-lo após confirmação. |
-| WhatsApp | Nenhum número foi fornecido nem autorizado para divulgação. `PORTFOLIO_WHATSAPP` permanece vazio; não existe número nem link `wa.me` no site atual. |
-| Ingresso, semestre atual, disciplinas cursadas e previsão de conclusão | Não confirmados. A página acadêmica mostra apenas o curso em andamento e os períodos comprovados de Amigo Fiel (2025/2) e Controle de Estoque (2026.1). Nenhum percentual é calculado. |
+| E-mail profissional | vrascode@gmail.com confirmado e autorizado para publicacao por Matheus. Aparece em um link mailto:. |
+| WhatsApp | +55 63 99225-4787 confirmado e autorizado para publicacao por Matheus; link internacional 5563992254787. |
+| Semestre atual | 8o semestre de Bacharelado em Ciencia da Computacao na UFT confirmado. Percentual de conclusao e previsao de formatura nao sao exibidos. Ingresso e disciplinas concluidas nao foram informados. |
 | Cursos e certificações | Não confirmados por uma fonte legível. Nenhuma certificação foi adicionada. |
 | Texto completo de apresentação ou experiências no LinkedIn | Não pôde ser verificado no perfil informado; o conteúdo do site usa os dados fornecidos e fatos dos repositórios examinados. |
 
 ## Handoff para atualização
 
-Adicionar a fotografia original de Matheus a `public/images/matheus-sulino.png` e gerar uma nova build: os componentes de início, Sobre e Open Graph verificam esse arquivo e usam `next/image` ou ImageResponse.
+A fotografia original foi encontrada e esta integrada em Home, Sobre e Open Graph a partir de public/images/matheus-sulino.png.jpeg. Nenhuma alteracao facial foi aplicada.
 
-Adicionar o currículo somente em `public/documents/matheus-sulino-cv.pdf` quando houver PDF profissional para divulgar. Configurar `PORTFOLIO_EMAIL` somente com o endereço que Matheus autorizar publicar. Configurar `PORTFOLIO_WHATSAPP` com código do país e número completo, somente depois da autorização explícita de divulgação. Em Vercel, defina esses dois valores como variáveis do ambiente de produção; eles aparecem publicamente nos cards de contato porque esse é o propósito do ajuste.
+Adicionar o curriculo somente em public/documents/matheus-sulino-cv.pdf quando houver um PDF profissional para divulgar. Os contatos publicos acima foram autorizados e estao no conteudo padrao e em .env.example.
 
-Para enriquecer o currículo sem inferir detalhes, forneça as informações ausentes do LinkedIn, sem precisar compartilhar credenciais: resumo aprovado para publicação, ingresso e situação acadêmica, experiências com datas, cursos/certificações com datas e verificações, e projetos ou atividades relevantes.
+O conteudo adicional do LinkedIn permanece inacessivel anonimamente; cursos e certificacoes so devem ser incluidos quando forem confirmados.
