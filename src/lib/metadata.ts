@@ -4,8 +4,11 @@ import { identity } from './identity';
 
 export function pageMetadata(locale: Locale, path: string, title: string, description: string): Metadata {
   const canonical = `${identity.links.portfolio}/${locale}${path}`;
+  const fullTitle = title.startsWith(`${identity.name} |`)
+    ? title
+    : `${title} | ${title.includes(identity.name) ? identity.brand : `${identity.name} | ${identity.brand}`}`;
   return {
-    title: { absolute: title === identity.pageTitle ? title : `${title} | ${identity.pageTitle}` },
+    title: { absolute: fullTitle },
     description,
     alternates: {
       canonical,
@@ -14,7 +17,7 @@ export function pageMetadata(locale: Locale, path: string, title: string, descri
     openGraph: {
       title, description, url: canonical, siteName: identity.brand,
       locale: locale === 'pt' ? 'pt_BR' : 'en_US', type: 'website',
-      images: [{ url: `${identity.links.portfolio}/${locale}/opengraph-image`, width: 1200, height: 630, alt: identity.pageTitle }]
+      images: [{ url: `${identity.links.portfolio}/${locale}/opengraph-image`, width: 1200, height: 630, alt: locale === 'pt' ? 'Matheus Sulino | Desenvolvedor Full Stack — VRAS CODE' : identity.pageTitle }]
     },
     twitter: { card: 'summary_large_image', title, description, images: [`${identity.links.portfolio}/${locale}/opengraph-image`] }
   };
