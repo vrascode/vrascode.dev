@@ -62,7 +62,7 @@ for (const locale of ['en', 'pt'] as const) {
     await page.keyboard.press('Enter');
     await expect(page.locator('main')).toBeFocused();
     await page.goto(`/${locale}/projects`);
-    await expect(page.locator('.project-card h3')).toHaveText(projects.map(p => p.name));
+    await expect(page.locator('.project-story h2')).toHaveText(projects.map(p => p.name));
   });
 
   test(`${locale}: accessible pages in both themes`, async ({ page }) => {
@@ -257,7 +257,7 @@ for (const locale of ['en', 'pt'] as const) {
       await page.goto(`/${locale}/projects`);
       const visualHeights: number[] = [];
       for (const [slug, path] of Object.entries(expected)) {
-        const card = page.locator(`.project-card[data-project="${slug}"]`);
+        const card = page.locator(`.project-story[data-project="${slug}"]`);
         const image = card.locator('.project-visual img');
         await image.scrollIntoViewIfNeeded();
         await expect.poll(() => image.evaluate(element => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
@@ -288,12 +288,36 @@ for (const locale of ['en', 'pt'] as const) {
 test('project search, categories and recovery from empty results work', async ({ page }) => {
   await page.goto('/en/projects');
   await page.getByRole('searchbox').fill('FastAPI');
-  await expect(page.locator('.project-card h3')).toHaveText(['ClearLedger']);
+  await expect(page.locator('.project-story h2')).toHaveText(['ClearLedger']);
   await page.getByRole('searchbox').fill('no-such-project');
-  await expect(page.getByRole('status')).toHaveText('No projects found');
+  await expect(page.locator('.result-count')).toHaveText('No projects found');
   await page.getByRole('button', { name: 'Reset filters' }).click();
   await page.getByRole('button', { name: 'Mobile', exact: true }).click();
-  await expect(page.locator('.project-card h3')).toHaveText(['FinTrack Pro']);
+  await expect(page.locator('.project-story h2')).toHaveText(['FinTrack Pro']);
+});
+
+for (const [locale, copy] of [['en', { run: 'Run sample', divergence: '1 discrepancy identified for review' }], ['pt', { run: 'Executar amostra', divergence: '1 divergência identificada para análise' }]] as const) {
+  test(`${locale}: ClearLedger sample reconciliation is interactive and clearly fictional`, async ({ page }) => {
+    await page.goto(`/${locale}/projects`);
+    const demo = page.locator('.project-story[data-project="clearledger"] .reconciliation-demo');
+    await expect(demo.getByText(locale === 'pt' ? 'DADOS FICTÍCIOS DE EXEMPLO' : 'FICTIONAL SAMPLE DATA').first()).toBeVisible();
+    await demo.getByRole('button', { name: copy.run }).click();
+    await expect(demo.getByText(copy.divergence)).toBeVisible();
+    await demo.getByRole('button', { name: locale === 'pt' ? 'Reiniciar amostra' : 'Reset sample' }).click();
+    await expect(demo.getByRole('button', { name: copy.run })).toBeVisible();
+  });
+}
+
+test('project screenshots can be opened and dismissed with keyboard focus restored by the browser', async ({ page }) => {
+  await page.goto('/en/projects');
+  const showcase = page.locator('.project-story[data-project="clearledger"] .interactive-showcase');
+  await showcase.getByRole('button', { name: 'Enlarge project image' }).click();
+  const dialog = page.getByRole('dialog');
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole('img')).toHaveAttribute('alt', /Actual ClearLedger dashboard/);
+  await page.keyboard.press('Escape');
+  await expect(dialog).not.toBeVisible();
+  await expect(showcase.getByRole('button', { name: 'Enlarge project image' })).toBeFocused();
 });
 
 test('language switching retains the project route and theme persists', async ({ page }) => {
