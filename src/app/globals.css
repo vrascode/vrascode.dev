@@ -136,6 +136,11 @@ img { max-width: 100%; height: auto; }
 .screenshot-frame { width: 90%; border: 1px solid #ffffff29; border-radius: 7px; overflow: hidden; background: #f8f8f8; box-shadow: var(--shadow-soft); transform: translateY(44px) rotate(-3deg); transition: transform .45s cubic-bezier(.2,.7,.2,1), filter .45s; }
 .visual-clearledger .screenshot-frame { transform: translateY(50px) rotate(3deg); }
 .project-card:hover .screenshot-frame, .project-card:focus-within .screenshot-frame { transform: translateY(30px) rotate(0); filter: saturate(1.05); }
+.project-asset-preview { display: flex; align-items: center; justify-content: center; max-width: 90%; overflow: hidden; border: 1px solid #ffffff20; border-radius: 8px; background: #09090f; box-shadow: var(--shadow-soft); }
+.project-asset-cover { width: 90%; aspect-ratio: 1672 / 941; }
+.project-asset-logo { width: min(68%, 250px); aspect-ratio: 1; }
+.project-asset-icon { width: 144px; aspect-ratio: 1; border-radius: 22px; }
+.project-asset-image { display: block; width: 100%; height: 100%; object-fit: contain; }
 .window-bar { height: 24px; display: flex; align-items: center; gap: 4px; padding-inline: 10px; background: #eeefeb; }
 .window-bar i { width: 4px; height: 4px; border-radius: 50%; background: #bcc2b9; }
 .window-bar span { margin: auto; padding-right: 20px; font: 7px var(--font-mono); color: #5e6559; }
@@ -227,6 +232,9 @@ img { max-width: 100%; height: auto; }
 .project-visual-detail { height: auto; padding: 45px; min-height: 350px; }
 .project-visual-detail .screenshot-frame { width: 100%; max-width: 1000px; transform: none; }
 .project-visual-detail .project-illustration { padding-block: 28px; }
+.project-visual-detail .project-asset-cover { width: min(90%, 1000px); }
+.project-visual-detail .project-asset-logo { width: min(70%, 360px); }
+.project-visual-detail .project-asset-icon { width: 180px; }
 .image-caption { font-size: 11px; color: var(--muted); margin-top: 14px; line-height: 1.7; }
 .detail-layout { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 85px; margin-top: 65px; }
 .detail-body section { margin-bottom: 42px; }

@@ -8,6 +8,7 @@ export type ProjectText = {
 export type Project = {
   slug: string; number: string; name: string; category: 'mobile' | 'fullstack' | 'web';
   verified: boolean; stack: string[]; repository?: string; image?: string;
+  imagePresentation?: 'screenshot' | 'cover' | 'logo' | 'icon'; imageDimensions?: readonly [number, number];
   sources: { label: string; url: string }[];
   content: Record<Locale, ProjectText>;
 };
@@ -145,6 +146,7 @@ export const projects: Project[] = [
     slug: 'controle-de-estoque', number: '05', name: 'Controle de Estoque', category: 'fullstack', verified: true,
     stack: ['PHP', 'MySQL', 'PDO', 'JavaScript', 'PHPUnit', 'MVC'],
     repository: 'https://github.com/vrascode/Eng.Software-Controle-de-Estoque',
+    image: '/images/Controle-de-estoque.png', imagePresentation: 'cover', imageDimensions: [1672, 941],
     sources: [
       { label: 'BECKMAN700 / Eng.Software-Controle-de-Estoque', url: 'https://github.com/BECKMAN700/Eng.Software-Controle-de-Estoque' },
       { label: 'CONTRIBUICOES_MATHEUS_SULINO.md', url: 'https://github.com/vrascode/Eng.Software-Controle-de-Estoque/blob/ec1806143aef31b89ba09e0f97c020fcc2e39fb3/docs/CONTRIBUICOES_MATHEUS_SULINO.md' },
@@ -161,7 +163,7 @@ export const projects: Project[] = [
         contribution: 'Matheus contributed to user registration, stock limits, product filters, report refinements and interface improvements, with changes confirmed in Git history. The team includes João Pedro Rodrigues Bequiman, Giordano Bruno and Murillo Fernandes de Oliveira. Iagor Lourenço dos Santos is credited for earlier sprints.',
         verification: 'Implementation, schema and Matheus’s contribution commits were inspected. PHPUnit cases exist for validation, permissions, sessions, CSRF and inventory calculations. That suite was not executed in this review; helper tests do not establish database or end-to-end HTTP validation.',
         limitations: 'An academic team project. The linked GitHub Pages website is a project presentation, not an interactive deployment of the PHP/MySQL application.',
-        imageCaption: 'Original portfolio illustration for the inventory project.'
+        imageCaption: 'Inventory project presentation image.'
       },
       pt: {
         category: 'GESTÃO DE ESTOQUE · PROJETO COLABORATIVO', status: 'Projeto acadêmico',
@@ -172,7 +174,7 @@ export const projects: Project[] = [
         contribution: 'Matheus contribuiu com cadastro de usuários, limites de estoque, filtros de produtos, refinamento de relatórios e melhorias de interface, com alterações confirmadas no histórico Git. A equipe inclui João Pedro Rodrigues Bequiman, Giordano Bruno e Murillo Fernandes de Oliveira. Iagor Lourenço dos Santos é creditado por sprints anteriores.',
         verification: 'Foram inspecionados a implementação, o schema e os commits de contribuição de Matheus. Existem casos PHPUnit para validação, permissões, sessões, CSRF e cálculos de inventário. A suíte não foi executada nesta análise; testes de helpers não comprovam validação de banco ou E2E HTTP.',
         limitations: 'Projeto acadêmico em equipe. O site GitHub Pages vinculado é uma apresentação do projeto, não uma implantação interativa da aplicação PHP/MySQL.',
-        imageCaption: 'Ilustração original do portfólio para o projeto de estoque.'
+        imageCaption: 'Imagem de apresentação do projeto de controle de estoque.'
       }
     }
   },
