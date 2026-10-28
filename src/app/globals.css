@@ -128,7 +128,8 @@ img { max-width: 100%; height: auto; }
 .project-visual { position: relative; display: flex; align-items: center; justify-content: center; height: 318px; border-radius: 10px; overflow: hidden; border: 1px solid #ffffff0c; background: #181e1b; }
 .visual-fintrack-pro { background: radial-gradient(ellipse at 70% 20%, #30264e, #171522); }
 .visual-clearledger { background: radial-gradient(ellipse at 25% 30%, #393350, #1c192e); }
-.visual-vras { background: #151b13; }
+.visual-vras-watches { background: radial-gradient(ellipse at 40% 10%, #393350, #1c192e); }
+.visual-vrascode { background: radial-gradient(ellipse at 40% 10%, #30264e, #171522); }
 .visual-amigo-fiel { background: radial-gradient(ellipse at 40% 10%, #3d3028, #211d18); }
 .visual-controle-de-estoque { background: radial-gradient(ellipse at 40% 10%, #1c3948, #111e2b); }
 .project-image-link { display: block; position: relative; }
@@ -158,6 +159,7 @@ img { max-width: 100%; height: auto; }
 .illustration-ring { width: 150px; height: 150px; border: 1px solid #ffffff17; border-radius: 50%; display: grid; place-items: center; }
 .illustration-dot { color: #9be29b; }
 .visual-controle-de-estoque .project-illustration { color: #8cb7cb; }
+.visual-vrascode .project-illustration { color: var(--accent); }
 .monogram-compact { height: 225px; width: 225px; color: var(--accent); }
 .about-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 100px; align-items: start; }
 .about-copy p { color: var(--muted); font-size: 16px; margin-bottom: 18px; }
@@ -260,6 +262,8 @@ img { max-width: 100%; height: auto; }
 .timeline-date { font: 12px var(--font-mono); color: var(--muted); padding-top: 6px; }
 .timeline-entry h2 { font-size: 30px; font-weight: 500; letter-spacing: -.035em; }
 .timeline-company { color: var(--accent); font-size: 16px; margin-top: 8px; }
+.timeline-work-mode { color: var(--muted); margin-top: 12px; font-size: 12px; }
+.timeline-work-mode span { color: var(--foreground); }
 .timeline-body { max-width: 630px; color: var(--muted); margin-top: 20px; font-size: 15px; }
 .timeline-tasks { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; list-style: none; padding: 0; }
 .timeline-tasks li { padding: 8px 12px; font-size: 12px; border: 1px solid var(--border); border-radius: 5px; color: var(--muted); }
@@ -287,11 +291,15 @@ img { max-width: 100%; height: auto; }
 .academic-snapshot { display: flex; justify-content: space-between; align-items: center; gap: 25px; border-block: 1px solid var(--border); margin-top: 30px; padding-block: 27px; }
 .academic-snapshot > div { display: flex; align-items: flex-start; gap: 15px; }
 .academic-snapshot > div > svg { color: var(--accent); margin-top: 2px; }
+.academic-snapshot .academic-brand { display: flex; align-items: center; gap: 20px; }
+.institution-logo-frame { display: flex; align-items: center; justify-content: center; flex: 0 0 140px; width: 140px; aspect-ratio: 1.46; padding: 8px; overflow: hidden; border: 1px solid var(--border); border-radius: 7px; background: #fff; }
+.institution-logo { display: block; width: 100%; height: 100%; object-fit: contain; }
 .academic-snapshot h3 { font-size: 19px; font-weight: 500; letter-spacing: -.025em; }
 .academic-snapshot p { color: var(--muted); font-size: 12px; margin-top: 5px; }
 .education-progress { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 20px; margin-block: 22px 34px; border: 1px solid var(--border); background: var(--background-secondary); border-radius: 7px; }
 .education-progress > div > p:last-child { color: var(--muted); font-size: 12px; margin-top: 7px; }
 .academic-data-pending { color: var(--muted); border: 1px solid var(--border); border-radius: 4px; padding: 7px 10px; font: 10px var(--font-mono); white-space: nowrap; }
+.academic-description { max-width: 790px; margin: -10px 0 34px; color: var(--muted); font-size: 14px; line-height: 1.8; }
 .academic-timeline .timeline-entry { grid-template-columns: minmax(155px, .35fr) 1fr; padding-block: 28px; }
 .academic-project-title { font-size: 21px; font-weight: 500; }
 .academic-timeline .timeline-body { margin-top: 9px; font-size: 13px; }
@@ -437,6 +445,8 @@ img { max-width: 100%; height: auto; }
   .academic-snapshot { flex-direction: column; gap: 15px; }
   .education-progress { flex-direction: column; gap: 12px; }
   .academic-data-pending { align-self: flex-start; }
+  .institution-logo-frame { flex-basis: 112px; width: 112px; }
+  .academic-snapshot .academic-brand { align-items: flex-start; gap: 15px; }
   .academic-timeline .timeline-entry { grid-template-columns: 1fr; gap: 13px; }
   .profile-photo-about { min-height: 240px; }
   .error-page h1 { font-size: 38px; }
