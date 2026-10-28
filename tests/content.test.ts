@@ -36,8 +36,8 @@ test('identity retains the exact requested presentation and official links', () 
 });
 
 test('the project collection preserves the required order and has complete localized details', () => {
-  assert.deepEqual(projects.map(p => p.name), ['FinTrack Pro', 'ClearLedger', 'VRAS', 'Amigo Fiel', 'Controle de Estoque']);
-  assert.equal(new Set(projects.map(p => p.slug)).size, 5);
+  assert.deepEqual(projects.map(p => p.name), ['ClearLedger', 'FinTrack Pro', 'VRAS Watches', 'VRAS CODE', 'Controle de Estoque', 'Amigo Fiel']);
+  assert.equal(new Set(projects.map(p => p.slug)).size, 6);
   for (const project of projects) {
     assert.deepEqual(Object.keys(project.content.en).sort(), Object.keys(project.content.pt).sort());
     for (const locale of ['en', 'pt'] as const) {
@@ -49,19 +49,23 @@ test('the project collection preserves the required order and has complete local
   }
 });
 
-test('unidentified work cannot silently acquire invented technologies or a repository', () => {
-  const vras = projects.find(p => p.slug === 'vras')!;
-  assert.equal(vras.verified, false);
-  assert.equal(vras.repository, undefined);
-  assert.equal(vras.image, undefined);
-  assert.deepEqual(vras.stack, []);
+test('VRAS Watches remains listed without a public repository link or invented screenshot', () => {
+  const watches = projects.find(p => p.slug === 'vras-watches')!;
+  assert.equal(watches.verified, false);
+  assert.equal(watches.repository, undefined);
+  assert.equal(watches.image, undefined);
+  assert.deepEqual(watches.stack, ['Django']);
+  assert.match(watches.content.pt.summary, /catálogo de produtos, carrinho de compras e interface responsiva/);
+  const portfolio = projects.find(p => p.slug === 'vrascode')!;
+  assert.equal(portfolio.verified, true);
+  assert.equal(portfolio.repository, 'https://github.com/vrascode/vrascode.dev');
 });
 
 test('project search supports accent-insensitive terms, technology filters and empty results', () => {
   assert.equal(filterProjects(projects, 'reconciliacao', 'all', 'pt')[0]?.slug, 'clearledger');
   assert.deepEqual(filterProjects(projects, 'typescript', 'mobile', 'en').map(p => p.slug), ['fintrack-pro']);
   assert.equal(filterProjects(projects, 'nothing-matches-this', 'all', 'en').length, 0);
-  assert.equal(filterProjects(projects, '   ', 'all', 'en').length, 5);
+  assert.equal(filterProjects(projects, '   ', 'all', 'en').length, 6);
 });
 
 test('GitHub parsing rejects invalid counts, another profile and untrusted fields', () => {
@@ -71,7 +75,7 @@ test('GitHub parsing rejects invalid counts, another profile and untrusted field
 
 test('all localized public pages have production canonicals and matching language alternatives', () => {
   const paths = [...publicPaths, ...projects.map(p => `/projects/${p.slug}`)];
-  assert.equal(paths.length, 10);
+  assert.equal(paths.length, 11);
   for (const locale of ['en', 'pt'] as const) for (const path of paths) {
     const meta = pageMetadata(locale, path, identity.pageTitle, 'Description');
     assert.equal(meta.alternates?.canonical, `https://vrascode.dev/${locale}${path}`);

@@ -25,6 +25,16 @@ for (const locale of ['en', 'pt'] as const) {
       await expect(page.locator('html')).toHaveAttribute('lang', locale === 'pt' ? 'pt-BR' : 'en');
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://vrascode.dev/${locale}${route}`);
       expect(await page.title()).toContain(identity.name);
+      if (route === '/projects') {
+        await expect(page.locator('.page-header h1')).toHaveText(locale === 'pt' ? 'Projetos que transformam conhecimento em soluções reais.' : 'Projects that turn knowledge into real-world solutions.');
+        await expect(page.locator('.page-header > p').last()).toHaveText(locale === 'pt' ? 'Uma coleção de aplicações desenvolvidas para explorar desafios de engenharia de software, desenvolvimento Full Stack e arquitetura de sistemas. Cada projeto representa uma oportunidade de aplicar tecnologias, aprimorar habilidades e construir soluções com propósito.' : 'A collection of applications built to explore software engineering, full-stack development and systems architecture. Each project is an opportunity to apply technology, strengthen my skills and build purposeful solutions.');
+      }
+      if (route.startsWith('/projects/')) {
+        const project = projects.find(item => route.endsWith(item.slug))!;
+        const repositoryLink = page.locator('.project-detail-header a[href*="github.com/"]');
+        if (project.repository) await expect(repositoryLink).toHaveAttribute('href', project.repository);
+        else await expect(repositoryLink).toHaveCount(0);
+      }
       expect(await page.locator('body').innerText()).not.toMatch(/Nubank|NuDemo|MISSING_MESSAGE|undefined/);
       const internal = await page.locator('a[href^="/"]').evaluateAll(links => [...new Set(links.map(link => link.getAttribute('href')!).filter(Boolean))]);
       for (const link of internal) {
@@ -57,7 +67,7 @@ for (const locale of ['en', 'pt'] as const) {
 
   test(`${locale}: accessible pages in both themes`, async ({ page }) => {
     for (const theme of ['dark', 'light']) {
-      for (const route of ['', '/projects', '/about', '/experience', '/contact', '/projects/clearledger', '/projects/vras']) {
+      for (const route of ['', '/projects', '/about', '/experience', '/contact', '/projects/clearledger', '/projects/vras-watches', '/projects/vrascode']) {
         await page.goto(`/${locale}${route}`);
         await page.evaluate(value => { localStorage.setItem('theme', value); document.documentElement.setAttribute('data-theme', value); }, theme);
         const audit = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
@@ -89,9 +99,17 @@ for (const locale of ['en', 'pt'] as const) {
     await page.goto(`/${locale}/about#education`);
     const timeline = page.locator('#education');
     await expect(timeline.locator('.timeline-date').filter({ hasText: /2025\/2/ })).toBeVisible();
-    await expect(timeline.locator('.timeline-date').filter({ hasText: /2026\.1/ })).toBeVisible();
-    await expect(timeline.getByText(locale === 'pt' ? new RegExp('percentual de conclus' + String.fromCharCode(227) + 'o da gradua' + String.fromCharCode(231, 227) + 'o e a previs' + String.fromCharCode(227) + 'o de formatura n' + String.fromCharCode(227) + 'o foram confirmados') : /degree completion percentage and expected graduation date have not been confirmed/)).toBeVisible();
-    await expect(timeline.locator('.education-status')).toHaveText(locale === 'pt' ? '8' + String.fromCharCode(186) + ' semestre' : '8th semester');
+    await expect(timeline.locator('.timeline-date').filter({ hasText: /2026\/1/ })).toBeVisible();
+    await expect(timeline.getByText(locale === 'pt' ? 'Janeiro de 2023 — dezembro de 2027 (previsão)' : 'January 2023 — December 2027 (expected)')).toBeVisible();
+    await expect(timeline.locator('.academic-data-pending')).toHaveText(locale === 'pt' ? '8º período · Graduação em andamento' : '8th term · Degree in progress');
+    await expect(timeline.getByText(locale === 'pt' ? /Graduação em Ciência da Computação com estudos em programação/ : /Computer Science studies in programming/)).toBeVisible();
+    const uftLogo = timeline.locator('.institution-logo');
+    await expect(uftLogo).toHaveAttribute('alt', 'Universidade Federal do Tocantins — UFT');
+    await expect.poll(() => uftLogo.evaluate(image => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+    const logoResponse = await page.request.get('/images/institutions/uft-logo.png');
+    expect(logoResponse.ok()).toBe(true);
+    expect(logoResponse.headers()['content-type']).toMatch(/image\/png/);
+    await expect(timeline).not.toContainText(/percentual de conclusão da graduação e a previsão de formatura não foram confirmados|degree completion percentage and expected graduation date have not been confirmed/i);
     await expect(timeline).not.toContainText(/\b\d+%\b/);
   });
 }
@@ -105,6 +123,17 @@ for (const locale of ['en', 'pt'] as const) {
     await expect(page.getByRole('link', { name: locale === 'pt' ? 'Conversar pelo WhatsApp' : 'Chat on WhatsApp' })).toHaveAttribute('href', /5563992254787/);
     await expect(page.getByRole('link', { name: locale === 'pt' ? 'Ver perfil no LinkedIn' : 'View LinkedIn profile' })).toHaveAttribute('href', identity.links.linkedin);
     await expect(page.getByRole('link', { name: locale === 'pt' ? 'Ver perfil no GitHub' : 'View GitHub profile' })).toHaveAttribute('href', identity.links.github);
+  });
+
+  test(`${locale}: SEFAZ-TO internship and work arrangement are accurate`, async ({ page }) => {
+    await page.goto(`/${locale}/experience`);
+    const experience = page.locator('.timeline-entry').first();
+    await expect(experience.locator('h2')).toHaveText(locale === 'pt' ? 'Estagiário de Tecnologia da Informação' : 'Information Technology Intern');
+    await expect(experience.locator('.timeline-company')).toHaveText('SEFAZ-TO');
+    await expect(experience).toContainText(locale === 'pt' ? 'Junho de 2025 — Atual' : 'June 2025 — Present');
+    await expect(experience).toContainText(locale === 'pt' ? 'Palmas, Tocantins, Brasil' : 'Palmas, Tocantins, Brazil');
+    await expect(experience).toContainText(locale === 'pt' ? 'Presencial' : 'On-site');
+    await expect(experience.locator('.timeline-body').last()).toContainText(locale === 'pt' ? 'Desenvolvedor de software, suporte técnico, manutenção de equipamentos e apoio à infraestrutura de TI' : 'software development, technical support, equipment maintenance and IT infrastructure support');
   });
 }
 
@@ -198,7 +227,7 @@ test('404, robots, sitemap, favicon and localized Open Graph images', async ({ p
   expect(robots.status()).toBe(200);
   expect(await robots.text()).toContain('https://vrascode.dev/sitemap.xml');
   const sitemap = await request.get('/sitemap.xml');
-  expect((await sitemap.text()).match(/<loc>/g)?.length).toBe(20);
+  expect((await sitemap.text()).match(/<loc>/g)?.length).toBe(22);
   for (const route of ['/icon.svg', '/apple-icon', '/en/opengraph-image', '/pt/opengraph-image']) {
     const image = await request.get(route);
     expect(image.status(), route).toBe(200);
