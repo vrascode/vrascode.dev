@@ -26,15 +26,15 @@ Next.js App Router provides server-rendered and prerendered routes. The twenty c
 
 ## Browser boundaries
 
-Client components are limited to navigation controls, themes, Motion reveals, project filtering, clipboard and back-to-top. `next-themes` persists the selected theme; dark is the initial default. The language switch retains the current route, query and hash. Native dialog behavior supplies focus containment and Escape handling for the mobile menu.
+Client components are limited to navigation controls, themes and scroll animation, project filtering, clipboard and back-to-top. `next-themes` persists the selected theme; dark is the initial default. The language switch retains the current route, query and hash. Native dialog behavior supplies focus containment and Escape handling for the mobile menu.
 
-Server-rendered text remains visible without animation or JavaScript. Motion honors reduced-motion preferences; CSS also disables nonessential animation and smooth scrolling. Links remain actual links. The site uses one `h1` per page, semantic landmarks, a skip link and visible focus styles.
+Server-rendered text remains visible without animation or JavaScript. GSAP reveals start at readable opacity and honor reduced-motion preferences. A single Lenis instance drives GSAP's ticker and ScrollTrigger; it falls back to native scrolling for reduced-motion and low-power devices. Route changes refresh ScrollTrigger, anchors use Lenis handling, and scroll progress is updated through event-driven animation frames without React renders. Effects revert on component teardown. Links remain actual links. The site uses one `h1` per page, semantic landmarks, a skip link and visible focus styles.
 
 ## Visual system and assets
 
-CSS variables implement the requested dark palette and an independently checked light palette. Tailwind supplies utilities and reset; shared CSS describes the visual system. Geist and JetBrains Mono ship through local npm font assets, without a runtime Google Fonts request. Lucide supplies interface icons; the VRAS mark and project illustrations are original code-native artwork.
+CSS variables implement Midnight Violet dark/light palettes. Tailwind supplies utilities and reset; shared CSS describes the visual system. Geist and JetBrains Mono ship through local npm font assets, without a runtime Google Fonts request. Lucide supplies interface icons; the VRAS mark and project illustrations are original code-native artwork.
 
-Two authorized local screenshots illustrate the user's FinTrack Pro and ClearLedger projects. `next/image` supplies responsive sizes and lazy loading on collection pages. Detail-page images are preloaded. ClearLedger captions disclose synthetic records. Illustrations for the other projects are explicitly identified as illustrations. A portrait at `public/images/matheus-sulino.png` is optional and is rendered with `next/image` only when present; the localized Open Graph ImageResponse uses it when present and otherwise creates a typographic VRAS CODE card. A CV at `public/documents/matheus-sulino-cv.pdf` is optional.
+Two authorized local screenshots illustrate the user's FinTrack Pro and ClearLedger projects. `next/image` supplies responsive sizes and lazy loading on collection pages. Detail-page images are preloaded. ClearLedger captions disclose synthetic records. Illustrations for the other projects are explicitly identified as illustrations. The supplied portrait at `public/images/matheus-sulino.png.jpeg` is rendered with `next/image` on Home and About; the localized Open Graph ImageResponse uses it unchanged. A CV at `public/documents/matheus-sulino-cv.pdf` is optional.
 
 ## Content and integration constraints
 

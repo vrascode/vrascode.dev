@@ -5,7 +5,7 @@ Atualizacao: **28 de outubro de 2026**.
 ## Implementado
 
 - Preservação de `content/identity.json`, `docs/identidade-profissional.md`, repositório e remote originais.
-- Next.js App Router, React, TypeScript, Tailwind, Motion, Lucide, next-intl e next-themes.
+- Next.js App Router, React, TypeScript, Tailwind, GSAP, ScrollTrigger, Lenis, Lucide, next-intl e next-themes.
 - Identidade VRAS CODE, nome Matheus Sulino, fontes locais, favicon e ícone Apple próprios.
 - `/en` padrão e `/pt`, com vinte páginas de conteúdo: início, projetos, cinco detalhes, sobre, experiência e contato em cada idioma.
 - Temas, idioma, navegação desktop/mobile, foco por teclado, movimento reduzido e retorno ao topo.
@@ -18,6 +18,9 @@ Atualizacao: **28 de outubro de 2026**.
 - E-mail e WhatsApp autorizados estao configurados e visiveis nas duas linguas. A foto fornecida em public/images/matheus-sulino.png.jpeg esta integrada sem alteracao. O curriculo continua opcional.
 - Pesquisa pública e anônima do LinkedIn registrada em `docs/profile-research.md`; o perfil não forneceu conteúdo legível, portanto nenhuma experiência, competência ou certificação foi atribuída a ele.
 - SEO, canonical, hreflang, JSON-LD, Open Graph, sitemap, robots e proteção contra indexação de previews.
+- Redesign Midnight Violet aplicado aos tokens dos temas, ícones e imagens sociais.
+- GSAP/ScrollTrigger para entrada do hero, revelações escalonadas e parallax decorativo sutil; Lenis compartilha o ticker GSAP e trata âncoras. Movimento reduzido e aparelhos de baixa capacidade permanecem em rolagem nativa.
+- Indicador de rolagem atualizado por eventos e `requestAnimationFrame`, sem renderizações React por quadro.
 - Configuração Vercel, workflow de validação GitHub Actions e documentação de DNS sem alteração da zona.
 
 ## Validação executada localmente
@@ -33,6 +36,8 @@ Atualizacao: **28 de outubro de 2026**.
 | Acessibilidade | 28 análises axe-core: sete páginas × dois idiomas × dois temas, sem violações das regras WCAG 2 A/AA e 2.1 AA examinadas. Teclado, foco do menu, skip link e movimento reduzido também testados. |
 | Responsividade | 360, 390, 768 e 1440 pixels, em ambos os idiomas, sem overflow horizontal nas rotas examinadas. |
 | Links externos | 20/20 links das fontes retornaram HTTP 200 após a atualização. |
+| Animações e rolagem | GSAP/ScrollTrigger e Lenis testados em produção: âncora, indicador, revela de tecnologias e fallback de movimento reduzido passaram. |
+| Regressão E2E | 22 testes Playwright aprovados no build de produção; inclui `/pt`, `/en`, navegação, acessibilidade, temas e larguras responsivas. |
 | Dependências de produção | `npm.cmd audit --omit=dev`: zero vulnerabilidades reportadas. |
 | Inspeção visual | Capturas reais do portfólio em desktop/celular revisadas; nenhuma exceção JavaScript detectada no preview. |
 
@@ -48,7 +53,7 @@ VRAS mantém página própria na terceira posição, com fonte pendente. Não fo
 
 ## Ambiente local
 
-Um servidor existente do projeto foi observado na porta 3000 e preservado. `http://localhost:3000/en` retornou HTTP 200. Para acompanhar em outro terminal, execute `npm.cmd run dev` quando a porta estiver livre; não inicie uma segunda instância se o projeto já estiver servindo ali. Os testes usam a porta 3100 e encerram apenas seu próprio servidor.
+Para acompanhar em outro terminal, execute `npm.cmd run dev` quando a porta estiver livre; não inicie uma segunda instância se o projeto já estiver servindo ali. Os testes usam a porta 3100 e encerram apenas seu próprio servidor.
 
 ## Git e hospedagem
 

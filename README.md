@@ -26,7 +26,8 @@ On macOS/Linux, use `npm` instead of `npm.cmd`. The dev server binds to loopback
 - Exact supplied identity and presentation, a custom typographic logo, SVG favicon and Apple icon.
 - Dark/light themes, persistent theme preference, route-preserving language switch, mobile dialog navigation, keyboard access and reduced-motion support.
 - Searchable project collection with category filters and honest implementation/contribution notes.
-- Self-hosted Geist and JetBrains Mono, optimized project screenshots and restrained Motion animations.
+- Midnight Violet dark/light design tokens, self-hosted Geist and JetBrains Mono, optimized project screenshots and restrained GSAP animations.
+- GSAP ScrollTrigger reveals, one Lenis instance synchronized through the GSAP ticker, anchor support and a scroll progress indicator. Native scrolling remains active for reduced-motion and low-power devices.
 - GitHub public profile data fetched on the server, cached for one hour, with a graceful failure state.
 - Localized metadata and Open Graph images, canonical/alternate URLs, sitemap, robots and Person JSON-LD.
 - EGEFAZ IT internship since June 2025, UFT education and evidence-based technology descriptions.
@@ -48,7 +49,7 @@ On macOS/Linux, use `npm` instead of `npm.cmd`. The dev server binds to loopback
 
 ## Stack and structure
 
-Next.js App Router, React, TypeScript, Tailwind CSS, Motion, Lucide, next-intl and next-themes. Small native controls cover the required interactions; shadcn/ui is not needed for this implementation.
+Next.js App Router, React, TypeScript, Tailwind CSS, GSAP, ScrollTrigger, Lenis, Lucide, next-intl and next-themes. Small native controls cover the required interactions; shadcn/ui is not needed for this implementation.
 
 ```text
 content/identity.json       Original identity, preserved

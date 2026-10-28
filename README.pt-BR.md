@@ -26,7 +26,8 @@ Em Linux/macOS, use `npm`. Para visualizar a versão de produção, execute `npm
 - Identidade original preservada, logotipo VRAS CODE, favicon SVG e ícone Apple próprios.
 - Temas claro/escuro, preferência persistida, troca de idioma preservando a página, menu mobile, navegação por teclado e movimento reduzido.
 - Busca e filtros de projetos, capturas reais e descrição clara do escopo e da participação de Matheus.
-- Fontes locais Geist e JetBrains Mono, imagens otimizadas e animações com Motion.
+- Design Midnight Violet com temas escuro/claro, fontes Geist e JetBrains Mono, imagens otimizadas e animações discretas com GSAP.
+- Revelações com ScrollTrigger, uma instância Lenis sincronizada ao ticker GSAP, âncoras e indicador de rolagem. Dispositivos com movimento reduzido ou baixa capacidade usam rolagem nativa.
 - API pública do GitHub no servidor, cache de uma hora e estado de indisponibilidade.
 - Metadados, Open Graph localizado, canonical, alternativas de idioma, sitemap, robots e JSON-LD.
 - Estágio em TI na EGEFAZ desde junho de 2025, formação na UFT e tecnologias contextualizadas.
@@ -46,7 +47,7 @@ Veja [CONTENT_SOURCES.md](CONTENT_SOURCES.md) e [a pesquisa detalhada](docs/proj
 
 ## Tecnologias e organização
 
-Next.js App Router, React, TypeScript, Tailwind CSS, Motion, Lucide, next-intl e next-themes. Controles nativos atendem às interações; shadcn/ui não foi necessário.
+Next.js App Router, React, TypeScript, Tailwind CSS, GSAP, ScrollTrigger, Lenis, Lucide, next-intl e next-themes. Controles nativos atendem às interações; shadcn/ui não foi necessário.
 
 O conteúdo original está em `content/identity.json`; traduções em `messages/`; páginas em `src/app/[locale]/`; componentes em `src/components/`; projetos e integrações em `src/lib/`; testes em `tests/`; evidências em `docs/`. A [arquitetura](ARCHITECTURE.md) detalha as responsabilidades.
 

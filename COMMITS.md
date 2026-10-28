@@ -38,3 +38,14 @@ O hash completo de `git rev-parse HEAD` deve coincidir com o retornado para `ref
 | d3d208e | test: validate contacts, semester and photo ? unit tests, localized links and academic status, supplied image and Open Graph output. |
 
 The email and WhatsApp details are public by explicit request. The supplied portrait was committed unchanged. Local checks passed before push; remote synchronization is verified after the normal push.
+
+## Midnight Violet redesign (2026-10-28)
+
+| Commit | Delivery |
+| --- | --- |
+| `ae7d9e8` | `style: implement Midnight Violet design tokens` — dark/light palette, theme-aware accent treatments, favicon and social images. |
+| `54866c6` | `feat: integrate GSAP ScrollTrigger and Lenis` — shared animation ticker, route refresh, anchors, reduced-motion/native fallback, progress indicator and staggered section entrances. Removes unused Motion dependency. |
+| `b8ca615` | `feat: refine hero hierarchy and profile links` — two primary actions and accessible social profile links, translated in both locales. |
+| `a9d08ca` | `test: cover Lenis scrolling and Midnight Violet UI` — production browser coverage for colors, anchor scrolling, progress and native reduced-motion behavior. |
+
+Validation for these commits: TypeScript, ESLint, 11 unit tests, production build, all 22 Playwright tests including 28 axe-core route/theme checks, and 20/20 external source links passed. Push status is checked separately after the commits are sent.
