@@ -14,7 +14,7 @@ export function ProjectVisual({ project, locale, detail = false }: { project: Pr
 
 export function ProjectCard({ project, locale, viewLabel }: { project: Project; locale: Locale; viewLabel: string }) {
   const copy = project.content[locale];
-  return <article className="project-card" data-project={project.slug}>
+  return <article className="project-card" data-project={project.slug} data-gsap-item>
     <Link href={`/projects/${project.slug}`} className="project-image-link" tabIndex={-1} aria-hidden="true"><ProjectVisual project={project} locale={locale} /><span className="visual-arrow"><ArrowUpRight size={24} /></span></Link>
     <div className="project-card-meta"><span className="mono">{project.number} / {copy.category}</span><span className={`status-dot ${project.verified ? '' : 'pending-dot'}`} aria-hidden="true" /></div>
     <h3><Link href={`/projects/${project.slug}`}>{project.name}<ArrowUpRight size={24} /></Link></h3>

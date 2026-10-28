@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { Braces, Boxes, Database, PanelsTopLeft, Server, Settings, TestTube, Wrench } from 'lucide-react';
 import { SectionHeading } from './section-heading';
+import { Reveal } from './reveal';
 
 export async function TechnologySection() {
   const t = await getTranslations('Home');
@@ -14,5 +15,5 @@ export async function TechnologySection() {
     { title: t('infrastructure'), icon: Settings, tools: ['Node.js runtime', 'GitHub Actions CI'] },
     { title: t('architecture'), icon: Boxes, tools: ['MVC', 'REST APIs', 'Monorepos', 'Relational data'] }
   ];
-  return <section className="section" id="technologies"><SectionHeading label={t('stackLabel')} title={t('stackTitle')} description={t('stackDescription')} /><div className="stack-grid">{groups.map(group => <div className="stack-group" key={group.title}><group.icon size={25} strokeWidth={1.5} /><h3>{group.title}</h3><div className="stack-list">{group.tools.map(tool => <span key={tool}>{tool}</span>)}</div></div>)}</div></section>;
+  return <section className="section" id="technologies"><SectionHeading label={t('stackLabel')} title={t('stackTitle')} description={t('stackDescription')} /><Reveal stagger className="stack-reveal"><div className="stack-grid">{groups.map(group => <div className="stack-group" key={group.title} data-gsap-item><group.icon size={25} strokeWidth={1.5} /><h3>{group.title}</h3><div className="stack-list">{group.tools.map(tool => <span key={tool}>{tool}</span>)}</div></div>)}</div></Reveal></section>;
 }
