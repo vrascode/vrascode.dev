@@ -14,7 +14,7 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: 'fintrack-pro', number: '01', name: 'FinTrack Pro', category: 'mobile', verified: true,
+    slug: 'fintrack-pro', number: '02', name: 'FinTrack Pro', category: 'mobile', verified: true,
     stack: ['React Native', 'Expo', 'TypeScript', 'NestJS', 'Prisma', 'PostgreSQL'],
     repository: 'https://github.com/vrascode/fintrack-pro', image: '/projects/fintrack-pro.png',
     sources: [
@@ -48,7 +48,7 @@ export const projects: Project[] = [
     }
   },
   {
-    slug: 'clearledger', number: '02', name: 'ClearLedger', category: 'fullstack', verified: true,
+    slug: 'clearledger', number: '01', name: 'ClearLedger', category: 'fullstack', verified: true,
     stack: ['Python', 'FastAPI', 'SQLite', 'Next.js', 'TypeScript', 'Tailwind CSS'],
     repository: 'https://github.com/vrascode/clearledger', image: '/projects/clearledger.png',
     sources: [
@@ -83,32 +83,32 @@ export const projects: Project[] = [
     }
   },
   {
-    slug: 'vras', number: '03', name: 'VRAS', category: 'web', verified: false, stack: [], sources: [],
+    slug: 'vras-watches', number: '03', name: 'VRAS Watches', category: 'web', verified: false, stack: ['Django'], sources: [],
     content: {
       en: {
-        category: 'PREVIOUS WEBSITE', status: 'Source identification pending',
-        summary: 'An earlier chapter of my work. The original website and its projects are still awaiting source confirmation.',
-        overview: 'This space is reserved for the earlier VRAS website requested for this portfolio. Its original repository and demonstrations could not be reliably identified during the source review.',
-        features: [], architecture: 'The original source is needed before describing the technologies or architecture.',
-        contribution: 'Matheus Sulino’s specific work will be documented once the original project is identified.',
-        verification: 'Public repositories and accessible local project folders were reviewed. No source was confirmed as the previous VRAS website.',
-        limitations: 'This is separate from the new vrascode.dev portfolio. No features, technologies, screenshots or demonstrations are claimed until the original source is verified.',
-        imageCaption: 'VRAS · previous website'
+        category: 'E-COMMERCE · DJANGO', status: 'Source not publicly accessible',
+        summary: 'An online watch store built with Django, featuring a product catalog, shopping cart and responsive interface.',
+        overview: 'The project description supplied by Matheus identifies VRAS Watches as an online watch store built with Django, with a product catalog, shopping cart and responsive interface.',
+        features: [], architecture: 'The repository could not be verified as publicly accessible, so the implementation and architecture could not be inspected.',
+        contribution: 'Included using the project information supplied by Matheus. Further contribution details are not claimed without access to the source.',
+        verification: 'The supplied GitHub URL returned HTTP 404 to anonymous access on October 28, 2026.',
+        limitations: 'The repository and a live demo were not available for review. No additional features, screenshots or technical details are claimed.',
+        imageCaption: 'Illustration for the project · not an application screenshot'
       },
       pt: {
-        category: 'SITE ANTERIOR', status: 'Identificação da fonte pendente',
-        summary: 'Um capítulo anterior do meu trabalho. O site original e seus projetos ainda aguardam confirmação das fontes.',
-        overview: 'Este espaço está reservado para o site VRAS anterior solicitado para este portfólio. Seu repositório original e suas demonstrações não puderam ser identificados com segurança durante a análise das fontes.',
-        features: [], architecture: 'A fonte original é necessária antes de descrever as tecnologias ou a arquitetura.',
-        contribution: 'Os trabalhos específicos de Matheus Sulino serão documentados após a identificação do projeto original.',
-        verification: 'Foram analisados repositórios públicos e pastas locais acessíveis. Nenhuma fonte foi confirmada como o site VRAS anterior.',
-        limitations: 'Este projeto é distinto do novo portfólio vrascode.dev. Funcionalidades, tecnologias, capturas e demonstrações só serão apresentadas após a verificação da fonte original.',
-        imageCaption: 'VRAS · site anterior'
+        category: 'E-COMMERCE · DJANGO', status: 'Fonte não acessível publicamente',
+        summary: 'Loja virtual de relógios desenvolvida com Django, com catálogo de produtos, carrinho de compras e interface responsiva.',
+        overview: 'De acordo com a descrição fornecida por Matheus, a VRAS Watches é uma loja virtual de relógios desenvolvida com Django, com catálogo de produtos, carrinho de compras e interface responsiva.',
+        features: [], architecture: 'O repositório não pôde ser verificado como publicamente acessível; por isso, não foi possível analisar a implementação ou a arquitetura.',
+        contribution: 'Incluído com base nas informações do projeto fornecidas por Matheus. Não são atribuídos outros detalhes de participação sem acesso ao código-fonte.',
+        verification: 'A URL do GitHub informada retornou HTTP 404 para acesso anônimo em 28 de outubro de 2026.',
+        limitations: 'O repositório e uma demonstração não estavam disponíveis para análise. Não são alegadas funcionalidades adicionais, capturas ou detalhes técnicos.',
+        imageCaption: 'Ilustração do projeto · não é uma captura da aplicação'
       }
     }
   },
   {
-    slug: 'amigo-fiel', number: '04', name: 'Amigo Fiel', category: 'fullstack', verified: true,
+    slug: 'amigo-fiel', number: '06', name: 'Amigo Fiel', category: 'fullstack', verified: true,
     stack: ['Python', 'Django', 'PostgreSQL', 'HTML', 'CSS', 'JavaScript'],
     repository: 'https://github.com/vrascode/Amigo-Fiel',
     sources: [
@@ -175,8 +175,43 @@ export const projects: Project[] = [
         imageCaption: 'Ilustração original do portfólio para o projeto de estoque.'
       }
     }
+  },
+  {
+    slug: 'vrascode', number: '04', name: 'VRAS CODE', category: 'web', verified: true,
+    stack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'next-intl', 'GSAP', 'Lenis'],
+    repository: 'https://github.com/vrascode/vrascode.dev',
+    sources: [
+      { label: 'package.json', url: 'https://github.com/vrascode/vrascode.dev/blob/main/package.json' },
+      { label: 'localized app routes', url: 'https://github.com/vrascode/vrascode.dev/tree/main/src/app' }
+    ],
+    content: {
+      en: {
+        category: 'PERSONAL PORTFOLIO · FULL STACK', status: 'Public source repository',
+        summary: 'A bilingual portfolio for Matheus Sulino, presenting professional information, project case studies, academic background and experience.',
+        overview: 'VRAS CODE is Matheus Sulino’s bilingual portfolio, built with Next.js App Router, React and TypeScript. It brings together project details, academic background, professional experience and contact information.',
+        features: ['Localized Portuguese and English pages.', 'Project catalog with filters and individual case studies.', 'Professional, academic and contact sections.', 'Dark and light themes with reduced-motion support.'],
+        architecture: 'Next.js App Router organizes localized routes. React and TypeScript components use next-intl messages, Tailwind CSS and shared styles. Public GitHub profile data is fetched on the server.',
+        contribution: 'Personal project designed, developed and maintained by Matheus Sulino in the public vrascode/vrascode.dev repository.',
+        verification: 'The source repository is public and includes the application code, dependency manifest and project documentation.',
+        limitations: 'This project is the portfolio itself; it is presented as a website rather than a separate product application.',
+        imageCaption: 'VRAS CODE mark · project illustration, not an application screenshot'
+      },
+      pt: {
+        category: 'PORTFÓLIO PESSOAL · FULL STACK', status: 'Repositório público',
+        summary: 'Portfólio bilíngue de Matheus Sulino, com apresentação profissional, estudos de caso, formação acadêmica e experiência.',
+        overview: 'VRAS CODE é o portfólio bilíngue de Matheus Sulino, desenvolvido com Next.js App Router, React e TypeScript. Reúne detalhes dos projetos, formação acadêmica, experiência profissional e informações de contato.',
+        features: ['Páginas localizadas em português e inglês.', 'Catálogo de projetos com filtros e estudos de caso individuais.', 'Seções profissionais, acadêmicas e de contato.', 'Temas claro e escuro com suporte a movimento reduzido.'],
+        architecture: 'O Next.js App Router organiza as rotas localizadas. Componentes React e TypeScript utilizam mensagens do next-intl, Tailwind CSS e estilos compartilhados. Os dados públicos do perfil GitHub são consultados no servidor.',
+        contribution: 'Projeto pessoal planejado, desenvolvido e mantido por Matheus Sulino no repositório público vrascode/vrascode.dev.',
+        verification: 'O repositório é público e contém o código da aplicação, o manifesto de dependências e a documentação do projeto.',
+        limitations: 'Este projeto é o próprio portfólio e é apresentado como um site, não como uma aplicação de produto independente.',
+        imageCaption: 'Marca VRAS CODE · ilustração do projeto, não é uma captura da aplicação'
+      }
+    }
   }
 ];
+
+projects.sort((left, right) => Number(left.number) - Number(right.number));
 
 export function getProject(slug: string) { return projects.find(project => project.slug === slug); }
 
