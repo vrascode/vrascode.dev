@@ -12,8 +12,8 @@ import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { BackToTop } from '@/components/back-to-top';
 
-// SHA-256 of public/images/vras-icon.png, used to invalidate previously cached icons.
-const faviconVersion = '?v=110fcc550a62b6a18bb7d5edaefc9515105a1979b0c18881d1391bdd7e1f4084';
+// SHA-256 of public/images/vras-icon2.png, used to invalidate previously cached icons.
+const faviconVersion = '?v=3abf1b3f21c6b5a6ecf251505abeb3d3a01f5dc3554544466aa7f7684e862990';
 
 export const metadata: Metadata = {
   metadataBase: new URL(identity.links.portfolio),
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   creator: identity.name,
   icons: {
     icon: [
-      { url: `/images/vras-icon.png${faviconVersion}`, type: 'image/png', sizes: '1254x1254' },
+      { url: `/images/vras-icon2.png${faviconVersion}`, type: 'image/png', sizes: '1254x1254' },
       { url: `/favicon.ico${faviconVersion}`, sizes: 'any' }
     ],
     apple: [{ url: `/apple-touch-icon.png${faviconVersion}`, type: 'image/png', sizes: '180x180' }]
