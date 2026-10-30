@@ -1,11 +1,11 @@
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
-import { ArrowLeft, ArrowUpRight, GitFork as Github } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, ExternalLink, GitFork as Github } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { resolveLocale } from '@/lib/locale';
 import { getProject, projects } from '@/lib/projects';
 import { pageMetadata } from '@/lib/metadata';
-import { ProjectVisual } from '@/components/project-card';
+import { ProjectInteractiveShowcase, type ShowcaseLabels } from '@/components/project-interactive-showcase';
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 export function generateStaticParams() { return projects.map(project => ({ slug: project.slug })); }
@@ -24,9 +24,16 @@ export default async function ProjectDetail({ params }: Props) {
   const t = await getTranslations('Projects');
   const copy = project.content[locale];
   const next = projects[(projects.indexOf(project) + 1) % projects.length];
+  const showcaseLabels: ShowcaseLabels = {
+    zoom: t('zoom'), close: t('close'), previous: t('previous'), next: t('nextImage'), sample: t('sample'),
+    demoTitle: t('demoTitle'), demoIntro: t('demoIntro'), orders: t('orders'), payments: t('payments'), deposits: t('deposits'),
+    discrepancies: t('discrepancies'), results: t('demoResults'), run: t('run'), reset: t('resetDemo'), order: t('order'),
+    amount: t('amount'), state: t('state'), matched: t('matched'), pending: t('pending'), difference: t('difference'),
+    demoNotice: t('demoNotice'), slide: t('slide')
+  };
   return <article className="container page-content">
-    <header className="page-header project-detail-header"><Link href="/projects" className="text-link"><ArrowLeft size={15} />{t('back')}</Link><p className="eyebrow">{project.number} / {copy.category}</p><h1>{project.name}</h1><p>{copy.summary}</p>{project.repository && <div className="hero-actions"><a className="button button-primary" href={project.repository} target="_blank" rel="noopener noreferrer"><Github size={16} />{t('repository')}<ArrowUpRight size={16} /></a></div>}</header>
-    <figure><ProjectVisual project={project} locale={locale} detail /><figcaption className="image-caption">{project.image ? copy.imageCaption : `${t('illustration')}. ${copy.imageCaption}`}</figcaption></figure>
+    <header className="page-header project-detail-header"><Link href="/projects" className="text-link"><ArrowLeft size={15} />{t('back')}</Link><p className="eyebrow">{project.number} / {copy.category}</p><h1>{project.name}</h1><p>{copy.summary}</p>{(project.repository || project.liveDemo) && <div className="hero-actions">{project.repository && <a className="button button-primary" href={project.repository} target="_blank" rel="noopener noreferrer"><Github size={16} />{t('repository')}<ArrowUpRight size={16} /></a>}{project.liveDemo && <a className="button button-secondary" href={project.liveDemo} target="_blank" rel="noopener noreferrer"><ExternalLink size={16} />{t('openWebsite')}<ArrowUpRight size={16} /></a>}</div>}</header>
+    <figure><ProjectInteractiveShowcase project={project} locale={locale} detail labels={showcaseLabels} /><figcaption className="image-caption">{project.image ? copy.imageCaption : `${t('illustration')}. ${copy.imageCaption}`}</figcaption></figure>
     <div className="detail-layout"><div className="detail-body">
       <section><h2>{t('overview')}</h2><p>{copy.overview}</p></section>
       {copy.features.length > 0 && <section><h2>{t('features')}</h2><ul>{copy.features.map(feature => <li key={feature}>{feature}</li>)}</ul></section>}

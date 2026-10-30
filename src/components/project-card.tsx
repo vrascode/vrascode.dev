@@ -5,10 +5,11 @@ import type { Locale } from '@/i18n/routing';
 import type { Project } from '@/lib/projects';
 import { Monogram } from './brand';
 
-export function ProjectVisual({ project, locale, detail = false }: { project: Project; locale: Locale; detail?: boolean }) {
+export function ProjectVisual({ project, locale, detail = false, editorial = false, preload = false, alt }: { project: Project; locale: Locale; detail?: boolean; editorial?: boolean; preload?: boolean; alt?: string }) {
   const imageSize = project.imageDimensions ?? (project.slug === 'clearledger' ? [1440, 1148] as const : [1280, 900] as const);
   const isScreenshot = project.image && (!project.imagePresentation || project.imagePresentation === 'screenshot');
-  const image = project.image ? <Image src={project.image} width={imageSize[0]} height={imageSize[1]} alt={project.content[locale].imageCaption} sizes={detail ? '(max-width: 800px) 100vw, 1080px' : isScreenshot ? '(max-width: 700px) 100vw, 560px' : '(max-width: 700px) 90vw, 560px'} className={isScreenshot ? 'project-screenshot' : 'project-asset-image'} preload={detail} /> : null;
+  const image = project.image ? <Image src={project.image} width={imageSize[0]} height={imageSize[1]} alt={alt ?? project.content[locale].imageCaption} sizes={detail ? '(max-width: 800px) 100vw, 1080px' : editorial ? '(max-width: 1000px) 100vw, 65vw' : isScreenshot ? '(max-width: 700px) 100vw, 560px' : '(max-width: 700px) 90vw, 560px'} className={isScreenshot ? 'project-screenshot' : 'project-asset-image'} preload={detail || preload} /> : null;
+  if (editorial && image) return <div className={`project-visual project-visual-editorial visual-${project.slug} ${detail ? 'project-visual-detail' : ''}`} style={{ aspectRatio: `${imageSize[0]} / ${imageSize[1]}` }}>{image}</div>;
   return <div className={`project-visual visual-${project.slug} ${detail ? 'project-visual-detail' : ''}`}>
     {isScreenshot && image ? <div className="screenshot-frame"><div className="window-bar" aria-hidden="true"><i /><i /><i /><span>{project.name}</span></div>{image}</div>
       : project.image && image ? <div className={`project-asset-preview project-asset-${project.imagePresentation}`}>

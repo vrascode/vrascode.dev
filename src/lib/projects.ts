@@ -8,14 +8,27 @@ export type ProjectText = {
 export type Project = {
   slug: string; number: string; name: string; category: 'mobile' | 'fullstack' | 'web';
   verified: boolean; stack: string[]; repository?: string; image?: string;
+  liveDemo?: string;
   imagePresentation?: 'screenshot' | 'cover' | 'logo' | 'icon'; imageDimensions?: readonly [number, number];
+  showcaseImage?: { src: string; dimensions: readonly [number, number]; alt: Record<Locale, string> };
   sources: { label: string; url: string }[];
+  showcase: ProjectShowcaseMode;
+  highlights?: Record<Locale, { label: string; value: string }[]>;
   content: Record<Locale, ProjectText>;
 };
 
+export type ProjectShowcaseMode =
+  | { mode: 'image' }
+  | { mode: 'application-preview' }
+  | { mode: 'gallery'; images: { src: string; alt: Record<Locale, string> }[] }
+  | { mode: 'demo'; demoId: 'clearledger' }
+  | { mode: 'video'; src: string; poster: string; alt: Record<Locale, string> }
+  | { mode: 'comparison'; before: { src: string; alt: Record<Locale, string> }; after: { src: string; alt: Record<Locale, string> } };
+
 export const projects: Project[] = [
   {
-    slug: 'fintrack-pro', number: '02', name: 'FinTrack Pro', category: 'mobile', verified: true,
+    slug: 'fintrack-pro', number: '02', name: 'FinTrack Pro', category: 'mobile', verified: true, showcase: { mode: 'application-preview' },
+    highlights: { en: [{ label: 'Automated tests', value: '27' }], pt: [{ label: 'Testes automatizados', value: '27' }] },
     stack: ['React Native', 'Expo', 'TypeScript', 'NestJS', 'Prisma', 'PostgreSQL'],
     repository: 'https://github.com/vrascode/fintrack-pro', image: '/projects/fintrack-pro.png',
     sources: [
@@ -49,7 +62,8 @@ export const projects: Project[] = [
     }
   },
   {
-    slug: 'clearledger', number: '01', name: 'ClearLedger', category: 'fullstack', verified: true,
+    slug: 'clearledger', number: '01', name: 'ClearLedger', category: 'fullstack', verified: true, showcase: { mode: 'demo', demoId: 'clearledger' },
+    highlights: { en: [{ label: 'Backend tests', value: '64' }, { label: 'Frontend tests', value: '51' }], pt: [{ label: 'Testes de backend', value: '64' }, { label: 'Testes de frontend', value: '51' }] },
     stack: ['Python', 'FastAPI', 'SQLite', 'Next.js', 'TypeScript', 'Tailwind CSS'],
     repository: 'https://github.com/vrascode/clearledger', image: '/projects/clearledger.png',
     sources: [
@@ -84,7 +98,7 @@ export const projects: Project[] = [
     }
   },
   {
-    slug: 'vras-watches', number: '03', name: 'VRAS Watches', category: 'web', verified: false, stack: ['Django'], sources: [],
+    slug: 'vras-watches', number: '03', name: 'VRAS Watches', category: 'web', verified: false, showcase: { mode: 'image' }, stack: ['Django'], sources: [],
     image: '/images/vras-watches.png', imagePresentation: 'cover', imageDimensions: [1672, 941],
     content: {
       en: {
@@ -110,7 +124,7 @@ export const projects: Project[] = [
     }
   },
   {
-    slug: 'amigo-fiel', number: '06', name: 'Amigo Fiel', category: 'fullstack', verified: true,
+    slug: 'amigo-fiel', number: '06', name: 'Amigo Fiel', category: 'fullstack', verified: true, showcase: { mode: 'image' },
     stack: ['Python', 'Django', 'PostgreSQL', 'HTML', 'CSS', 'JavaScript'],
     repository: 'https://github.com/vrascode/Amigo-Fiel',
     image: '/images/projects/amigo-fiel-logo.png', imagePresentation: 'logo', imageDimensions: [1080, 1080],
@@ -145,7 +159,7 @@ export const projects: Project[] = [
     }
   },
   {
-    slug: 'controle-de-estoque', number: '05', name: 'Controle de Estoque', category: 'fullstack', verified: true,
+    slug: 'controle-de-estoque', number: '05', name: 'Controle de Estoque', category: 'fullstack', verified: true, showcase: { mode: 'image' },
     stack: ['PHP', 'MySQL', 'PDO', 'JavaScript', 'PHPUnit', 'MVC'],
     repository: 'https://github.com/vrascode/Eng.Software-Controle-de-Estoque',
     image: '/images/Controle-de-estoque.png', imagePresentation: 'cover', imageDimensions: [1672, 941],
@@ -181,10 +195,17 @@ export const projects: Project[] = [
     }
   },
   {
-    slug: 'vrascode', number: '04', name: 'VRAS CODE', category: 'web', verified: true,
+    slug: 'vrascode', number: '04', name: 'VRAS CODE', category: 'web', verified: true, showcase: { mode: 'image' },
     stack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'next-intl', 'GSAP', 'Lenis'],
-    repository: 'https://github.com/vrascode/vrascode.dev',
+    repository: 'https://github.com/vrascode/vrascode.dev', liveDemo: 'https://vrascode.dev',
     image: '/icon.svg', imagePresentation: 'icon', imageDimensions: [64, 64],
+    showcaseImage: {
+      src: '/projects/vrascode-portfolio.png', dimensions: [1440, 900],
+      alt: {
+        en: 'Real screenshot of the VRAS CODE portfolio homepage, with the official mark shown below.',
+        pt: 'Captura real da página inicial do portfólio VRAS CODE, com o símbolo oficial apresentado abaixo.'
+      }
+    },
     sources: [
       { label: 'package.json', url: 'https://github.com/vrascode/vrascode.dev/blob/main/package.json' },
       { label: 'localized app routes', url: 'https://github.com/vrascode/vrascode.dev/tree/main/src/app' }
@@ -199,7 +220,7 @@ export const projects: Project[] = [
         contribution: 'Personal project designed, developed and maintained by Matheus Sulino in the public vrascode/vrascode.dev repository.',
         verification: 'The source repository is public and includes the application code, dependency manifest and project documentation.',
         limitations: 'This project is the portfolio itself; it is presented as a website rather than a separate product application.',
-        imageCaption: 'VRAS CODE website icon.'
+        imageCaption: 'A real screenshot of this portfolio. The official VRAS CODE mark is retained below.'
       },
       pt: {
         category: 'PORTFÓLIO PESSOAL · FULL STACK', status: 'Repositório público',
@@ -210,7 +231,7 @@ export const projects: Project[] = [
         contribution: 'Projeto pessoal planejado, desenvolvido e mantido por Matheus Sulino no repositório público vrascode/vrascode.dev.',
         verification: 'O repositório é público e contém o código da aplicação, o manifesto de dependências e a documentação do projeto.',
         limitations: 'Este projeto é o próprio portfólio e é apresentado como um site, não como uma aplicação de produto independente.',
-        imageCaption: 'Ícone do site VRAS CODE.'
+        imageCaption: 'Captura real deste portfólio. O símbolo oficial VRAS CODE permanece abaixo.'
       }
     }
   }

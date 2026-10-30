@@ -62,7 +62,7 @@ for (const locale of ['en', 'pt'] as const) {
     await page.keyboard.press('Enter');
     await expect(page.locator('main')).toBeFocused();
     await page.goto(`/${locale}/projects`);
-    await expect(page.locator('.project-card h3')).toHaveText(projects.map(p => p.name));
+    await expect(page.locator('.project-story h2')).toHaveText(projects.map(p => p.name));
   });
 
   test(`${locale}: accessible pages in both themes`, async ({ page }) => {
@@ -250,14 +250,13 @@ for (const locale of ['en', 'pt'] as const) {
       'controle-de-estoque': '/images/Controle-de-estoque.png',
       'vras-watches': '/images/vras-watches.png',
       'amigo-fiel': '/images/projects/amigo-fiel-logo.png',
-      'vrascode': '/icon.svg'
+      'vrascode': '/projects/vrascode-portfolio.png'
     } as const;
-    for (const width of [390, 1440]) {
+    for (const width of [390, 768, 1024, 1440]) {
       await page.setViewportSize({ width, height: 900 });
       await page.goto(`/${locale}/projects`);
-      const visualHeights: number[] = [];
       for (const [slug, path] of Object.entries(expected)) {
-        const card = page.locator(`.project-card[data-project="${slug}"]`);
+        const card = page.locator(`.project-story[data-project="${slug}"]`);
         const image = card.locator('.project-visual img');
         await image.scrollIntoViewIfNeeded();
         await expect.poll(() => image.evaluate(element => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
@@ -266,15 +265,20 @@ for (const locale of ['en', 'pt'] as const) {
           return url.pathname === '/_next/image' ? url.searchParams.get('url') : url.pathname;
         });
         expect(source).toBe(path);
-        const box = await card.locator('.project-visual').boundingBox();
-        visualHeights.push(box!.height);
-        if (slug === 'clearledger' || slug === 'fintrack-pro') await expect(card.locator('.screenshot-frame')).toHaveCount(1);
-        else {
-          await expect(card.locator('.project-asset-preview')).toHaveCount(1);
-          await expect.poll(() => image.evaluate(element => getComputedStyle(element).objectFit)).toBe('contain');
+        const media = card.locator('.project-visual');
+        await expect(media).toHaveClass(/project-visual-editorial/);
+        const mediaBox = await media.boundingBox();
+        const imageBox = await image.boundingBox();
+        const dimensions = await image.evaluate(element => ({ width: (element as HTMLImageElement).naturalWidth, height: (element as HTMLImageElement).naturalHeight }));
+        expect(imageBox!.width / mediaBox!.width).toBeGreaterThan(0.98);
+        expect(Math.abs(imageBox!.width / imageBox!.height - dimensions.width / dimensions.height)).toBeLessThan(0.03);
+        await expect.poll(() => image.evaluate(element => getComputedStyle(element).objectFit)).toBe('contain');
+        if (slug === 'amigo-fiel') {
+          await expect(media).toHaveCSS('background-color', 'rgb(5, 5, 5)');
+          await expect(image).toHaveCSS('transform', 'matrix(1.5, 0, 0, 1.5, 0, 0)');
         }
+        if (slug === 'vrascode') await expect(card.locator('.project-brand-complement')).toContainText('VRAS CODE');
       }
-      expect(new Set(visualHeights).size).toBe(1);
     }
     for (const slug of Object.keys(expected)) {
       await page.goto(`/${locale}/projects/${slug}`);
@@ -288,12 +292,36 @@ for (const locale of ['en', 'pt'] as const) {
 test('project search, categories and recovery from empty results work', async ({ page }) => {
   await page.goto('/en/projects');
   await page.getByRole('searchbox').fill('FastAPI');
-  await expect(page.locator('.project-card h3')).toHaveText(['ClearLedger']);
+  await expect(page.locator('.project-story h2')).toHaveText(['ClearLedger']);
   await page.getByRole('searchbox').fill('no-such-project');
-  await expect(page.getByRole('status')).toHaveText('No projects found');
+  await expect(page.locator('.result-count')).toHaveText('No projects found');
   await page.getByRole('button', { name: 'Reset filters' }).click();
   await page.getByRole('button', { name: 'Mobile', exact: true }).click();
-  await expect(page.locator('.project-card h3')).toHaveText(['FinTrack Pro']);
+  await expect(page.locator('.project-story h2')).toHaveText(['FinTrack Pro']);
+});
+
+for (const [locale, copy] of [['en', { run: 'Run sample', divergence: '1 discrepancy identified for review' }], ['pt', { run: 'Executar amostra', divergence: '1 divergência identificada para análise' }]] as const) {
+  test(`${locale}: ClearLedger sample reconciliation is interactive and clearly fictional`, async ({ page }) => {
+    await page.goto(`/${locale}/projects`);
+    const demo = page.locator('.project-story[data-project="clearledger"] .reconciliation-demo');
+    await expect(demo.getByText(locale === 'pt' ? 'DADOS FICTÍCIOS DE EXEMPLO' : 'FICTIONAL SAMPLE DATA').first()).toBeVisible();
+    await demo.getByRole('button', { name: copy.run }).click();
+    await expect(demo.getByText(copy.divergence)).toBeVisible();
+    await demo.getByRole('button', { name: locale === 'pt' ? 'Reiniciar amostra' : 'Reset sample' }).click();
+    await expect(demo.getByRole('button', { name: copy.run })).toBeVisible();
+  });
+}
+
+test('project screenshots can be opened and dismissed with keyboard focus restored by the browser', async ({ page }) => {
+  await page.goto('/en/projects');
+  const showcase = page.locator('.project-story[data-project="clearledger"] .interactive-showcase');
+  await showcase.getByRole('button', { name: 'Enlarge project image' }).click();
+  const dialog = page.getByRole('dialog');
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole('img')).toHaveAttribute('alt', /Actual ClearLedger dashboard/);
+  await page.keyboard.press('Escape');
+  await expect(dialog).not.toBeVisible();
+  await expect(showcase.getByRole('button', { name: 'Enlarge project image' })).toBeFocused();
 });
 
 test('language switching retains the project route and theme persists', async ({ page }) => {

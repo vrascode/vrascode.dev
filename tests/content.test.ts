@@ -17,7 +17,7 @@ test('every message has an English and Portuguese equivalent and formats without
   assert.deepEqual(keys(en), keys(pt));
   for (const [locale, messages] of Object.entries({ en, pt })) {
     const translate = createTranslator({ locale, messages, onError: error => { throw error; } }) as (key: string, values: Record<string, string | number>) => string;
-    for (const key of keys(messages)) assert.ok(translate(key, { count: 3, year: 2026, name: 'ClearLedger' }).trim(), `${locale}:${key}`);
+    for (const key of keys(messages)) assert.ok(translate(key, { count: 3, year: 2026, name: 'ClearLedger', current: 1, total: 2 }).trim(), `${locale}:${key}`);
   }
 });
 
