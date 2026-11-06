@@ -4,7 +4,7 @@ import { useState, type CSSProperties } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { ArrowUpRight, ExternalLink, Search } from 'lucide-react';
 import type { Locale } from '@/i18n/routing';
-import { filterProjects, projects } from '@/lib/projects';
+import { filterProjects, getPublishedProjects } from '@/lib/projects';
 import { Reveal } from './reveal';
 import { ProjectInteractiveShowcase } from './project-interactive-showcase';
 import type { ShowcaseLabels } from './project-interactive-showcase';
@@ -15,7 +15,7 @@ export function ProjectExplorer() {
   const locale = useLocale() as Locale;
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('all');
-  const filtered = filterProjects(projects, query, category, locale);
+  const filtered = filterProjects(getPublishedProjects(), query, category, locale);
   const labels: ShowcaseLabels = {
     zoom: t('zoom'), close: t('close'), previous: t('previous'), next: t('nextImage'),
     sample: t('sample'), demoTitle: t('demoTitle'), demoIntro: t('demoIntro'),

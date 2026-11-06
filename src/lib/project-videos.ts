@@ -39,3 +39,11 @@ export const recordingLimitations: Record<string, Record<Locale, string>> = {
     en: 'The repository is not publicly accessible and no verifiable running application was found to record.'
   }
 };
+
+// Home only: genuine dark-theme recordings. Projects keeps its existing media and modal.
+export const homeProjectVideos: Partial<Record<string, ProjectVideo>> = {
+  clearledger: { ...projectVideos.clearledger, src: '/videos/projects/clearledger-dark.mp4', poster: '/videos/projects/clearledger-dark-poster.jpg', environment: { pt: 'Tema escuro real · reconciliação local com CSVs fictícios.', en: 'Real dark theme · local reconciliation with synthetic CSV data.' } },
+  'fintrack-pro': { ...projectVideos['fintrack-pro'], src: '/videos/projects/fintrack-pro-dark.mp4', poster: '/videos/projects/fintrack-pro-dark-poster.jpg', environment: { pt: 'Tema escuro real · modo demonstrativo integrado com dados fictícios locais.', en: 'Real dark theme · built-in demo mode with local fictional data.' } },
+  'controle-de-estoque': { ...projectVideos['controle-de-estoque'], src: '/videos/projects/controle-de-estoque-dark.mp4', poster: '/videos/projects/controle-de-estoque-dark-poster.jpg', environment: { pt: 'Tema escuro real · estoque fictício em banco local isolado.', en: 'Real dark theme · fictional inventory in an isolated local database.' } },
+  vrascode: { ...projectVideos.vrascode, environment: { pt: 'Navegação real do portfólio em tema escuro. Interface em inglês.', en: 'Real portfolio navigation in dark theme. English interface.' } }
+};

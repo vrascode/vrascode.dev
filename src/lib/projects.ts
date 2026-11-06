@@ -9,6 +9,7 @@ export type Project = {
   slug: string; number: string; name: string; category: 'mobile' | 'fullstack' | 'web';
   verified: boolean; stack: string[]; repository?: string; image?: string;
   liveDemo?: string;
+  published?: boolean;
   imagePresentation?: 'screenshot' | 'cover' | 'logo' | 'icon'; imageDimensions?: readonly [number, number];
   showcaseImage?: { src: string; dimensions: readonly [number, number]; alt: Record<Locale, string> };
   sources: { label: string; url: string }[];
@@ -240,6 +241,8 @@ export const projects: Project[] = [
 projects.sort((left, right) => Number(left.number) - Number(right.number));
 
 export function getProject(slug: string) { return projects.find(project => project.slug === slug); }
+
+export function getPublishedProjects(items: readonly Project[] = projects) { return items.filter(project => project.published !== false); }
 
 export function filterProjects(items: Project[], query: string, category: string, locale: Locale) {
   const normalize = (value: string) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();

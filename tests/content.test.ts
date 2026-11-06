@@ -4,7 +4,7 @@ import { createTranslator } from 'next-intl';
 import en from '../messages/en.json';
 import pt from '../messages/pt.json';
 import identity from '../content/identity.json';
-import { filterProjects, projects } from '../src/lib/projects';
+import { filterProjects, getPublishedProjects, projects } from '../src/lib/projects';
 import { pageMetadata, publicPaths } from '../src/lib/metadata';
 import { parseGitHubProfile, readGitHubProfile } from '../src/lib/github';
 import { buildProfileContacts, getProfileContacts } from '../src/lib/public-contacts';
@@ -12,6 +12,13 @@ import { buildProfileContacts, getProfileContacts } from '../src/lib/public-cont
 function keys(value: Record<string, unknown>, prefix = ''): string[] {
   return Object.entries(value).flatMap(([key, item]) => typeof item === 'string' ? [`${prefix}${key}`] : keys(item as Record<string, unknown>, `${prefix}${key}.`)).sort();
 }
+
+test('Home and Projects share the published collection without a featured-project limit', () => {
+  assert.deepEqual(getPublishedProjects(), projects);
+  const future = { ...projects[0], slug: 'future-project', name: 'Future project' };
+  const draft = { ...projects[0], slug: 'draft-project', published: false };
+  assert.deepEqual(getPublishedProjects([...projects, future, draft]).map(p => p.slug), [...projects, future].map(p => p.slug));
+});
 
 test('every message has an English and Portuguese equivalent and formats without errors', () => {
   assert.deepEqual(keys(en), keys(pt));

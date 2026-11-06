@@ -22,7 +22,7 @@
     "aboutCta": "Um pouco sobre mim",
     "scroll": "ROLE PARA EXPLORAR",
     "note": "Código com propósito. Sempre aprendendo.",
-    "workLabel": "01 / PROJETOS EM DESTAQUE",
+    "workLabel": "01 / COLEÇÃO DE PROJETOS",
     "workTitle": "Ideias colocadas em prática.",
     "workDescription": "Um olhar sobre o que desenvolvo, como funciona e o que aprendo ao longo do caminho.",
     "allProjects": "Ver todos os projetos",
@@ -244,6 +244,21 @@
     "title": "Algo não carregou.",
     "body": "Tente novamente em alguns instantes.",
     "retry": "Tentar novamente"
+  },
+  "HomeShowcase": {
+    "context": "Contexto e solução",
+    "technologies": "Tecnologias do projeto",
+    "links": "Explorar {name}",
+    "viewProject": "Ver projeto",
+    "openApp": "Abrir aplicação",
+    "play": "Reproduzir demonstração de {name}",
+    "pause": "Pausar demonstração de {name}",
+    "retry": "Tentar carregar o vídeo de {name} novamente",
+    "poster": "Imagem real do projeto — {name}",
+    "recording": "Gravação real do software — {name}",
+    "error": "Não foi possível carregar o vídeo. A imagem do projeto continua disponível; use o controle circular para tentar novamente.",
+    "noDarkRecording": "Logotipo real do projeto. Ainda não há gravação verificável em tema escuro; o vídeo existente permanece na página do projeto.",
+    "unavailableRecording": "Imagem real do projeto. Não foi possível verificar uma aplicação em execução para gravar."
   },
   "VideoShowcase": {
     "presentation": "Apresentação do projeto",

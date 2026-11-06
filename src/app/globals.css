@@ -620,3 +620,39 @@ img { max-width: 100%; height: auto; }
 .project-recording-unavailable strong { color:var(--foreground); }
 @media(max-width:700px) { .project-showcase-details { grid-template-columns:1fr; gap:0; } .project-preview-label { left:.65rem; bottom:.65rem; font-size:.8rem; } .project-preview-button small { display:none; } }
 @media(prefers-reduced-motion:reduce) { .project-hover-video,.project-preview-label { transition:none; } }
+
+/* Complete home collection; Projects retains its existing editorial layout. */
+.home-work { position:relative; left:50%; transform:translateX(-50%); width:calc(100vw - 64px); max-width:1440px; }
+.home-work > .section-heading { padding-inline:8px; }
+.home-project-sections { display:grid; gap:28px; }
+.home-project-section { display:grid; grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr); column-gap:clamp(28px,4vw,64px); row-gap:22px; align-items:start; padding:clamp(24px,3.2vw,48px); border:1px solid var(--border); border-radius:24px; background:var(--background); }
+.home-project-copy { min-width:0; grid-column:1; grid-row:1; }
+.home-project-details { min-width:0; grid-column:1; grid-row:2; }
+.home-project-copy h3 { font-size:clamp(38px,4.8vw,76px); line-height:1.04; font-weight:550; letter-spacing:-.055em; margin:18px 0 24px; overflow-wrap:break-word; }
+.home-project-copy h3 a { display:inline; }
+.home-project-copy h3 svg { display:inline; vertical-align:top; margin:7px 0 0 10px; color:var(--accent); }
+.home-project-summary { font-size:clamp(16px,1.3vw,19px); line-height:1.65; color:var(--foreground); }
+.home-project-context { margin-top:0; }
+.home-project-context h4 { font:10px var(--font-mono); text-transform:uppercase; letter-spacing:.1em; color:var(--muted); margin-bottom:8px; }
+.home-project-context p { color:var(--muted); font-size:13px; line-height:1.75; }
+.home-project-highlights { display:flex; gap:28px; margin:22px 0; }
+.home-project-highlights dt { color:var(--accent); font-size:28px; font-weight:600; }
+.home-project-highlights dd { margin:4px 0 0; color:var(--muted); font-size:11px; }
+.home-project-features { padding-left:17px; margin:20px 0; display:grid; gap:8px; color:var(--muted); font-size:12px; line-height:1.65; }
+.home-project-features li::marker { color:var(--accent); }
+.home-project-stack { display:flex; flex-wrap:wrap; gap:7px 14px; margin-top:24px; font:11px var(--font-mono); color:var(--muted); }
+.home-project-links { display:flex; flex-wrap:wrap; gap:14px 22px; margin-top:24px; font-size:12px; }
+.home-project-demo { min-width:0; margin:0; grid-column:2; grid-row:1 / span 2; align-self:center; }
+.home-project-media { position:relative; width:100%; aspect-ratio:16/9; border:1px solid var(--border); border-radius:17px; overflow:hidden; background:#09090f; }
+.home-project-poster { object-fit:contain; }
+.home-project-media-logo .home-project-poster { transform:scale(1.4); }
+.home-project-media video { position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:contain; opacity:0; transition:opacity .25s; }
+.home-project-media video.is-ready { opacity:1; }
+.home-video-toggle { position:absolute; z-index:1; left:14px; bottom:14px; display:grid; place-items:center; width:44px; height:44px; border:1px solid #ffffff40; border-radius:50%; background:#09090fce; color:#f5f5f5; transition:background .2s,transform .2s; }
+.home-video-toggle:hover { background:#272238; transform:scale(1.06); }
+.home-video-toggle:focus-visible { outline:2px solid #a78bfa; outline-offset:-5px; }
+.home-project-demo figcaption { color:var(--muted); font-size:11px; line-height:1.65; margin-top:12px; }
+@media(min-width:1700px) { .home-project-copy h3 { font-size:76px; } }
+@media(max-width:900px) { .home-work { width:calc(100vw - 32px); } .home-project-section { grid-template-columns:1fr; gap:28px; padding:28px; } .home-project-copy,.home-project-details,.home-project-demo { grid-column:auto; grid-row:auto; } .home-project-copy h3 { font-size:clamp(36px,7vw,60px); } }
+@media(max-width:480px) { .home-project-section { padding:22px 16px; border-radius:18px; } .home-project-media { border-radius:12px; } .home-video-toggle { left:9px; bottom:9px; } .home-project-copy h3 svg { width:19px; margin-left:6px; } }
+@media(prefers-reduced-motion:reduce) { .home-project-media video,.home-video-toggle { transition:none; } }
