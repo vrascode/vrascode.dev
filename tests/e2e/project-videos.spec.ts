@@ -36,8 +36,11 @@ for (const locale of ['en', 'pt']) for (const width of [1440, 390]) {
       await expect(control).toHaveAttribute('aria-label', new RegExp(locale === 'pt' ? '^Pausar' : '^Pause'));
       await control.click();
       await expect.poll(() => video.evaluate(v => (v as HTMLVideoElement).paused)).toBe(true);
+      await expect(control).toHaveAttribute('aria-pressed', 'false');
+      await expect(control).toHaveAttribute('aria-label', new RegExp(locale === 'pt' ? '^Reproduzir' : '^Play'));
       await control.focus(); await page.keyboard.press('Enter');
       await expect.poll(() => video.evaluate(v => (v as HTMLVideoElement).paused)).toBe(false);
+      await expect(control).toHaveAttribute('aria-pressed', 'true');
       await page.mouse.move(0, 0);
       await expect.poll(() => video.evaluate(v => (v as HTMLVideoElement).paused)).toBe(false);
       await expect(page.locator('dialog[open]')).toHaveCount(0);

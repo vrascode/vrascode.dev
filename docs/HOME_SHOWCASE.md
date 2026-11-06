@@ -42,3 +42,5 @@ Lint, TypeScript, 12 unit/content tests and production build passed. The complet
 A separate Chrome smoke check against the local production server exercised 20 inline previews (five recordings × two pages × two locales), touch playback at 390 px with reduced motion, no horizontal overflow, and matching SHA-256 hashes for all five served MP4s. Ignored screenshots in `.artifacts/video-screenshots/` were visually reviewed, including the actual Amigo Fiel application after initial loading. Physical mobile devices, Firefox and Safari were not tested.
 
 The existing accessibility test now stores each theme before navigation and waits for the loaded fonts. This avoids auditing a transient mismatch while next-themes hydrates; no accessibility rule or contrast threshold was disabled and no theme colors were changed.
+
+Keyboard resume tests also wait for the accessible Play label after pausing before pressing Enter. A native pause event precedes the React accessibility-label update; acting on the still-displayed Pause control requests another pause. This synchronization keeps the test aligned with the control a visitor sees instead of racing that update on CI.
