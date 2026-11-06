@@ -6,12 +6,14 @@ import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 const slug = process.argv[2];
+const dark = process.env.RECORD_THEME === 'dark';
+const asset = `${slug}${dark ? '-dark' : ''}`;
 const origin = process.env.RECORD_BASE_URL;
 if (!origin) throw new Error('Set RECORD_BASE_URL to the demo application.');
 const target = new URL(origin);
 if (!['127.0.0.1', 'localhost'].includes(target.hostname) && !(slug === 'vrascode' && target.hostname === 'vrascode.dev')) throw new Error('Record disposable local apps; only the portfolio permits a read-only production recording.');
 const output = resolve('public/videos/projects');
-const raw = resolve('.artifacts/project-recordings', slug);
+const raw = resolve('.artifacts/project-recordings', asset);
 mkdirSync(output, { recursive: true }); mkdirSync(raw, { recursive: true });
 const browser = await chromium.launch({ channel: process.env.RECORD_BROWSER || 'chrome' });
 const setup = await browser.newContext({ viewport: { width: 1280, height: 720 }, locale: 'en-US' });
@@ -48,6 +50,19 @@ try {
   } else if (slug === 'vrascode') start = '/en';
   else throw new Error('No verified recording workflow for this project.');
 
+  if (dark) {
+    if (slug === 'clearledger') {
+      if (!(await warm.locator('html').getAttribute('class'))?.includes('dark')) await warm.getByRole('button', { name: 'Toggle color theme' }).click();
+      await warm.locator('html.dark').waitFor();
+    } else if (slug === 'controle-de-estoque') {
+      if (await warm.locator('html').getAttribute('data-theme') !== 'dark') await warm.locator('[data-theme-toggle]').click();
+      await warm.locator('html[data-theme="dark"]').waitFor();
+    } else if (slug === 'fintrack-pro') {
+      await warm.goto(new URL('/preferences', origin).href, { waitUntil: 'networkidle' });
+      await warm.getByText('Escuro', { exact: true }).last().click();
+      await wait(warm, 500);
+    } else throw new Error('No verified dark theme workflow for this application.');
+  }
   const state = await setup.storageState();
   await setup.close();
   const context = await browser.newContext({ viewport: { width: 1280, height: 720 }, locale: 'en-US', storageState: state, recordVideo: { dir: raw, size: { width: 1280, height: 720 } } });
@@ -63,7 +78,7 @@ try {
   const trimStart = (Date.now() - began) / 1000;
   const contentBegan = Date.now();
   await wait(page);
-  await page.screenshot({ path: resolve(output, `${slug}-poster.jpg`), type: 'jpeg', quality: 82 });
+  await page.screenshot({ path: resolve(output, `${asset}-poster.jpg`), type: 'jpeg', quality: 82 });
   if (slug === 'clearledger') {
     await act('Open persisted reconciliation', () => page.locator('a[href^="/reconciliation"]').first().click());
     await act('Expand missing-payment record', () => page.getByRole('button', { name: 'Expand ORD-1003', exact: true }).click());
@@ -110,8 +125,8 @@ try {
   const recording = page.video(); await context.close();
   const rawPath = await recording.path();
   const ffmpeg = process.env.RECORD_FFMPEG || 'ffmpeg';
-  const converted = spawnSync(ffmpeg, ['-y', '-ss', trimStart.toFixed(3), '-i', rawPath, '-an', '-c:v', 'libx264', '-preset', 'medium', '-crf', '28', '-r', '24', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', resolve(output, `${slug}.mp4`)], { encoding: 'utf8' });
+  const converted = spawnSync(ffmpeg, ['-y', '-ss', trimStart.toFixed(3), '-i', rawPath, '-an', '-c:v', 'libx264', '-preset', 'medium', '-crf', '28', '-r', '24', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', resolve(output, `${asset}.mp4`)], { encoding: 'utf8' });
   if (converted.status !== 0) throw new Error(converted.stderr);
-  writeFileSync(resolve(raw, 'evidence.json'), JSON.stringify({ slug, origin, recordedAt: new Date().toISOString(), sourceCommit: process.env.RECORD_SOURCE_SHA || null, steps, viewport: [1280, 720], elapsedSeconds: Math.round((Date.now() - began) / 1000), rawPath }, null, 2));
-  console.log(`Recorded real ${slug} interactions to public/videos/projects/${slug}.mp4`);
+  writeFileSync(resolve(raw, 'evidence.json'), JSON.stringify({ slug, theme: dark ? 'dark' : 'original', origin, recordedAt: new Date().toISOString(), sourceCommit: process.env.RECORD_SOURCE_SHA || null, steps, viewport: [1280, 720], elapsedSeconds: Math.round((Date.now() - began) / 1000), rawPath }, null, 2));
+  console.log(`Recorded real ${slug} interactions to public/videos/projects/${asset}.mp4`);
 } finally { await browser.close(); }
