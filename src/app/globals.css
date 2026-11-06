@@ -262,7 +262,7 @@ img { max-width: 100%; height: auto; }
 .stack-group > svg { color: var(--accent); margin-bottom: 20px; }
 .stack-group h3 { font-size: 13px; font-weight: 550; margin-bottom: 17px; }
 .stack-list { display: flex; gap: 8px; flex-wrap: wrap; color: var(--muted); font: 11px var(--font-mono); line-height: 1.7; }
-.stack-list span:not(:last-child)::after { content: ' /'; color: var(--border); padding-left: 8px; }
+.stack-list span:not(:last-child)::after { content: ' /'; color: var(--muted); padding-left: 8px; }
 .github-panel { display: grid; grid-template-columns: 1.2fr 1fr; gap: 65px; padding: 37px; background: var(--background-secondary); border: 1px solid var(--border); border-radius: 10px; }
 .github-profile { display: flex; gap: 18px; align-items: center; margin-bottom: 18px; }
 .github-profile > svg { width: 45px; height: 45px; padding: 10px; border: 1px solid var(--border); border-radius: 10px; }
