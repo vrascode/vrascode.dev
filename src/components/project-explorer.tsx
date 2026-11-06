@@ -8,6 +8,8 @@ import { filterProjects, getPublishedProjects } from '@/lib/projects';
 import { Reveal } from './reveal';
 import { ProjectInteractiveShowcase } from './project-interactive-showcase';
 import type { ShowcaseLabels } from './project-interactive-showcase';
+import { ProjectVideoPlayback } from './project-video-preview';
+import { projectPreviewVideos } from '@/lib/project-videos';
 import { Link } from '@/i18n/navigation';
 
 export function ProjectExplorer() {
@@ -25,7 +27,7 @@ export function ProjectExplorer() {
     pending: t('pending'), difference: t('difference'), demoNotice: t('demoNotice'), slide: t('slide')
   };
 
-  return <>
+  return <ProjectVideoPlayback>
     <h2 className="sr-only">{t('all')}</h2>
     <div className="project-toolbar"><div className="project-filters" role="group" aria-label={t('filters')}>{(['all', 'mobile', 'fullstack', 'web'] as const).map(key => <button type="button" key={key} aria-pressed={category === key} onClick={() => setCategory(key)}>{t(key)}</button>)}</div><label className="search-field"><Search size={18} /><span className="sr-only">{t('search')}</span><input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder={t('searchPlaceholder')} /></label></div>
     <p className="result-count mono" role="status">{t('results', { count: filtered.length })}</p>
@@ -43,10 +45,10 @@ export function ProjectExplorer() {
             <div className="project-story-stack" aria-label={t('stack')}>{project.stack.slice(0, 6).map(tech => <span key={tech}>{tech}</span>)}</div>
             <div className="project-story-actions"><Link href={`/projects/${project.slug}`} className="text-link">{t('openCase')}<ArrowUpRight size={15} /></Link>{project.repository && <a className="text-link" href={project.repository} target="_blank" rel="noopener noreferrer">{t('repository')}<ExternalLink size={14} /></a>}{project.liveDemo && <a className="text-link" href={project.liveDemo} target="_blank" rel="noopener noreferrer">{t('openWebsite')}<ExternalLink size={14} /></a>}</div>
           </div>
-          <div className="project-story-media"><ProjectInteractiveShowcase project={project} locale={locale} editorial preload={index === 0} labels={labels} /><p className="image-caption">{copy.imageCaption}</p></div>
+          <div className="project-story-media"><ProjectInteractiveShowcase project={project} locale={locale} editorial preload={index === 0} labels={labels} /><p className="image-caption">{projectPreviewVideos[project.slug]?.environment[locale] ?? copy.imageCaption}</p></div>
         </div>
       </article>;
     })}</Reveal>
     {filtered.length === 0 && <div className="empty-state"><Search size={32} /><p>{t('empty')}</p><button className="button button-secondary" onClick={() => { setQuery(''); setCategory('all'); }}>{t('reset')}</button></div>}
-  </>;
+  </ProjectVideoPlayback>;
 }

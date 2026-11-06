@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight, Check, Play, RotateCcw, X, ZoomIn } from 'lucide
 import type { Locale } from '@/i18n/routing';
 import type { Project } from '@/lib/projects';
 import { ProjectVisual } from './project-card';
+import { projectPreviewVideos } from '@/lib/project-videos';
 import { ProjectVideoPreview } from './project-video-preview';
 
 type Props = { project: Project; locale: Locale; detail?: boolean; editorial?: boolean; preload?: boolean; labels: ShowcaseLabels };
@@ -44,11 +45,13 @@ export function ProjectInteractiveShowcase({ project, locale, detail = false, ed
   const [hasRun, setHasRun] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
   const showcase = project.showcase;
+  const video = projectPreviewVideos[project.slug];
   const gallery = showcase.mode === 'gallery' ? showcase.images : [];
   const imagePath = gallery[activeImage]?.src ?? project.showcaseImage?.src ?? project.image;
   const imageAlt = gallery[activeImage]?.alt[locale] ?? project.showcaseImage?.alt[locale] ?? project.content[locale].imageCaption;
   const imagePresentation = project.showcaseImage ? 'screenshot' : project.imagePresentation;
   const showcaseProject = { ...project, image: imagePath, imagePresentation, imageDimensions: project.showcaseImage?.dimensions ?? project.imageDimensions };
+  const mediaDimensions = showcaseProject.imageDimensions ?? (project.slug === 'clearledger' ? [1440, 1148] : [1280, 900]);
   const runDemo = () => { setHasRun(true); setActiveTab('results'); };
 
   useEffect(() => {
@@ -77,8 +80,7 @@ export function ProjectInteractiveShowcase({ project, locale, detail = false, ed
       {[showcase.before, showcase.after].map((item, index) => <figure key={item.src}><Image src={item.src} alt={item.alt[locale]} width={1200} height={675} sizes="(max-width: 700px) 100vw, 50vw" /><figcaption>{index === 0 ? labels.previous : labels.next}</figcaption></figure>)}
     </div> : <>
         <div className={`showcase-image-wrap ${project.showcaseImage ? 'showcase-image-with-brand' : ''}`}>
-          <ProjectVisual project={showcaseProject} locale={locale} detail={detail} editorial={editorial || detail} preload={preload} alt={imageAlt} />
-          <ProjectVideoPreview project={project} locale={locale} />
+          {video ? <ProjectVideoPreview id={project.slug} name={project.name} video={video} poster={video.poster} variant="inline" aspectRatio={mediaDimensions.join(' / ')} /> : <ProjectVisual project={showcaseProject} locale={locale} detail={detail} editorial={editorial || detail} preload={preload} alt={imageAlt} />}
           {imagePath && imagePresentation !== 'icon' && <button type="button" className="showcase-zoom" onClick={() => setIsZoomed(true)} aria-label={labels.zoom}><ZoomIn size={17} /></button>}
       </div>
         {project.showcaseImage && <div className="project-brand-complement" aria-label="VRAS CODE"><Image src="/icon.svg" width={28} height={28} alt="" /><span>VRAS CODE</span></div>}

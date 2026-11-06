@@ -257,25 +257,6 @@
     "poster": "Actual project image — {name}",
     "recording": "Real software recording — {name}",
     "error": "The video could not be loaded. The project image remains available; use the circular control to retry.",
-    "noDarkRecording": "Actual project logo. A verified dark-theme recording is not available; the existing recording remains on the project page.",
     "unavailableRecording": "Actual project image. A running application could not be verified for recording."
-  },
-  "VideoShowcase": {
-    "presentation": "Project presentation",
-    "close": "Close presentation",
-    "watch": "Watch {name} demonstration",
-    "explore": "Explore {name}",
-    "preview": "Watch demo",
-    "recorded": "Recorded {date}",
-    "unavailable": "Recording unavailable",
-    "notRecorded": "No verified recording is available yet. Explore the actual project details below.",
-    "features": "Implemented features",
-    "technologies": "Technologies",
-    "engineering": "Technical decisions",
-    "scope": "Current scope",
-    "caseStudy": "Read case study",
-    "openApp": "Open application",
-    "videoError": "The recording could not be loaded.",
-    "openVideo": "Open video file"
   }
 }

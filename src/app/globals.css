@@ -590,36 +590,9 @@ img { max-width: 100%; height: auto; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
-/* Real project recordings: no video requests until interaction. */
-.project-card-media,.showcase-image-wrap { position:relative; }
-.project-video-preview { position:absolute; inset:0; z-index:2; overflow:hidden; border-radius:inherit; }
-.project-hover-video { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:var(--background,#09090f); opacity:0; transition:opacity .25s ease; pointer-events:none; }
-.project-video-preview.is-playing .project-hover-video { opacity:1; }
-.project-preview-button { position:absolute; inset:0; width:100%; height:100%; padding:0; border:0; background:transparent; cursor:pointer; }
-.project-preview-button:focus-visible { outline-offset:-4px; }
-.project-preview-label { position:absolute; left:1rem; bottom:1rem; display:flex; gap:.6rem; align-items:center; min-height:44px; padding:.65rem 1rem; color:#f8fafc; background:#171727ed; border:1px solid #a78bfa80; border-radius:999px; box-shadow:0 4px 20px #0003; transition:transform .2s,border-color .2s; }
-.project-preview-button:hover .project-preview-label { transform:translateY(-2px); border-color:#a78bfa; }
-.project-preview-button small { opacity:.75; font-family:var(--font-mono,monospace); }
+/* Inline project recordings share the Home playback controls. */
 .showcase-zoom { z-index:3; }
-.project-showcase-dialog { position:fixed; inset:0; width:100vw; height:100dvh; max-width:none; max-height:none; margin:0; padding:clamp(.6rem,3vw,2rem); border:0; background:transparent; color:var(--foreground); overflow:auto; overscroll-behavior:contain; }
-.project-showcase-dialog::backdrop { background:#09090fdd; backdrop-filter:blur(8px); }
-.project-showcase-panel { width:min(1100px,100%); margin:auto; border:1px solid var(--border); border-radius:20px; padding:clamp(1rem,3vw,2rem); background:var(--background); box-shadow:0 24px 100px #0006; }
-.project-showcase-header { display:flex; gap:1rem; justify-content:space-between; align-items:flex-start; margin-bottom:1.5rem; }
-.project-showcase-header h2 { font-size:clamp(1.6rem,4vw,2.7rem); margin:.35rem 0; }
-.project-showcase-header p { color:var(--muted); max-width:75ch; }
-.project-showcase-header button { flex-shrink:0; }
-.project-video-player { width:100%; aspect-ratio:16/9; display:block; background:#09090f; border-radius:12px; object-fit:contain; }
-.project-video-note { margin:.8rem 0 1.5rem; color:var(--muted); font-size:.85rem; }
-.project-showcase-details { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin:1.5rem 0; }
-.project-showcase-details h3 { margin:1rem 0 .5rem; font-size:1rem; }
-.project-showcase-details p,.project-showcase-details li { color:var(--muted); line-height:1.7; }
-.project-showcase-details ul { padding-left:1.2rem; }
-.project-recording-unavailable { border:1px solid var(--border); border-radius:12px; overflow:hidden; }
-.project-recording-unavailable img { display:block; width:100%; height:min(45vh,360px); object-fit:contain; }
-.project-recording-unavailable p { padding:1rem; color:var(--muted); }
-.project-recording-unavailable strong { color:var(--foreground); }
-@media(max-width:700px) { .project-showcase-details { grid-template-columns:1fr; gap:0; } .project-preview-label { left:.65rem; bottom:.65rem; font-size:.8rem; } .project-preview-button small { display:none; } }
-@media(prefers-reduced-motion:reduce) { .project-hover-video,.project-preview-label { transition:none; } }
+.inline-project-demo { grid-column:auto; grid-row:auto; width:100%; }
 
 /* Complete home collection; Projects retains its existing editorial layout. */
 .home-work { position:relative; left:50%; transform:translateX(-50%); width:calc(100vw - 64px); max-width:1440px; }

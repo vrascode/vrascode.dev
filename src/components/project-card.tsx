@@ -4,6 +4,7 @@ import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/routing';
 import type { Project } from '@/lib/projects';
 import { Monogram } from './brand';
+import { projectPreviewVideos } from '@/lib/project-videos';
 import { ProjectVideoPreview } from './project-video-preview';
 
 export function ProjectVisual({ project, locale, detail = false, editorial = false, preload = false, alt }: { project: Project; locale: Locale; detail?: boolean; editorial?: boolean; preload?: boolean; alt?: string }) {
@@ -23,7 +24,7 @@ export function ProjectVisual({ project, locale, detail = false, editorial = fal
 export function ProjectCard({ project, locale, viewLabel }: { project: Project; locale: Locale; viewLabel: string }) {
   const copy = project.content[locale];
   return <article className="project-card" data-project={project.slug} data-gsap-item>
-    <div className="project-card-media"><Link href={`/projects/${project.slug}`} className="project-image-link" tabIndex={-1} aria-hidden="true"><ProjectVisual project={project} locale={locale} /><span className="visual-arrow"><ArrowUpRight size={24} /></span></Link><ProjectVideoPreview project={project} locale={locale} /></div>
+    <div className="project-card-media">{projectPreviewVideos[project.slug] ? <ProjectVideoPreview id={project.slug} name={project.name} video={projectPreviewVideos[project.slug]} poster={projectPreviewVideos[project.slug]?.poster} variant="inline" /> : <Link href={`/projects/${project.slug}`} className="project-image-link" tabIndex={-1} aria-hidden="true"><ProjectVisual project={project} locale={locale} /><span className="visual-arrow"><ArrowUpRight size={24} /></span></Link>}</div>
     <div className="project-card-meta"><span className="mono">{project.number} / {copy.category}</span><span className={`status-dot ${project.verified ? '' : 'pending-dot'}`} aria-hidden="true" /></div>
     <h3><Link href={`/projects/${project.slug}`}>{project.name}<ArrowUpRight size={24} /></Link></h3>
     <p className="project-summary">{copy.summary}</p>

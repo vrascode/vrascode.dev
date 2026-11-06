@@ -6,6 +6,7 @@ import { resolveLocale } from '@/lib/locale';
 import { getProject, projects } from '@/lib/projects';
 import { pageMetadata } from '@/lib/metadata';
 import { ProjectInteractiveShowcase, type ShowcaseLabels } from '@/components/project-interactive-showcase';
+import { projectPreviewVideos } from '@/lib/project-videos';
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 export function generateStaticParams() { return projects.map(project => ({ slug: project.slug })); }
@@ -33,7 +34,7 @@ export default async function ProjectDetail({ params }: Props) {
   };
   return <article className="container page-content">
     <header className="page-header project-detail-header"><Link href="/projects" className="text-link"><ArrowLeft size={15} />{t('back')}</Link><p className="eyebrow">{project.number} / {copy.category}</p><h1>{project.name}</h1><p>{copy.summary}</p>{(project.repository || project.liveDemo) && <div className="hero-actions">{project.repository && <a className="button button-primary" href={project.repository} target="_blank" rel="noopener noreferrer"><Github size={16} />{t('repository')}<ArrowUpRight size={16} /></a>}{project.liveDemo && <a className="button button-secondary" href={project.liveDemo} target="_blank" rel="noopener noreferrer"><ExternalLink size={16} />{t('openWebsite')}<ArrowUpRight size={16} /></a>}</div>}</header>
-    <figure><ProjectInteractiveShowcase project={project} locale={locale} detail labels={showcaseLabels} /><figcaption className="image-caption">{project.image ? copy.imageCaption : `${t('illustration')}. ${copy.imageCaption}`}</figcaption></figure>
+    <figure><ProjectInteractiveShowcase project={project} locale={locale} detail labels={showcaseLabels} /><figcaption className="image-caption">{projectPreviewVideos[project.slug]?.environment[locale] ?? (project.image ? copy.imageCaption : `${t('illustration')}. ${copy.imageCaption}`)}</figcaption></figure>
     <div className="detail-layout"><div className="detail-body">
       <section><h2>{t('overview')}</h2><p>{copy.overview}</p></section>
       {copy.features.length > 0 && <section><h2>{t('features')}</h2><ul>{copy.features.map(feature => <li key={feature}>{feature}</li>)}</ul></section>}

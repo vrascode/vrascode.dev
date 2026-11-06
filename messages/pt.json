@@ -257,25 +257,6 @@
     "poster": "Imagem real do projeto — {name}",
     "recording": "Gravação real do software — {name}",
     "error": "Não foi possível carregar o vídeo. A imagem do projeto continua disponível; use o controle circular para tentar novamente.",
-    "noDarkRecording": "Logotipo real do projeto. Ainda não há gravação verificável em tema escuro; o vídeo existente permanece na página do projeto.",
     "unavailableRecording": "Imagem real do projeto. Não foi possível verificar uma aplicação em execução para gravar."
-  },
-  "VideoShowcase": {
-    "presentation": "Apresentação do projeto",
-    "close": "Fechar apresentação",
-    "watch": "Assistir à demonstração de {name}",
-    "explore": "Explorar {name}",
-    "preview": "Assistir demonstração",
-    "recorded": "Gravado em {date}",
-    "unavailable": "Gravação indisponível",
-    "notRecorded": "Ainda não há uma gravação verificável disponível. Explore os detalhes reais do projeto abaixo.",
-    "features": "Funcionalidades implementadas",
-    "technologies": "Tecnologias",
-    "engineering": "Decisões técnicas",
-    "scope": "Escopo atual",
-    "caseStudy": "Ler estudo de caso",
-    "openApp": "Abrir aplicação",
-    "videoError": "Não foi possível carregar a gravação.",
-    "openVideo": "Abrir arquivo de vídeo"
   }
 }
