@@ -20,7 +20,7 @@ ClearLedger used its real example CSVs, API and local SQLite database. Example i
 
 ## Unavailable recording
 
-VRAS Watches is listed but its supplied repository returned HTTP 404 to anonymous GitHub API access. No verified running shop was available. Its existing image is preserved; the presentation dialog explicitly states that no recording is available, and no broken public-code link is added. “VRAS” corresponds to the existing Watches/VRAS CODE entries; no duplicate project was invented. No other software appeared in the current six-project catalog.
+VRAS Watches is listed but its supplied repository returned HTTP 404 to anonymous GitHub API access. No verified running shop was available. Its existing image is preserved without a fake play control, and no broken public-code link is added. “VRAS” corresponds to the existing Watches/VRAS CODE entries; no duplicate project was invented. No other software appeared in the current six-project catalog.
 
 ## Reproduction
 
@@ -40,7 +40,7 @@ Recording workflows expect the fictitious pet `Luna Demo`, shop handle `loja-dem
 
 The five MP4 files total 1,862,399 bytes (~1.78 MiB), plus JPEG posters. They are static assets, not function responses. This is well below the documented [Vercel source-upload limit for CLI deployments](https://vercel.com/docs/limits); no external video host or paid service is required for these clips. Future large libraries should be evaluated against bandwidth and deployment size before expanding.
 
-No preview source is attached until deliberate desktop hover. Reduced motion and data-saver preferences suppress hover playback. IntersectionObserver and visibility events pause offscreen/background previews. On touch devices, an explicit button opens the presentation. The dynamically loaded native dialog traps focus, restores the launcher, closes via Escape/backdrop, locks page scrolling and pauses its video on exit. Native controls provide seeking, duration and fullscreen; no video is automatically played with audio. Apple/Safari playback uses standard H.264 MP4 and inline playback, but physical iOS/Android devices were not available for testing.
+Home and Projects now share `ProjectVideoPreview` and `ProjectVideoPlayback`. Sources are attached when media becomes visible; muted, looping, inline playback starts without hover or a click. One IntersectionObserver selects the most visible eligible preview and pauses the others. Offscreen/background playback stops and returning resumes the timeline. Reduced motion and data-saver preferences suppress autoplay; the small circular button permits explicit playback and retry. No video modal or Watch demo overlay remains. Apple/Safari playback uses standard H.264 MP4 and inline playback, but physical iOS/Android devices were not available for testing. Dark variants and their provenance are documented in [HOME_SHOWCASE.md](HOME_SHOWCASE.md); Amigo Fiel retains its real light-theme recording in both collections.
 
 New UI uses the existing locale dictionaries. Clips preserve the original software language; localized notes disclose the recording environment. The original image zoom, ClearLedger isolated simulation, filters, project URLs, themes and other portfolio sections remain available.
 

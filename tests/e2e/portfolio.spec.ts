@@ -1,3 +1,4 @@
+import { projectPreviewVideos } from '../../src/lib/project-videos';
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { existsSync } from 'node:fs';
@@ -66,10 +67,16 @@ for (const locale of ['en', 'pt'] as const) {
   });
 
   test(`${locale}: accessible pages in both themes`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto(`/${locale}`);
     for (const theme of ['dark', 'light']) {
+      // Set the stored preference before navigation so hydration and next-themes
+      // cannot restore the previous theme during the contrast audit.
+      await page.evaluate(value => localStorage.setItem('theme', value), theme);
       for (const route of ['', '/projects', '/about', '/experience', '/contact', '/projects/clearledger', '/projects/vras-watches', '/projects/vrascode']) {
         await page.goto(`/${locale}${route}`);
-        await page.evaluate(value => { localStorage.setItem('theme', value); document.documentElement.setAttribute('data-theme', value); }, theme);
+        await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
+        await page.evaluate(() => document.fonts.ready);
         const audit = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
         expect(audit.violations.map(v => ({ id: v.id, nodes: v.nodes.map(n => n.target) })), `${locale}${route} ${theme}`).toEqual([]);
       }
@@ -243,7 +250,8 @@ for (const locale of ['en', 'pt'] as const) {
 }
 
 for (const locale of ['en', 'pt'] as const) {
-  test(`${locale}: local project images load on cards and detail pages`, async ({ page }) => {
+  test(`${locale}: real project posters and fallback images load on cards and detail pages`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
     const expected = {
       'clearledger': '/projects/clearledger.png',
       'fintrack-pro': '/projects/fintrack-pro.png',
@@ -257,23 +265,30 @@ for (const locale of ['en', 'pt'] as const) {
       await page.goto(`/${locale}/projects`);
       for (const [slug, path] of Object.entries(expected)) {
         const card = page.locator(`.project-story[data-project="${slug}"]`);
-        const image = card.locator('.project-visual img');
+        const recording = projectPreviewVideos[slug];
+        const image = card.locator(recording ? '.home-project-poster' : '.project-visual img');
         await image.scrollIntoViewIfNeeded();
         await expect.poll(() => image.evaluate(element => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
         const source = await image.evaluate(element => {
           const url = new URL((element as HTMLImageElement).currentSrc);
           return url.pathname === '/_next/image' ? url.searchParams.get('url') : url.pathname;
         });
-        expect(source).toBe(path);
-        const media = card.locator('.project-visual');
-        await expect(media).toHaveClass(/project-visual-editorial/);
+        expect(source).toBe(recording?.poster ?? path);
+        const media = card.locator(recording ? '.home-project-media' : '.project-visual');
+        if (!recording) await expect(media).toHaveClass(/project-visual-editorial/);
         const mediaBox = await media.boundingBox();
         const imageBox = await image.boundingBox();
         const dimensions = await image.evaluate(element => ({ width: (element as HTMLImageElement).naturalWidth, height: (element as HTMLImageElement).naturalHeight }));
         expect(imageBox!.width / mediaBox!.width).toBeGreaterThan(0.98);
-        expect(Math.abs(imageBox!.width / imageBox!.height - dimensions.width / dimensions.height)).toBeLessThan(0.03);
+        if (!recording) expect(Math.abs(imageBox!.width / imageBox!.height - dimensions.width / dimensions.height)).toBeLessThan(0.03);
+        else {
+          const project = projects.find(p => p.slug === slug)!;
+          const size = project.showcaseImage?.dimensions ?? project.imageDimensions;
+          if (size) expect(Math.abs(mediaBox!.width / mediaBox!.height - size[0] / size[1])).toBeLessThan(.03);
+          await expect(card.locator('.home-video-toggle')).toHaveCount(1);
+        }
         await expect.poll(() => image.evaluate(element => getComputedStyle(element).objectFit)).toBe('contain');
-        if (slug === 'amigo-fiel') {
+        if (slug === 'amigo-fiel' && !recording) {
           await expect(media).toHaveCSS('background-color', 'rgb(5, 5, 5)');
           await expect(image).toHaveCSS('transform', 'matrix(1.5, 0, 0, 1.5, 0, 0)');
         }
@@ -282,7 +297,7 @@ for (const locale of ['en', 'pt'] as const) {
     }
     for (const slug of Object.keys(expected)) {
       await page.goto(`/${locale}/projects/${slug}`);
-      const image = page.locator('.project-visual img');
+      const image = page.locator(projectPreviewVideos[slug] ? '.home-project-poster' : '.project-visual img');
       await expect(image).toBeVisible();
       await expect.poll(() => image.evaluate(element => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
     }

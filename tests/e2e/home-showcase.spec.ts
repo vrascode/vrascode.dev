@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { mkdir } from 'node:fs/promises';
 import { getPublishedProjects } from '../../src/lib/projects';
+import { projectPreviewVideos } from '../../src/lib/project-videos';
 
 for (const locale of ['en', 'pt']) for (const width of [1440, 768, 390]) {
   test(`complete editorial Home ${locale} at ${width}px`, async ({ page }) => {
@@ -76,7 +77,12 @@ test('reduced motion has explicit touch playback and fallback posters are honest
   await expect.poll(() => card.locator('video').evaluate(v => (v as HTMLVideoElement).currentTime)).toBeGreaterThan(.1);
   await card.locator('.home-video-toggle').tap();
   await expect.poll(() => card.locator('video').evaluate(v => (v as HTMLVideoElement).paused)).toBe(true);
-  for (const slug of ['amigo-fiel', 'vras-watches']) {
+  const amigo = page.locator('[data-home-project="amigo-fiel"]');
+  await amigo.locator('.home-project-media').scrollIntoViewIfNeeded();
+  await amigo.locator('.home-video-toggle').tap();
+  await expect(amigo.locator('video')).toHaveAttribute('src', '/videos/projects/amigo-fiel.mp4');
+  await expect.poll(() => amigo.locator('video').evaluate(v => (v as HTMLVideoElement).currentTime)).toBeGreaterThan(.1);
+  for (const slug of ['vras-watches']) {
     const section = page.locator(`[data-home-project="${slug}"]`);
     await expect(section.locator('.home-project-poster')).toHaveCount(1);
     await expect(section.locator('video,.home-video-toggle')).toHaveCount(0);
@@ -87,6 +93,7 @@ test('reduced motion has explicit touch playback and fallback posters are honest
 test('network failure leaves the real poster and a functioning retry control', async ({ page }) => {
   await page.route('**/clearledger-dark.mp4', r => r.abort());
   await page.goto('/en');
+  await page.evaluate(() => document.fonts.ready);
   const card = page.locator('[data-home-project="clearledger"]');
   await card.locator('.home-project-media').scrollIntoViewIfNeeded();
   await expect(card.locator('figcaption')).toContainText('could not be loaded');
@@ -94,4 +101,24 @@ test('network failure leaves the real poster and a functioning retry control', a
   await page.unroute('**/clearledger-dark.mp4');
   await card.locator('.home-video-toggle').click();
   await expect.poll(() => card.locator('video').evaluate(v => (v as HTMLVideoElement).currentTime)).toBeGreaterThan(.1);
+});
+
+test('all Home recordings resume visibility arbitration after manual controls and further scrolling', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto('/en');
+  await page.evaluate(() => document.fonts.ready);
+  for (const project of getPublishedProjects().filter(p => projectPreviewVideos[p.slug])) {
+    const section = page.locator(`[data-home-project="${project.slug}"]`);
+    // Centre explicitly: a neighbour may already be fully visible after a manual
+    // gesture, in which case scrollIntoViewIfNeeded would not actually scroll.
+    await section.locator('.home-project-media').evaluate(node => node.scrollIntoView({ block: 'center', behavior: 'instant' }));
+    const video = section.locator('video');
+    await expect.poll(() => video.evaluate(v => (v as HTMLVideoElement).currentTime)).toBeGreaterThan(.1);
+    await expect(section.locator('.home-project-media')).toHaveAttribute('data-video-active', 'true');
+    await section.getByRole('button', { name: `Pause ${project.name} demonstration`, exact: true }).click();
+    await expect.poll(() => video.evaluate(v => (v as HTMLVideoElement).paused)).toBe(true);
+    await section.getByRole('button', { name: `Play ${project.name} demonstration`, exact: true }).click();
+    await expect.poll(() => video.evaluate(v => (v as HTMLVideoElement).paused)).toBe(false);
+    expect(await page.locator('video').evaluateAll(vs => vs.filter(v => !(v as HTMLVideoElement).paused).length)).toBe(1);
+  }
 });
