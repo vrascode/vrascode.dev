@@ -404,7 +404,7 @@ test('404, robots, sitemap, favicon and localized Open Graph images', async ({ p
   expect(await robots.text()).toContain('https://vrascode.dev/sitemap.xml');
   const sitemap = await request.get('/sitemap.xml');
   expect((await sitemap.text()).match(/<loc>/g)?.length).toBe(22);
-  for (const route of ['/icon.svg', '/apple-icon', '/en/opengraph-image', '/pt/opengraph-image']) {
+  for (const route of ['/icon.svg', '/favicon.ico', '/apple-touch-icon.png', '/images/vras-icon-rounded.png', '/en/opengraph-image', '/pt/opengraph-image']) {
     const image = await request.get(route);
     expect(image.status(), route).toBe(200);
     expect(image.headers()['content-type']).toMatch(/image\//);

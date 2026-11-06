@@ -12,11 +12,11 @@ export type ProjectVideo = {
 // Only real browser recordings belong here. Missing entries never render a fake player.
 export const projectVideos: Record<string, ProjectVideo> = {
   'clearledger': {
-    src: '/videos/projects/clearledger.mp4', type: 'video/mp4', poster: '/videos/projects/clearledger-poster.jpg', duration: 29, recordedAt: '2026-11-06',
+    src: '/videos/projects/clearledger.mp4', type: 'video/mp4', poster: '/videos/projects/clearledger-poster.jpg', duration: 28, recordedAt: '2026-11-06',
     environment: { pt: 'Aplicação real Next.js + FastAPI/SQLite com CSVs fictícios de exemplo. Interface em inglês.', en: 'Real Next.js + FastAPI/SQLite application with synthetic example CSVs. English interface.' }
   },
   'fintrack-pro': {
-    src: '/videos/projects/fintrack-pro.mp4', type: 'video/mp4', poster: '/videos/projects/fintrack-pro-poster.jpg', duration: 29, recordedAt: '2026-11-06',
+    src: '/videos/projects/fintrack-pro.mp4', type: 'video/mp4', poster: '/videos/projects/fintrack-pro-poster.jpg', duration: 28, recordedAt: '2026-11-06',
     environment: { pt: 'Aplicação Expo Web real no modo demo integrado. Dados fictícios locais; não demonstra o backend autenticado. Interface em português.', en: 'Real Expo Web application in its built-in demo mode. Local fictional data; authenticated backend flows are not shown. Portuguese interface.' }
   },
   'amigo-fiel': {
@@ -24,7 +24,7 @@ export const projectVideos: Record<string, ProjectVideo> = {
     environment: { pt: 'Aplicação Django real com configuração SQLite local de gravação e contas, animais e produtos fictícios. Interface em português.', en: 'Real Django application using a local SQLite recording configuration and fictional accounts, pets and products. Portuguese interface.' }
   },
   'controle-de-estoque': {
-    src: '/videos/projects/controle-de-estoque.mp4', type: 'video/mp4', poster: '/videos/projects/controle-de-estoque-poster.jpg', duration: 29, recordedAt: '2026-11-06',
+    src: '/videos/projects/controle-de-estoque.mp4', type: 'video/mp4', poster: '/videos/projects/controle-de-estoque-poster.jpg', duration: 28, recordedAt: '2026-11-06',
     environment: { pt: 'Aplicação PHP real com MariaDB isolado e produtos fictícios. A entrada de estoque foi persistida localmente. Interface em português.', en: 'Real PHP application with isolated MariaDB and fictional products. The stock entry was persisted locally. Portuguese interface.' }
   },
   'vrascode': {

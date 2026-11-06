@@ -100,7 +100,7 @@
     "stack": "Tecnologias",
     "status": "Status do projeto",
     "verified": "Código analisado",
-    "pending": "Fonte pendente",
+    "pending": "Não executado",
     "illustration": "Ilustração do projeto · não é uma captura da aplicação",
     "screenshot": "Interface real do projeto",
     "previewAlt": "Interface do projeto {name}",
@@ -127,7 +127,6 @@
     "amount": "Valor",
     "state": "Status",
     "matched": "Exemplo",
-    "pending": "Não executado",
     "difference": "Diferença",
     "demoNotice": "Esta demonstração isolada utiliza dados fictícios. Ela não se conecta a bancos nem ao serviço ClearLedger.",
     "slide": "de"
@@ -245,5 +244,23 @@
     "title": "Algo não carregou.",
     "body": "Tente novamente em alguns instantes.",
     "retry": "Tentar novamente"
+  },
+  "VideoShowcase": {
+    "presentation": "Apresentação do projeto",
+    "close": "Fechar apresentação",
+    "watch": "Assistir à demonstração de {name}",
+    "explore": "Explorar {name}",
+    "preview": "Assistir demonstração",
+    "recorded": "Gravado em {date}",
+    "unavailable": "Gravação indisponível",
+    "notRecorded": "Ainda não há uma gravação verificável disponível. Explore os detalhes reais do projeto abaixo.",
+    "features": "Funcionalidades implementadas",
+    "technologies": "Tecnologias",
+    "engineering": "Decisões técnicas",
+    "scope": "Escopo atual",
+    "caseStudy": "Ler estudo de caso",
+    "openApp": "Abrir aplicação",
+    "videoError": "Não foi possível carregar a gravação.",
+    "openVideo": "Abrir arquivo de vídeo"
   }
 }

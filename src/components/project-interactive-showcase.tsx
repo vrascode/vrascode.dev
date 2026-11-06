@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight, Check, Play, RotateCcw, X, ZoomIn } from 'lucide
 import type { Locale } from '@/i18n/routing';
 import type { Project } from '@/lib/projects';
 import { ProjectVisual } from './project-card';
+import { ProjectVideoPreview } from './project-video-preview';
 
 type Props = { project: Project; locale: Locale; detail?: boolean; editorial?: boolean; preload?: boolean; labels: ShowcaseLabels };
 export type ShowcaseLabels = {
@@ -77,6 +78,7 @@ export function ProjectInteractiveShowcase({ project, locale, detail = false, ed
     </div> : <>
         <div className={`showcase-image-wrap ${project.showcaseImage ? 'showcase-image-with-brand' : ''}`}>
           <ProjectVisual project={showcaseProject} locale={locale} detail={detail} editorial={editorial || detail} preload={preload} alt={imageAlt} />
+          <ProjectVideoPreview project={project} locale={locale} />
           {imagePath && imagePresentation !== 'icon' && <button type="button" className="showcase-zoom" onClick={() => setIsZoomed(true)} aria-label={labels.zoom}><ZoomIn size={17} /></button>}
       </div>
         {project.showcaseImage && <div className="project-brand-complement" aria-label="VRAS CODE"><Image src="/icon.svg" width={28} height={28} alt="" /><span>VRAS CODE</span></div>}

@@ -100,7 +100,7 @@
     "stack": "Technology stack",
     "status": "Project status",
     "verified": "Code reviewed",
-    "pending": "Source pending",
+    "pending": "Not run",
     "illustration": "Project illustration · not an application screenshot",
     "screenshot": "Actual project interface",
     "previewAlt": "{name} project interface",
@@ -127,7 +127,6 @@
     "amount": "Amount",
     "state": "Status",
     "matched": "Sample",
-    "pending": "Not run",
     "difference": "Difference",
     "demoNotice": "This isolated demonstration uses fictional data. It is not connected to a bank or the ClearLedger service.",
     "slide": "of"
@@ -245,5 +244,23 @@
     "title": "Something didn't load.",
     "body": "Please try again in a moment.",
     "retry": "Try again"
+  },
+  "VideoShowcase": {
+    "presentation": "Project presentation",
+    "close": "Close presentation",
+    "watch": "Watch {name} demonstration",
+    "explore": "Explore {name}",
+    "preview": "Watch demo",
+    "recorded": "Recorded {date}",
+    "unavailable": "Recording unavailable",
+    "notRecorded": "No verified recording is available yet. Explore the actual project details below.",
+    "features": "Implemented features",
+    "technologies": "Technologies",
+    "engineering": "Technical decisions",
+    "scope": "Current scope",
+    "caseStudy": "Read case study",
+    "openApp": "Open application",
+    "videoError": "The recording could not be loaded.",
+    "openVideo": "Open video file"
   }
 }
