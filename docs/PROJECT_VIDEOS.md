@@ -43,3 +43,9 @@ The five MP4 files total 1,862,399 bytes (~1.78 MiB), plus JPEG posters. They ar
 No preview source is attached until deliberate desktop hover. Reduced motion and data-saver preferences suppress hover playback. IntersectionObserver and visibility events pause offscreen/background previews. On touch devices, an explicit button opens the presentation. The dynamically loaded native dialog traps focus, restores the launcher, closes via Escape/backdrop, locks page scrolling and pauses its video on exit. Native controls provide seeking, duration and fullscreen; no video is automatically played with audio. Apple/Safari playback uses standard H.264 MP4 and inline playback, but physical iOS/Android devices were not available for testing.
 
 New UI uses the existing locale dictionaries. Clips preserve the original software language; localized notes disclose the recording environment. The original image zoom, ClearLedger isolated simulation, filters, project URLs, themes and other portfolio sections remain available.
+
+## Validation performed
+
+On 2026-11-06: lint, Next.js type generation/TypeScript, all 11 unit/content tests and production build passed. The complete Playwright suite passed 39/39 on installed Microsoft Edge. After the final media hit-area refinement, all six video tests also passed on installed Chrome, covering real MP4 decoding/play/pause, native-dialog Escape/backdrop close, focus restoration, scroll locking, modal accessibility, PT/EN, 390/1440 px, dark/light themes, reduced motion, hover loading and explicit absence of a fabricated Watches recording. Screenshots were reviewed from ignored `.artifacts/video-screenshots/`. Source-link validation passed 22/22 URLs.
+
+The existing favicon regression assertion was updated to the current committed favicon and Apple Touch URLs; favicon assets themselves were not changed by this feature. No claim is made of testing physical mobile devices or Safari.
