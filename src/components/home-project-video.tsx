@@ -68,15 +68,15 @@ export function HomeProjectVideo({ id, name, video, poster, logo = false, note }
   useEffect(() => {
     if (root.current && video) return register(id, root.current, value => { setVisible(value); if (value && automatic) setLoaded(true); });
   }, [id, video, register, automatic]);
+  useEffect(() => { const node = root.current; return () => node?.querySelector('video')?.pause(); }, []);
   const shouldPlay = active === id && visible && !paused && !failed && (automatic || manual);
   useEffect(() => {
     const element = player.current;
     if (shouldPlay && loaded) { pauseOthers(id); void element?.play().catch(() => { /* A blocked autoplay leaves the poster and manual play control available. */ }); }
     else element?.pause();
-    return () => element?.pause();
   }, [shouldPlay, loaded, id, pauseOthers]);
   const toggle = () => {
-    if (playing) { setPaused(true); setManual(false); player.current?.pause(); }
+    if (player.current && !player.current.paused && !player.current.ended) { setPaused(true); setManual(false); player.current.pause(); }
     else {
       if (failed) { setFailed(false); player.current?.load(); }
       setLoaded(true); setPaused(false); setManual(true); activate(id); pauseOthers(id);

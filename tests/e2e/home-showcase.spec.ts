@@ -43,6 +43,9 @@ test('visibility autoplay, manual pause, resumption and one-player arbitration',
   await expect.poll(() => a.evaluate(v => (v as HTMLVideoElement).currentTime)).toBeGreaterThan(.1);
   expect(await a.evaluate(v => { const x = v as HTMLVideoElement; return x.muted && x.loop && x.playsInline && x.autoplay; })).toBe(true);
   const control = clear.locator('.home-video-toggle');
+  // Consecutive clicks can occur before React receives the native pause event.
+  await control.evaluate(button => { (button as HTMLButtonElement).click(); (button as HTMLButtonElement).click(); });
+  await expect.poll(() => a.evaluate(v => (v as HTMLVideoElement).paused)).toBe(false);
   // A browser may interrupt/reject automatic playback without changing viewport state.
   await a.evaluate(v => (v as HTMLVideoElement).pause());
   await expect(control).toHaveAttribute('aria-pressed', 'false');
