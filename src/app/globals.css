@@ -378,6 +378,11 @@ img { max-width: 100%; height: auto; }
 .profile-links { display: grid; gap: 12px; }
 .profile-link-card { display: flex; min-width: 0; gap: 16px; align-items: center; padding: 17px; border: 1px solid var(--border); border-radius: 8px; background: var(--background-secondary); }
 .profile-link-icon { flex: 0 0 44px; width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid var(--border); border-radius: 7px; color: var(--accent); font: 600 15px var(--font-mono); }
+.profile-brand-mark { display: block; width: 22px; height: 22px; background: currentColor; -webkit-mask: var(--profile-brand-image) center / contain no-repeat; mask: var(--profile-brand-image) center / contain no-repeat; }
+.profile-icon-linkedin { --profile-brand-image: url('/images/social/linkedin.svg'); color: #0a66c2; }
+.profile-icon-github { --profile-brand-image: url('/images/social/github.svg'); color: var(--foreground); }
+.profile-icon-whatsapp { --profile-brand-image: url('/images/social/whatsapp.svg'); color: #25d366; background: #0b2116; }
+.profile-link-card:hover .profile-link-icon, .profile-link-card:focus-within .profile-link-icon { border-color: currentColor; }
 .profile-link-copy { min-width: 0; flex: 1; }
 .profile-link-copy h2 { font-size: 15px; font-weight: 550; }
 .profile-link-copy p { color: var(--muted); font-size: 11px; margin-top: 3px; }
